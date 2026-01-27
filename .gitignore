@@ -1,0 +1,27 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Generated content
+.tmp/
+
+# Large binary files
+models/piper/*.onnx
+models/piper/*.onnx.json
+avatars/*.mp4
+broll/*.mp4
+overlays/*.png
+overlays/*.jpg
+music/*.mp3
+
+# OS files
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Claude
+.claude/
