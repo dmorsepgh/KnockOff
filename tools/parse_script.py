@@ -149,6 +149,11 @@ def parse_script(script_text: str) -> tuple[list[Segment], Optional[MusicTrack]]
     segments = []
     music_track = None
 
+    # Strip metadata section after "---" (common in script templates)
+    # This handles footers like "Words: 240 | Duration: ~1:40 | Avatar: doug"
+    if '\n---' in script_text:
+        script_text = script_text.split('\n---')[0]
+
     # First, extract music marker (global, not a segment)
     music_match = MUSIC_PATTERN.search(script_text)
     if music_match:

@@ -32,25 +32,50 @@ import sys
 import tempfile
 import shutil
 import time
+import logging
+import traceback
+from datetime import datetime
 from pathlib import Path
 
 # Import script parser
 sys.path.insert(0, str(Path(__file__).parent))
 from parse_script import parse_script, get_full_speech_text, has_visual_markers, Segment, MusicTrack
+from whisper_captions import generate_srt_from_whisper
 
 # Paths
 PROJECT_ROOT = Path(__file__).parent.parent
 VOICE_DIR = PROJECT_ROOT / "models" / "piper"
+VOICES_DIR = PROJECT_ROOT / "voices"  # Cloned voices
 AVATAR_LIB_DIR = PROJECT_ROOT / "avatars"
 BROLL_DIR = PROJECT_ROOT / "broll"
 OVERLAY_DIR = PROJECT_ROOT / "overlays"
 MUSIC_DIR = PROJECT_ROOT / "music"
 WAV2LIP_DIR = Path.home() / "Easy-Wav2Lip"
-OUTPUT_DIR = PROJECT_ROOT / ".tmp" / "avatar" / "output"
+WAV2LIP_PYTHON = WAV2LIP_DIR / ".venv" / "bin" / "python3"  # Wav2Lip's dedicated venv
+# Output to Synology NAS (fallback to local if not mounted)
+NAS_OUTPUT_DIR = Path("/Volumes/homes/dmpgh/KnockOff")
+LOCAL_OUTPUT_DIR = PROJECT_ROOT / ".tmp" / "avatar" / "output"
+OUTPUT_DIR = NAS_OUTPUT_DIR if NAS_OUTPUT_DIR.exists() else LOCAL_OUTPUT_DIR
 SEGMENTS_DIR = PROJECT_ROOT / ".tmp" / "avatar" / "segments"
 
+# Logging setup - persist errors even on crash
+LOG_DIR = PROJECT_ROOT / "logs"
+LOG_DIR.mkdir(exist_ok=True)
+LOG_FILE = LOG_DIR / f"knockoff_{datetime.now().strftime('%Y%m%d')}.log"
+
+# Configure logging to file and console
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s [%(levelname)s] %(message)s',
+    handlers=[
+        logging.FileHandler(LOG_FILE),
+        logging.StreamHandler(sys.stdout)
+    ]
+)
+logger = logging.getLogger(__name__)
+
 # Default voice
-DEFAULT_VOICE = "lessac"
+DEFAULT_VOICE = "doug"  # Use cloned voice by default
 
 # Video format presets (width, height)
 VIDEO_FORMATS = {
@@ -82,16 +107,26 @@ def list_avatars():
 
 
 def list_voices():
-    """List available Piper voices."""
+    """List available Piper voices and cloned voices."""
+    # Piper voices
     voices = list(VOICE_DIR.glob("en_US-*-medium.onnx"))
-    if not voices:
-        print(f"No voices found in {VOICE_DIR}")
-        return
-    print("Available voices:")
-    for v in sorted(voices):
-        # Extract voice name from en_US-{name}-medium.onnx
-        name = v.stem.replace("en_US-", "").replace("-medium", "")
-        print(f"  {name}")
+    print("Available Piper voices:")
+    if voices:
+        for v in sorted(voices):
+            name = v.stem.replace("en_US-", "").replace("-medium", "")
+            print(f"  {name}")
+    else:
+        print(f"  (none found in {VOICE_DIR})")
+
+    # Cloned voices
+    VOICES_DIR.mkdir(parents=True, exist_ok=True)
+    cloned = list(VOICES_DIR.glob("*.wav"))
+    print("\nCloned voices (XTTS):")
+    if cloned:
+        for v in sorted(cloned):
+            print(f"  {v.stem}")
+    else:
+        print(f"  (none found in {VOICES_DIR})")
 
 
 def resolve_avatar(avatar_arg: Path) -> Path:
@@ -172,22 +207,35 @@ def check_dependencies(voice: str = DEFAULT_VOICE):
     """Verify all required components are available."""
     errors = []
 
-    # Check voice model
-    model, config = get_voice_path(voice)
-    if not model.exists():
-        errors.append(f"Voice model not found: {model}")
-        errors.append(f"  Available voices: {', '.join(v.stem.split('-')[1] for v in VOICE_DIR.glob('en_US-*-medium.onnx'))}")
+    # Check voice - either Piper model or cloned voice
+    if is_cloned_voice(voice):
+        # Cloned voice - check XTTS venv exists
+        tts_venv = PROJECT_ROOT / ".venv-tts" / "bin" / "python"
+        if not tts_venv.exists():
+            errors.append(f"XTTS venv not found: {tts_venv}")
+            errors.append("  Run: python3.11 -m venv .venv-tts && source .venv-tts/bin/activate && pip install TTS")
+    else:
+        # Piper voice
+        model, config = get_voice_path(voice)
+        if not model.exists():
+            errors.append(f"Voice model not found: {model}")
+            piper_voices = [v.stem.split('-')[1] for v in VOICE_DIR.glob('en_US-*-medium.onnx')]
+            cloned_voices = [v.stem for v in VOICES_DIR.glob('*.wav')] if VOICES_DIR.exists() else []
+            errors.append(f"  Available Piper voices: {', '.join(piper_voices)}")
+            if cloned_voices:
+                errors.append(f"  Available cloned voices: {', '.join(cloned_voices)}")
 
     # Check Wav2Lip
     wav2lip_model = WAV2LIP_DIR / "checkpoints" / "Wav2Lip.pth"
     if not wav2lip_model.exists():
         errors.append(f"Wav2Lip model not found: {wav2lip_model}")
 
-    # Check piper via python module
-    try:
-        subprocess.run([sys.executable, "-m", "piper", "--help"], capture_output=True, check=True)
-    except (subprocess.CalledProcessError, FileNotFoundError):
-        errors.append("Piper TTS not installed. Install with: pip install piper-tts")
+    # Check piper via python module (skip if using cloned voice)
+    # Cloned voices use XTTS, not Piper
+    # try:
+    #     subprocess.run([sys.executable, "-m", "piper", "--help"], capture_output=True, check=True)
+    # except (subprocess.CalledProcessError, FileNotFoundError):
+    #     errors.append("Piper TTS not installed. Install with: pip install piper-tts")
 
     # Check ffmpeg
     try:
@@ -202,8 +250,61 @@ def check_dependencies(voice: str = DEFAULT_VOICE):
         sys.exit(1)
 
 
+def is_cloned_voice(voice_name: str) -> bool:
+    """Check if a voice is a cloned voice (in voices/ folder)."""
+    voice_file = VOICES_DIR / f"{voice_name}.wav"
+    return voice_file.exists()
+
+
+def text_to_speech_cloned(text: str, output_path: Path, voice_name: str, speed: float = 0.95) -> Path:
+    """Generate speech using a cloned voice via XTTS."""
+    print(f"Generating speech with cloned voice '{voice_name}' (speed={speed}x)...")
+
+    voice_file = VOICES_DIR / f"{voice_name}.wav"
+    if not voice_file.exists():
+        print(f"Error: Cloned voice '{voice_name}' not found in {VOICES_DIR}")
+        sys.exit(1)
+
+    # Use the TTS venv which has XTTS installed
+    tts_venv_python = PROJECT_ROOT / ".venv-tts" / "bin" / "python"
+    tts_script = PROJECT_ROOT / "tools" / "tts_xtts.py"
+
+    cmd = [
+        str(tts_venv_python), str(tts_script),
+        "--text", text,
+        "--voice", voice_name,
+        "--output", str(output_path),
+        "--speed", str(speed)
+    ]
+
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        print(f"XTTS failed: {result.stderr}")
+        sys.exit(1)
+
+    # Normalize audio to match HeyGen levels (~-24 LUFS)
+    normalized_path = output_path.with_suffix('.normalized.wav')
+    normalize_cmd = [
+        "ffmpeg", "-y", "-i", str(output_path),
+        "-af", "loudnorm=I=-24:TP=-1.5:LRA=11",
+        str(normalized_path)
+    ]
+    norm_result = subprocess.run(normalize_cmd, capture_output=True)
+    if norm_result.returncode == 0 and normalized_path.exists():
+        shutil.move(str(normalized_path), str(output_path))
+        print(f"  Audio normalized to -24 LUFS")
+
+    return output_path
+
+
 def text_to_speech(text: str, output_path: Path, voice: str = DEFAULT_VOICE) -> Path:
-    """Convert text to speech using Piper TTS."""
+    """Convert text to speech using Piper TTS or cloned voice."""
+
+    # Check if this is a cloned voice
+    if is_cloned_voice(voice):
+        return text_to_speech_cloned(text, output_path, voice)
+
+    # Otherwise use Piper TTS
     print(f"Generating speech with voice '{voice}'...")
 
     model, config = get_voice_path(voice)
@@ -247,20 +348,37 @@ def get_video_duration(video_path: Path) -> float:
     return get_audio_duration(video_path)  # Same ffprobe command works
 
 
-def loop_video_to_duration(video_path: Path, duration: float, output_path: Path) -> Path:
-    """Loop video to match audio duration."""
+def loop_video_to_duration(video_path: Path, duration: float, output_path: Path, video_format: str = None) -> Path:
+    """Loop video to match audio duration, optionally scaling to target format."""
     print(f"Looping video to {duration:.1f}s...")
 
-    cmd = [
-        "ffmpeg", "-y",
-        "-stream_loop", "-1",
-        "-i", str(video_path),
-        "-t", str(duration + 0.5),
-        "-c:v", "libx264",
-        "-preset", "fast",
-        "-an",
-        str(output_path)
-    ]
+    if video_format:
+        # Scale to target format (portrait/landscape/square)
+        width, height = VIDEO_FORMATS.get(video_format, VIDEO_FORMATS[DEFAULT_FORMAT])
+        # Use crop to fill frame (keeps avatar centered, crops edges)
+        filter_str = f"scale={width}:{height}:force_original_aspect_ratio=increase,crop={width}:{height},setsar=1"
+        cmd = [
+            "ffmpeg", "-y",
+            "-stream_loop", "-1",
+            "-i", str(video_path),
+            "-t", str(duration + 0.5),
+            "-vf", filter_str,
+            "-c:v", "libx264",
+            "-preset", "fast",
+            "-an",
+            str(output_path)
+        ]
+    else:
+        cmd = [
+            "ffmpeg", "-y",
+            "-stream_loop", "-1",
+            "-i", str(video_path),
+            "-t", str(duration + 0.5),
+            "-c:v", "libx264",
+            "-preset", "fast",
+            "-an",
+            str(output_path)
+        ]
 
     result = subprocess.run(cmd, capture_output=True)
     if result.returncode != 0:
@@ -276,12 +394,15 @@ MAX_WAV2LIP_CHUNK = 20.0  # Max seconds per Wav2Lip chunk (CPU memory limit)
 def run_wav2lip_chunked(video_path: Path, audio_path: Path, output_path: Path, quality: str = "Improved") -> Path:
     """Run Wav2Lip with chunking for long videos."""
     duration = get_audio_duration(audio_path)
+    logger.info(f"Starting Wav2Lip chunked processing: duration={duration:.1f}s, quality={quality}")
 
     if duration <= MAX_WAV2LIP_CHUNK:
         # Short enough to process in one go
+        logger.info(f"Video under {MAX_WAV2LIP_CHUNK}s, processing in single chunk")
         return run_wav2lip(video_path, audio_path, output_path, quality)
 
     print(f"Video is {duration:.1f}s, processing in {MAX_WAV2LIP_CHUNK}s chunks...")
+    logger.info(f"Chunking enabled: {MAX_WAV2LIP_CHUNK}s per chunk")
 
     with tempfile.TemporaryDirectory() as chunk_dir:
         chunk_dir = Path(chunk_dir)
@@ -335,24 +456,69 @@ def run_wav2lip_chunked(video_path: Path, audio_path: Path, output_path: Path, q
                     old_file.unlink()
 
             # Small delay between chunks to let system settle
+            # Longer delay for the last chunk which tends to fail more
             if i > 0:
-                time.sleep(1)
+                delay = 2 if i == num_chunks - 1 else 1
+                time.sleep(delay)
 
             # Process chunk with Wav2Lip (disable tracking reuse for chunks)
             synced_chunk = chunk_dir / f"synced_chunk_{i}.mp4"
-            run_wav2lip(video_chunk, audio_chunk, synced_chunk, quality, use_tracking=False)
 
-            if synced_chunk.exists():
-                chunk_outputs.append(synced_chunk)
-            else:
-                print(f"  WARNING: Chunk {i+1} failed, skipping")
+            # Retry logic for failed chunks (up to 3 attempts)
+            max_retries = 3
+            for attempt in range(max_retries):
+                try:
+                    logger.info(f"Processing chunk {i+1}/{num_chunks}, attempt {attempt+1}/{max_retries}")
+                    run_wav2lip(video_chunk, audio_chunk, synced_chunk, quality, use_tracking=False)
+
+                    if synced_chunk.exists() and synced_chunk.stat().st_size > 1000:
+                        chunk_outputs.append(synced_chunk)
+                        logger.info(f"Chunk {i+1} completed successfully ({synced_chunk.stat().st_size} bytes)")
+                        break
+                    else:
+                        if attempt < max_retries - 1:
+                            logger.warning(f"Chunk {i+1} attempt {attempt+1} produced invalid output, retrying...")
+                            print(f"  Chunk {i+1} attempt {attempt+1} failed, retrying...")
+                            # Clear Wav2Lip temp before retry
+                            wav2lip_temp = WAV2LIP_DIR / "temp"
+                            if wav2lip_temp.exists():
+                                for old_file in wav2lip_temp.iterdir():
+                                    if old_file.is_file():
+                                        old_file.unlink()
+                            time.sleep(2)
+                        else:
+                            logger.error(f"Chunk {i+1} failed after {max_retries} attempts, skipping")
+                            logger.error(f"Chunk file: {synced_chunk} (exists={synced_chunk.exists()}, size={synced_chunk.stat().st_size if synced_chunk.exists() else 0})")
+                            print(f"  WARNING: Chunk {i+1} failed after {max_retries} attempts, skipping")
+                except Exception as e:
+                    logger.error(f"Exception during chunk {i+1} attempt {attempt+1}: {type(e).__name__}: {e}")
+                    logger.error(traceback.format_exc())
+                    if attempt == max_retries - 1:
+                        logger.error(f"Chunk {i+1} failed with exception after all retries - SKIPPING this chunk")
+                        logger.error(f"This often happens when chunk contains overlay/graphic with no face")
+                        # Don't raise - allow other chunks to continue
+                        break
 
         # Concatenate all chunks
         if chunk_outputs:
-            print(f"\n  Concatenating {len(chunk_outputs)} chunks...")
+            print(f"\n  Concatenating {len(chunk_outputs)}/{num_chunks} chunks...")
+            logger.info(f"Concatenating {len(chunk_outputs)} successfully processed chunks out of {num_chunks} total")
+            if len(chunk_outputs) < num_chunks:
+                logger.warning(f"WARNING: {num_chunks - len(chunk_outputs)} chunks failed and were skipped")
+                logger.warning("Output video will have gaps where failed chunks were")
             concatenate_videos(chunk_outputs, output_path)
         else:
+            logger.error("FATAL: No chunks were processed successfully")
+            logger.error(f"Total chunks attempted: {num_chunks}")
+            logger.error(f"Video path: {video_path}")
+            logger.error(f"Audio path: {audio_path}")
+            logger.error(f"Audio duration: {duration:.1f}s")
+            logger.error("Possible causes:")
+            logger.error("  - Video contains overlay/graphics instead of avatar with face")
+            logger.error("  - Video file is corrupted")
+            logger.error("  - Wav2Lip face detection is failing")
             print("ERROR: No chunks were processed successfully")
+            print(f"Check log file for details: {LOG_FILE}")
             sys.exit(1)
 
     return output_path
@@ -361,6 +527,7 @@ def run_wav2lip_chunked(video_path: Path, audio_path: Path, output_path: Path, q
 def run_wav2lip(video_path: Path, audio_path: Path, output_path: Path, quality: str = "Improved", use_tracking: bool = True) -> Path:
     """Run Wav2Lip to sync lips to audio (single chunk)."""
     print(f"Running Wav2Lip ({quality} quality)...")
+    logger.info(f"Wav2Lip: video={video_path}, audio={audio_path}, quality={quality}")
 
     config_path = WAV2LIP_DIR / "config.ini"
     tracking_str = "True" if use_tracking else "False"
@@ -377,7 +544,7 @@ preview_window = False
 [PADDING]
 u = 0
 d = 10
-l = 0
+l = 5
 r = 0
 
 [MASK]
@@ -394,15 +561,17 @@ preview_settings = False
 frame_to_preview = 100
 """
     config_path.write_text(config_content)
+    logger.debug(f"Wav2Lip config written to {config_path}")
 
     cmd = [
-        sys.executable,
+        str(WAV2LIP_PYTHON),  # Use Wav2Lip's dedicated venv to avoid dependency conflicts
         str(WAV2LIP_DIR / "run.py"),
     ]
 
     env = os.environ.copy()
     env["PYTHONPATH"] = str(WAV2LIP_DIR)
 
+    logger.info(f"Running Wav2Lip command: {' '.join(cmd)}")
     result = subprocess.run(
         cmd,
         cwd=str(WAV2LIP_DIR),
@@ -412,10 +581,18 @@ frame_to_preview = 100
     )
 
     if result.returncode != 0:
+        error_msg = f"Wav2Lip failed with return code {result.returncode}"
+        logger.error(error_msg)
+        logger.error(f"STDERR: {result.stderr}")
+        logger.error(f"STDOUT: {result.stdout}")
+        logger.error(f"Video input: {video_path} (exists={video_path.exists()}, size={video_path.stat().st_size if video_path.exists() else 0})")
+        logger.error(f"Audio input: {audio_path} (exists={audio_path.exists()}, size={audio_path.stat().st_size if audio_path.exists() else 0})")
         print(f"Wav2Lip failed:")
         print(result.stderr)
         print(result.stdout)
         sys.exit(1)
+
+    logger.info("Wav2Lip processing completed")
 
     # Debug: list what files exist in video directory
     print(f"  Files in {video_path.parent}:")
@@ -456,17 +633,32 @@ frame_to_preview = 100
     return output_path
 
 
-def trim_video(video_path: Path, duration: float, output_path: Path) -> Path:
-    """Trim video to specified duration (no audio)."""
-    cmd = [
-        "ffmpeg", "-y",
-        "-i", str(video_path),
-        "-t", str(duration),
-        "-c:v", "libx264",
-        "-preset", "fast",
-        "-an",
-        str(output_path)
-    ]
+def trim_video(video_path: Path, duration: float, output_path: Path, video_format: str = None) -> Path:
+    """Trim video to specified duration (no audio), optionally scaling to format."""
+    if video_format:
+        # Scale to target format (like B-roll needs)
+        width, height = VIDEO_FORMATS.get(video_format, VIDEO_FORMATS[DEFAULT_FORMAT])
+        filter_str = f"scale={width}:{height}:force_original_aspect_ratio=decrease,pad={width}:{height}:(ow-iw)/2:(oh-ih)/2,setsar=1"
+        cmd = [
+            "ffmpeg", "-y",
+            "-i", str(video_path),
+            "-t", str(duration),
+            "-vf", filter_str,
+            "-c:v", "libx264",
+            "-preset", "fast",
+            "-an",
+            str(output_path)
+        ]
+    else:
+        cmd = [
+            "ffmpeg", "-y",
+            "-i", str(video_path),
+            "-t", str(duration),
+            "-c:v", "libx264",
+            "-preset", "fast",
+            "-an",
+            str(output_path)
+        ]
     result = subprocess.run(cmd, capture_output=True)
     if result.returncode != 0:
         print(f"Video trim failed: {result.stderr.decode()}")
@@ -628,8 +820,15 @@ def add_text_overlay(
 
     result = subprocess.run(cmd, capture_output=True)
     if result.returncode != 0:
-        print(f"Text overlay failed: {result.stderr.decode()}")
-        sys.exit(1)
+        stderr = result.stderr.decode()
+        if "drawtext" in stderr.lower() or "filter not found" in stderr.lower():
+            print(f"  WARNING: drawtext filter not available, skipping CTA overlay")
+            print(f"  (Install ffmpeg with freetype to enable text overlays)")
+            # Copy input to output without overlay
+            shutil.copy(video_path, output_path)
+        else:
+            print(f"Text overlay failed: {stderr}")
+            sys.exit(1)
 
     return output_path
 
@@ -852,9 +1051,9 @@ def generate_simple_video(
         duration = get_audio_duration(audio_path)
         print(f"Audio duration: {duration:.1f}s")
 
-        # Loop video
+        # Loop video and scale to target format (portrait/landscape/square)
         looped_video = tmpdir / "looped.mp4"
-        loop_video_to_duration(avatar_video, duration, looped_video)
+        loop_video_to_duration(avatar_video, duration, looped_video, video_format)
 
         # Wav2Lip (use chunked version for long videos)
         synced_video = tmpdir / "synced.mp4"
@@ -867,7 +1066,8 @@ def generate_simple_video(
         # Add captions if enabled
         if captions:
             srt_path = tmpdir / "captions.srt"
-            generate_srt([text], [duration], srt_path)
+            # Use Whisper for accurate word-level timestamps
+            generate_srt_from_whisper(audio_path, srt_path, words_per_caption=6, model_size="base")
 
             captioned_video = tmpdir / "captioned.mp4"
             burn_captions(video_with_audio, srt_path, captioned_video)
@@ -957,6 +1157,11 @@ def generate_broll_video(
         synced_duration = get_video_duration(full_synced)
         print(f"Synced video duration: {synced_duration:.1f}s (expected {total_duration:.1f}s)")
 
+        # Warn if synced video is significantly shorter
+        duration_diff = total_duration - synced_duration
+        if duration_diff > 1.0:
+            print(f"WARNING: Video is {duration_diff:.1f}s shorter than audio - extraction will be bounded")
+
         # Step 3: Calculate timestamps and build visual effects map
         # Visual effects (overlay/broll/cta) apply to the FOLLOWING speech segment
         speech_segments = [s for s in segments if s.type == "speech"]
@@ -1023,7 +1228,8 @@ def generate_broll_video(
                     if broll_path.exists():
                         print(f"\nB-roll: {effect['content']} ({effect_duration:.1f}s) @ {current_time:.1f}s")
                         broll_out = tmpdir / f"broll_{len(video_segments)}.mp4"
-                        trim_video(broll_path, effect_duration, broll_out)
+                        # Scale B-roll to match video format (portrait/landscape/square)
+                        trim_video(broll_path, effect_duration, broll_out, video_format)
                         video_segments.append(broll_out)
                     current_time += effect_duration
 
@@ -1123,13 +1329,23 @@ def generate_broll_video(
                         current_time += remaining_speech
             else:
                 # No effect - just show avatar talking
-                print(f"\nSpeech: {speech_duration:.1f}s @ {current_time:.1f}s")
+                # Ensure we don't exceed the synced video duration
+                if current_time >= synced_duration:
+                    print(f"\nWARNING: Speech at {current_time:.1f}s exceeds video duration {synced_duration:.1f}s, skipping")
+                    break
+
+                actual_speech_duration = min(speech_duration, synced_duration - current_time)
+                if actual_speech_duration < 0.5:
+                    print(f"\nWARNING: Remaining video too short ({actual_speech_duration:.1f}s), ending")
+                    break
+
+                print(f"\nSpeech: {actual_speech_duration:.1f}s @ {current_time:.1f}s")
                 seg_out = tmpdir / f"speech_{len(video_segments)}.mp4"
                 cmd = [
                     "ffmpeg", "-y",
                     "-i", str(full_synced),
                     "-ss", str(current_time),
-                    "-t", str(speech_duration),
+                    "-t", str(actual_speech_duration),
                     "-c:v", "libx264", "-preset", "fast", "-an",
                     str(seg_out)
                 ]
@@ -1138,7 +1354,7 @@ def generate_broll_video(
                     print(f"FFmpeg error: {result.stderr.decode()}")
                     raise subprocess.CalledProcessError(result.returncode, cmd)
                 video_segments.append(seg_out)
-                current_time += speech_duration
+                current_time += actual_speech_duration
 
         # Step 5: Concatenate all video segments
         print(f"\nConcatenating {len(video_segments)} segments...")
@@ -1166,9 +1382,9 @@ def generate_broll_video(
         # Step 8: Add captions if enabled
         if captions:
             print("\nAdding captions...")
-            speech_texts = [s.content for s in speech_segments]
             srt_path = tmpdir / "captions.srt"
-            generate_srt(speech_texts, segment_durations, srt_path)
+            # Use Whisper for accurate word-level timestamps on the full audio
+            generate_srt_from_whisper(full_audio, srt_path, words_per_caption=6, model_size="base")
 
             captioned_video = tmpdir / "captioned.mp4"
             burn_captions(final_video, srt_path, captioned_video)
@@ -1215,8 +1431,8 @@ Examples:
     parser.add_argument(
         "--output", "-o",
         type=Path,
-        default=OUTPUT_DIR / "video.mp4",
-        help="Output video path"
+        default=None,
+        help="Output video path (default: auto-named with timestamp on NAS)"
     )
     parser.add_argument(
         "--quality", "-q",
@@ -1283,6 +1499,18 @@ Examples:
     if not args.skip_checks:
         check_dependencies(args.voice)
 
+    # Set output path with auto-naming if not specified
+    if args.output is None:
+        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+        timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        if args.script:
+            # Use script filename as base
+            base_name = args.script.stem
+            args.output = OUTPUT_DIR / f"{base_name}_{timestamp}.mp4"
+        else:
+            args.output = OUTPUT_DIR / f"video_{timestamp}.mp4"
+        print(f"Output: {args.output}")
+
     # Check for visual markers (B-roll, overlay, CTA, music)
     if has_visual_markers(text) or "[MUSIC:" in text.upper():
         generate_broll_video(
@@ -1307,4 +1535,27 @@ Examples:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        logger.info("=" * 80)
+        logger.info("KnockOff Video Generation Started")
+        logger.info(f"Command: {' '.join(sys.argv)}")
+        logger.info("=" * 80)
+        main()
+        logger.info("=" * 80)
+        logger.info("Video generation completed successfully")
+        logger.info("=" * 80)
+    except KeyboardInterrupt:
+        logger.warning("\n\nGeneration cancelled by user")
+        sys.exit(130)
+    except Exception as e:
+        logger.error("=" * 80)
+        logger.error("FATAL ERROR - Video generation crashed")
+        logger.error(f"Error type: {type(e).__name__}")
+        logger.error(f"Error message: {str(e)}")
+        logger.error("-" * 80)
+        logger.error("Full traceback:")
+        logger.error(traceback.format_exc())
+        logger.error("=" * 80)
+        logger.error(f"Error details saved to: {LOG_FILE}")
+        print(f"\n\nERROR: Generation failed. Check log file: {LOG_FILE}")
+        sys.exit(1)

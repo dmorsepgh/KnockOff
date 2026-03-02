@@ -1,3 +1,4 @@
+I don't know why I was shit as I don't know where my thing went
 # KnockOff - Local AI Video Generation
 
 HeyGen alternative using local AI models. No subscriptions, no API costs, full control.
