@@ -1,0 +1,9 @@
+.venv/
+.tmp/
+__pycache__/
+*.pyc
+logs/
+models/
+*.wav
+*.mp4
+cloud_config.json
