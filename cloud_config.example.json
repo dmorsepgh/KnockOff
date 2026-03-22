@@ -1,0 +1,54 @@
+{
+  "macstadium": {
+    "host": "your-server.macstadium.com",
+    "username": "admin",
+    "password": "your-password-here",
+    "ssh_key": "/path/to/your/private/key",
+    "server_id": "manual",
+    "hourly_rate": 0.85,
+    "notes": "MacStadium on-demand Mac servers - Update with your credentials"
+  },
+  "macly": {
+    "host": "your-server.macly.com",
+    "username": "admin",
+    "password": "your-password-here",
+    "ssh_key": "/path/to/your/private/key",
+    "server_id": "manual",
+    "hourly_rate": 0.85,
+    "notes": "Macly on-demand Mac servers - Update with your credentials"
+  },
+  "scaleway": {
+    "access_key": "SCWXXXXXXXXXXXXXXXXX",
+    "secret_key": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "project_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "organization_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "zone": "fr-par-1",
+    "mac_type": "m2",
+    "hourly_rate": 0.17,
+    "notes": "Scaleway Mac mini - TRUE on-demand (recommended)"
+  },
+  "custom": {
+    "host": "192.168.1.100",
+    "username": "admin",
+    "password": "your-password",
+    "ssh_key": "",
+    "server_id": "custom-001",
+    "hourly_rate": 0.0,
+    "notes": "Custom Mac server - Local or other provider"
+  },
+  "_instructions": {
+    "setup": [
+      "1. Copy this file to cloud_config.json",
+      "2. Fill in your server credentials",
+      "3. Choose either password OR ssh_key authentication",
+      "4. Update hourly_rate based on your provider's pricing",
+      "5. Keep cloud_config.json out of git (already in .gitignore)"
+    ],
+    "security": [
+      "IMPORTANT: cloud_config.json contains sensitive credentials",
+      "- Never commit this file to git",
+      "- Use environment variables for CI/CD",
+      "- Restrict file permissions: chmod 600 cloud_config.json"
+    ]
+  }
+}

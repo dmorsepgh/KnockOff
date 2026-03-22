@@ -1,9 +1,38 @@
+# Python
 .venv/
-.tmp/
 __pycache__/
 *.pyc
-logs/
-models/
-*.wav
-*.mp4
+*.pyo
+
+# Generated content
+.tmp*
+
+# Large binary files
+models/piper/*.onnx
+models/piper/*.onnx.json
+avatars/*.mp4
+broll/*.mp4
+overlays/*.png
+overlays/*.jpg
+music/*.mp3
+
+# OS files
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Claude
+.claude/
+.env
+
+# Sensitive config
 cloud_config.json
+
+# Additional venvs
+.venv-tts/
+
+# Logs and generated comparisons
+logs/
+comparisons/
