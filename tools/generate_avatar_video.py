@@ -529,6 +529,12 @@ def run_wav2lip(video_path: Path, audio_path: Path, output_path: Path, quality: 
     print(f"Running Wav2Lip ({quality} quality)...")
     logger.info(f"Wav2Lip: video={video_path}, audio={audio_path}, quality={quality}")
 
+    # Clear stale face detection cache to prevent ghost faces from previous runs
+    stale_cache = WAV2LIP_DIR / "last_detected_face.pkl"
+    if not use_tracking and stale_cache.exists():
+        stale_cache.unlink()
+        logger.info("Cleared stale face detection cache")
+
     config_path = WAV2LIP_DIR / "config.ini"
     tracking_str = "True" if use_tracking else "False"
     config_content = f"""[OPTIONS]
