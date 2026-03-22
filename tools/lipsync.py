@@ -69,9 +69,9 @@ def run_lipsync(
     cmd = [
         python_bin, str(WAV2LIP_SCRIPT),
         "--checkpoint_path", checkpoint,
-        "--face", str(avatar_path),
-        "--audio", str(audio_path),
-        "--outfile", str(output_path),
+        "--face", str(avatar_path.resolve()),
+        "--audio", str(audio_path.resolve()),
+        "--outfile", str(output_path.resolve()),
         "--out_height", "720",
         "--quality", quality,
         "--wav2lip_batch_size", "64",
