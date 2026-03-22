@@ -75,7 +75,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Default voice
-DEFAULT_VOICE = "doug"  # Use cloned voice by default
+DEFAULT_VOICE = "joe"  # Piper TTS (use "doug" for cloned voice when XTTS is set up)
 
 # Video format presets (width, height)
 VIDEO_FORMATS = {
