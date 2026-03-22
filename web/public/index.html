@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KnockOff Video Generator</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0a0d14;
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .container { max-width: 700px; width: 100%; }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #60a5fa, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .subtitle { color: #94a3b8; margin-bottom: 2rem; }
+    .form-group { margin-bottom: 1.5rem; }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+    input[type="text"], select, textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: #1a2035;
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 8px;
+      color: #e2e8f0;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #3b82f6;
+    }
+    textarea {
+      min-height: 200px;
+      resize: vertical;
+      font-family: inherit;
+      line-height: 1.6;
+    }
+    .row {
+      display: flex;
+      gap: 1rem;
+    }
+    .row .form-group { flex: 1; }
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .checkbox-group input { width: 18px; height: 18px; cursor: pointer; }
+    .checkbox-group label { margin: 0; cursor: pointer; }
+    .btn {
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      width: 100%;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      color: white;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .btn-secondary {
+      background: #1a2035;
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      margin-top: 0.75rem;
+    }
+    .btn-secondary:hover { background: #1e2744; }
+    .status {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 8px;
+      display: none;
+    }
+    .status.info { display: block; background: #1e293b; border: 1px solid #334155; }
+    .status.success { display: block; background: #0f3326; border: 1px solid #166534; }
+    .status.error { display: block; background: #3b1111; border: 1px solid #7f1d1d; }
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #60a5fa;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .script-preview {
+      display: none;
+      margin-top: 1.5rem;
+    }
+    .script-preview.show { display: block; }
+    .script-preview h3 { margin-bottom: 0.75rem; color: #60a5fa; }
+    video {
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 1rem;
+      max-height: 400px;
+    }
+    .tag { font-size: 0.75rem; color: #94a3b8; margin-top: 0.25rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>KnockOff Video Generator</h1>
+    <p class="subtitle">AI Artisan Extraordinaire — dmpgh.com</p>
+
+    <div class="form-group">
+      <label for="topic">Topic</label>
+      <input type="text" id="topic" placeholder="e.g. How to set up SSH on a Mac Mini">
+    </div>
+
+    <div class="row">
+      <div class="form-group">
+        <label for="length">Video Length</label>
+        <select id="length">
+          <option value="30s">30 seconds</option>
+          <option value="60s" selected>60 seconds</option>
+          <option value="90s">90 seconds</option>
+          <option value="2m">2 minutes</option>
+          <option value="3m">3 minutes</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="avatar">Avatar</label>
+        <select id="avatar"></select>
+      </div>
+      <div class="form-group">
+        <label for="voice">Voice</label>
+        <select id="voice"></select>
+      </div>
+    </div>
+
+    <div class="checkbox-group">
+      <input type="checkbox" id="preview" checked>
+      <label for="preview">Preview script before rendering</label>
+    </div>
+
+    <button class="btn btn-primary" id="generateBtn" onclick="generate()">Generate Video</button>
+
+    <div class="script-preview" id="scriptPreview">
+      <h3>Script Preview</h3>
+      <textarea id="scriptText" placeholder="Script will appear here..."></textarea>
+      <p class="tag" id="wordCount"></p>
+      <button class="btn btn-primary" onclick="renderVideo()" style="margin-top: 0.75rem;">Approve & Render Video</button>
+      <button class="btn btn-secondary" onclick="regenerateScript()">Regenerate Script</button>
+    </div>
+
+    <div class="status" id="status"></div>
+
+    <div id="videoResult" style="display:none; margin-top: 1.5rem;">
+      <h3 style="color: #60a5fa; margin-bottom: 0.5rem;">Generated Video</h3>
+      <video id="videoPlayer" controls></video>
+      <button class="btn btn-secondary" onclick="downloadVideo()">Download Video</button>
+    </div>
+  </div>
+
+  <script>
+    let currentVideoUrl = '';
+
+    async function loadOptions() {
+      const [avatars, voices] = await Promise.all([
+        fetch('/api/avatars').then(r => r.json()),
+        fetch('/api/voices').then(r => r.json())
+      ]);
+
+      const avatarSelect = document.getElementById('avatar');
+      avatars.forEach(a => {
+        const opt = document.createElement('option');
+        opt.value = a;
+        opt.textContent = a;
+        avatarSelect.appendChild(opt);
+      });
+
+      const voiceSelect = document.getElementById('voice');
+      voices.forEach(v => {
+        const opt = document.createElement('option');
+        opt.value = v;
+        opt.textContent = v;
+        voiceSelect.appendChild(opt);
+      });
+    }
+
+    async function generate() {
+      const topic = document.getElementById('topic').value.trim();
+      if (!topic) return alert('Enter a topic');
+
+      const preview = document.getElementById('preview').checked;
+      const btn = document.getElementById('generateBtn');
+      btn.disabled = true;
+
+      setStatus('info', '<span class="spinner"></span> Generating script...');
+
+      try {
+        const res = await fetch('/api/generate-script', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            topic,
+            length: document.getElementById('length').value
+          })
+        });
+        const data = await res.json();
+
+        if (data.error) {
+          setStatus('error', data.error);
+          btn.disabled = false;
+          return;
+        }
+
+        document.getElementById('scriptText').value = data.script;
+        updateWordCount();
+
+        if (preview) {
+          document.getElementById('scriptPreview').classList.add('show');
+          setStatus('info', 'Script ready. Review and approve, or regenerate.');
+          btn.disabled = false;
+        } else {
+          await renderVideo();
+        }
+      } catch (err) {
+        setStatus('error', 'Error: ' + err.message);
+        btn.disabled = false;
+      }
+    }
+
+    async function regenerateScript() {
+      document.getElementById('scriptPreview').classList.remove('show');
+      await generate();
+    }
+
+    function updateWordCount() {
+      const text = document.getElementById('scriptText').value.trim();
+      const words = text.split(/\s+/).filter(w => w.length > 0).length;
+      document.getElementById('wordCount').textContent = `${words} words`;
+    }
+
+    document.getElementById('scriptText').addEventListener('input', updateWordCount);
+
+    async function renderVideo() {
+      const script = document.getElementById('scriptText').value.trim();
+      if (!script) return alert('No script to render');
+
+      const avatar = document.getElementById('avatar').value;
+      const voice = document.getElementById('voice').value;
+      const btn = document.getElementById('generateBtn');
+      btn.disabled = true;
+
+      setStatus('info', '<span class="spinner"></span> Rendering video... this may take a few minutes.');
+      document.getElementById('videoResult').style.display = 'none';
+
+      try {
+        const res = await fetch('/api/generate-video', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ script, avatar, voice })
+        });
+        const data = await res.json();
+
+        if (data.jobId) {
+          pollJob(data.jobId);
+        } else {
+          setStatus('error', 'Failed to start job');
+        }
+      } catch (err) {
+        setStatus('error', 'Error: ' + err.message);
+      }
+      btn.disabled = false;
+    }
+
+    async function pollJob(jobId) {
+      const poll = setInterval(async () => {
+        try {
+          const res = await fetch(`/api/job/${jobId}`);
+          const job = await res.json();
+
+          if (job.status === 'rendering') {
+            setStatus('info', `<span class="spinner"></span> Rendering video... ${job.elapsed}s elapsed`);
+          } else if (job.status === 'complete') {
+            clearInterval(poll);
+            currentVideoUrl = job.video;
+            document.getElementById('videoPlayer').src = job.video;
+            document.getElementById('videoResult').style.display = 'block';
+            setStatus('success', `Video generated in ${job.duration} seconds!`);
+            document.getElementById('generateBtn').disabled = false;
+          } else if (job.status === 'failed') {
+            clearInterval(poll);
+            setStatus('error', 'Video generation failed. Check logs.');
+            document.getElementById('generateBtn').disabled = false;
+          }
+        } catch (err) {
+          clearInterval(poll);
+          setStatus('error', 'Lost connection to server');
+          document.getElementById('generateBtn').disabled = false;
+        }
+      }, 3000);
+    }
+
+    function downloadVideo() {
+      if (currentVideoUrl) {
+        const a = document.createElement('a');
+        a.href = currentVideoUrl;
+        a.download = 'knockoff-video.mp4';
+        a.click();
+      }
+    }
+
+    function setStatus(type, message) {
+      const el = document.getElementById('status');
+      el.className = 'status ' + type;
+      el.innerHTML = message;
+    }
+
+    loadOptions();
+  </script>
+</body>
+</html>

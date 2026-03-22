@@ -84,6 +84,12 @@ models/piper/   # TTS voice models
 | Improved | Medium | General use |
 | Enhanced | Slowest | Final production |
 
+## Voice Output
+
+After every response, speak a brief conversational summary of what you said using the macOS `say` command. Keep it to 1-3 sentences max — don't read the entire response verbatim. Use the default system voice.
+
+Example: `say "I found the problem. The avatar file was corrupted. I'm downloading a new one now."`
+
 ## Known Issues
 
 - GFPGAN not installed (Enhanced mode unavailable, Fast/Improved work fine)
