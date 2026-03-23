@@ -15,6 +15,11 @@ MODELS_DIR = PROJECT_ROOT / "models" / "piper"
 VOICES = {
     "joe": MODELS_DIR / "en_US-joe-medium.onnx",
     "lessac": MODELS_DIR / "en_US-lessac-medium.onnx",
+    "amy": MODELS_DIR / "en_US-amy-medium.onnx",
+    "danny": MODELS_DIR / "en_US-danny-low.onnx",
+    "ryan": MODELS_DIR / "en_US-ryan-medium.onnx",
+    "kusal": MODELS_DIR / "en_US-kusal-medium.onnx",
+    "arctic": MODELS_DIR / "en_US-arctic-medium.onnx",
 }
 
 
