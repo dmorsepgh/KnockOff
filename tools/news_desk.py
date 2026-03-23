@@ -448,7 +448,7 @@ def generate_news_desk(script_path: Path, quality: str = "Fast", output_path: Pa
                 subprocess.run([
                     "ffmpeg", "-y", "-i", str(intro_path),
                     "-c:v", "libx264", "-preset", "fast", "-r", "30",
-                    "-c:a", "aac", "-ar", "44100",
+                    "-c:a", "aac", "-ar", "44100", "-ac", "2",
                     str(intro_ready)
                 ], capture_output=True, check=True)
                 parts.append(intro_ready)
@@ -459,7 +459,7 @@ def generate_news_desk(script_path: Path, quality: str = "Fast", output_path: Pa
                 "ffmpeg", "-y", "-i", str(desk_video),
                 "-vf", "scale=1920:1080",
                 "-c:v", "libx264", "-preset", "fast", "-r", "30",
-                "-c:a", "aac", "-ar", "44100",
+                "-c:a", "aac", "-ar", "44100", "-ac", "2",
                 str(desk_1080)
             ], capture_output=True, check=True)
             parts.append(desk_1080)
@@ -472,8 +472,8 @@ def generate_news_desk(script_path: Path, quality: str = "Fast", output_path: Pa
                 subprocess.run([
                     "ffmpeg", "-y", "-i", str(bumper_path),
                     "-vf", "scale=1920:1080",
-                    "-c:v", "libx264", "-preset", "fast", "-r", "30",
-                    "-c:a", "aac", "-ar", "44100",
+                    "-c:v", "libx264",  "-preset", "fast", "-r", "30",
+                    "-c:a", "aac", "-ar", "44100", "-ac", "2",
                     str(bumper_ready)
                 ], capture_output=True, check=True)
                 parts.append(bumper_ready)
