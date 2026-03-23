@@ -464,6 +464,20 @@ def generate_news_desk(script_path: Path, quality: str = "Fast", output_path: Pa
             ], capture_output=True, check=True)
             parts.append(desk_1080)
 
+            # Add bumper video if it exists (plays before disclaimer)
+            bumper_path = PROJECT_ROOT / "overlays" / "dmpgh_bumper.mp4"
+            if bumper_path.exists():
+                print("Adding bumper video...")
+                bumper_ready = tmpdir / "bumper_ready.mp4"
+                subprocess.run([
+                    "ffmpeg", "-y", "-i", str(bumper_path),
+                    "-vf", "scale=1920:1080",
+                    "-c:v", "libx264", "-preset", "fast", "-r", "30",
+                    "-c:a", "aac", "-ar", "44100",
+                    str(bumper_ready)
+                ], capture_output=True, check=True)
+                parts.append(bumper_ready)
+
             if outro_path.exists():
                 # Add silent audio to outro
                 outro_ready = tmpdir / "outro_ready.mp4"
