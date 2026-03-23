@@ -382,7 +382,7 @@ def generate_news_desk(script_path: Path, quality: str = "Fast", output_path: Pa
             "-c:a", "pcm_s16le", str(full_audio)
         ], capture_output=True, check=True)
 
-        # Composite side by side
+        # Composite side by side at 1080p
         OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
         if output_path is None:
             timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -391,18 +391,105 @@ def generate_news_desk(script_path: Path, quality: str = "Fast", output_path: Pa
         host_video = role_videos.get("HOST")
         guest_video = role_videos.get("GUEST")
 
-        subprocess.run([
+        # Build filter with lower thirds overlay
+        def find_lower_third(avatar_name):
+            """Find lower third overlay by trying each part of the avatar name."""
+            parts = avatar_name.lower().replace('_', '-').split('-')
+            for part in parts:
+                path = PROJECT_ROOT / "overlays" / f"lower_third_{part}.png"
+                if path.exists():
+                    return path
+            return PROJECT_ROOT / "overlays" / f"lower_third_{parts[0]}.png"
+
+        host_lower = find_lower_third(speakers['HOST']['avatar'])
+        guest_lower = find_lower_third(speakers['GUEST']['avatar'])
+
+        filter_parts = "[0:v]scale=960:540[left];[1:v]scale=960:540[right];[left][right]hstack=inputs=2[desk]"
+
+        overlay_inputs = []
+        input_idx = 3  # 0=host, 1=guest, 2=audio
+
+        if host_lower.exists() and guest_lower.exists():
+            overlay_inputs = ["-i", str(host_lower), "-i", str(guest_lower)]
+            filter_parts += (
+                f";[{input_idx}]scale=350:40[lt_h];"
+                f"[{input_idx+1}]scale=350:40[lt_g];"
+                f"[desk][lt_h]overlay=20:480:enable='between(t,0,5)'[tmp];"
+                f"[tmp][lt_g]overlay=990:480:enable='between(t,0,5)'[vid]"
+            )
+        else:
+            filter_parts += ";[desk]copy[vid]"
+
+        desk_video = tmpdir / "desk.mp4"
+        cmd = [
             "ffmpeg", "-y",
             "-i", str(host_video),
             "-i", str(guest_video),
             "-i", str(full_audio),
-            "-filter_complex",
-            "[0:v]scale=960:540[left];[1:v]scale=960:540[right];[left][right]hstack=inputs=2[vid]",
+        ] + overlay_inputs + [
+            "-filter_complex", filter_parts,
             "-map", "[vid]", "-map", "2:a",
             "-c:v", "libx264", "-preset", "fast", "-c:a", "aac",
             "-shortest",
-            str(output_path)
-        ], capture_output=True, check=True)
+            str(desk_video)
+        ]
+        subprocess.run(cmd, capture_output=True, check=True)
+
+        # Add intro and outro if they exist
+        intro_path = PROJECT_ROOT / "overlays" / "intro_card.mp4"
+        outro_path = PROJECT_ROOT / "overlays" / "outro_card.mp4"
+
+        if intro_path.exists() or outro_path.exists():
+            print("Adding broadcast package (intro/outro)...")
+            parts = []
+
+            if intro_path.exists():
+                intro_ready = tmpdir / "intro_ready.mp4"
+                subprocess.run([
+                    "ffmpeg", "-y", "-i", str(intro_path),
+                    "-c:v", "libx264", "-preset", "fast", "-r", "30",
+                    "-c:a", "aac", "-ar", "44100",
+                    str(intro_ready)
+                ], capture_output=True, check=True)
+                parts.append(intro_ready)
+
+            # Scale desk to 1080p to match intro/outro
+            desk_1080 = tmpdir / "desk_1080.mp4"
+            subprocess.run([
+                "ffmpeg", "-y", "-i", str(desk_video),
+                "-vf", "scale=1920:1080",
+                "-c:v", "libx264", "-preset", "fast", "-r", "30",
+                "-c:a", "aac", "-ar", "44100",
+                str(desk_1080)
+            ], capture_output=True, check=True)
+            parts.append(desk_1080)
+
+            if outro_path.exists():
+                # Add silent audio to outro
+                outro_ready = tmpdir / "outro_ready.mp4"
+                subprocess.run([
+                    "ffmpeg", "-y", "-i", str(outro_path),
+                    "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo",
+                    "-vf", "scale=1920:1080",
+                    "-c:v", "libx264", "-preset", "fast", "-r", "30",
+                    "-c:a", "aac", "-shortest",
+                    str(outro_ready)
+                ], capture_output=True, check=True)
+                parts.append(outro_ready)
+
+            # Concat all parts
+            concat_file = tmpdir / "broadcast_concat.txt"
+            with open(concat_file, "w") as f:
+                for p in parts:
+                    f.write(f"file '{p}'\n")
+
+            subprocess.run([
+                "ffmpeg", "-y", "-f", "concat", "-safe", "0",
+                "-i", str(concat_file), "-c", "copy",
+                str(output_path)
+            ], capture_output=True, check=True)
+        else:
+            shutil.copy2(str(desk_video), str(output_path))
 
         asm_time = time.time() - asm_start
 
@@ -410,10 +497,10 @@ def generate_news_desk(script_path: Path, quality: str = "Fast", output_path: Pa
 
     # Print metrics
     print(f"\n{'='*50}")
-    print(f"NEWS DESK VIDEO COMPLETE")
+    print(f"KNOCKOFF NEWS BROADCAST COMPLETE")
     print(f"{'='*50}")
     print(f"Output:        {output_path}")
-    print(f"Duration:      {total_duration:.1f}s of video")
+    print(f"Duration:      {total_duration:.1f}s of content")
     print(f"{'='*50}")
     print(f"TTS:           {tts_time:.1f}s")
     print(f"Wav2Lip:       {w2l_time:.1f}s")
