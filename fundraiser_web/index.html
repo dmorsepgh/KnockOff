@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fundraiser Video Generator — Look Mom No Hands Productions</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: #0f0f1a;
+      color: #e8e8f0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+    }
+    .card {
+      background: #1a1a2e;
+      border: 1px solid #2a2a4a;
+      border-radius: 16px;
+      padding: 40px;
+      width: 100%;
+      max-width: 560px;
+    }
+    .logo {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .logo h1 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #e05a00;
+      letter-spacing: 0.02em;
+    }
+    .logo p {
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .field { margin-bottom: 20px; }
+    input[type="text"], input[type="url"], select, textarea {
+      width: 100%;
+      background: #111128;
+      border: 1px solid #2a2a4a;
+      border-radius: 8px;
+      color: #e8e8f0;
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #e05a00;
+    }
+    textarea { resize: vertical; min-height: 80px; }
+    select option { background: #1a1a2e; }
+
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .radio-group { display: flex; gap: 10px; }
+    .radio-group label {
+      flex: 1; text-align: center;
+      background: #111128;
+      border: 1px solid #2a2a4a;
+      border-radius: 8px;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      text-transform: none;
+      letter-spacing: 0;
+      color: #ccc;
+      transition: all 0.15s;
+    }
+    .radio-group input[type="radio"] { display: none; }
+    .radio-group input[type="radio"]:checked + label,
+    .radio-group label:has(+ input:checked) { display: none; } /* fallback handled via JS */
+    .radio-group label.selected {
+      border-color: #e05a00;
+      color: #e05a00;
+      background: #1f1010;
+    }
+
+    .btn {
+      width: 100%;
+      background: #e05a00;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 15px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .btn:hover { background: #c74e00; }
+    .btn:disabled { background: #444; cursor: not-allowed; }
+
+    /* Progress panel */
+    #progress { display: none; margin-top: 24px; }
+    .progress-bar-track {
+      background: #111128;
+      border-radius: 8px;
+      height: 8px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: #e05a00;
+      border-radius: 8px;
+      width: 5%;
+      transition: width 0.5s ease;
+    }
+    .status-msg {
+      font-size: 0.9rem;
+      color: #bbb;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .done-panel { display: none; text-align: center; }
+    .done-panel h2 { color: #e05a00; font-size: 1.2rem; margin-bottom: 8px; }
+    .done-panel p { color: #aaa; font-size: 0.9rem; margin-bottom: 16px; }
+    .dl-btn {
+      display: inline-block;
+      background: #e05a00;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .dl-btn:hover { background: #c74e00; }
+    .preview-text {
+      background: #111128;
+      border: 1px solid #2a2a4a;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 0.82rem;
+      color: #aaa;
+      line-height: 1.5;
+      margin-bottom: 16px;
+      text-align: left;
+    }
+    .preview-text strong { color: #e05a00; display: block; margin-bottom: 4px; font-size: 0.75rem; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">
+    <h1>FUNDRAISER VIDEO GENERATOR</h1>
+    <p>Look Mom No Hands Productions &mdash; AI-Powered, $0 Per Video</p>
+  </div>
+
+  <form id="form">
+    <div class="field">
+      <label>Fundraiser / Organization Name</label>
+      <input type="text" id="org" placeholder="e.g. National MS Society" required>
+    </div>
+
+    <div class="field">
+      <label>Cause Description</label>
+      <textarea id="cause" placeholder="e.g. funding research to stop multiple sclerosis and help the 1 million Americans living with it" required></textarea>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label>Donation URL (used for QR code &amp; CTA)</label>
+        <input type="text" id="url" placeholder="e.g. nationalmssociety.org/donate" required>
+      </div>
+      <div class="field">
+        <label>Phone Number (shown on video banner)</label>
+        <input type="text" id="phone" placeholder="e.g. 1-800-344-4867">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Your Email (video delivered here when ready)</label>
+      <input type="text" id="email" placeholder="you@yourorg.com">
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label>Donation Ask Amount</label>
+        <input type="text" id="ask_amount" placeholder="e.g. $25, $50, $100">
+      </div>
+      <div class="field">
+        <label>Frequency</label>
+        <div class="radio-group" id="freqGroup">
+          <div class="freq-opt" data-value="one-time">
+            <label class="selected" onclick="selectFreq('one-time')">One-Time</label>
+          </div>
+          <div class="freq-opt" data-value="monthly">
+            <label onclick="selectFreq('monthly')">Monthly</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label>Video Length</label>
+        <select id="length">
+          <option value="60">60 seconds</option>
+          <option value="90" selected>90 seconds</option>
+          <option value="120">120 seconds</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Orientation</label>
+        <select id="orientation">
+          <option value="landscape" selected>⬛ Landscape (16:9)</option>
+          <option value="portrait">▮ Portrait (9:16)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Music Style</label>
+      <select id="music">
+        <option value="emotional-piano">Emotional Piano</option>
+        <option value="dramatic">Dramatic</option>
+        <option value="uplifting">Uplifting</option>
+        <option value="classical-love">Classical / Love</option>
+        <option value="cinematic-dramatic">Cinematic Dramatic</option>
+        <option value="epic-violin">Epic Violin</option>
+        <option value="acoustic-guitar">Acoustic Guitar</option>
+        <option value="somber-emotional">Somber / Emotional</option>
+        <option value="tender-hopeful">Tender / Hopeful</option>
+        <option value="love-cinematic">Love / Cinematic</option>
+        <option value="banjo-americana">Banjo / Americana</option>
+        <option value="dramatic-piano-violin">Dramatic Piano + Violin</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Voice Gender</label>
+      <div class="radio-group" id="voiceGroup">
+        <div class="voice-opt" data-value="female">
+          <label class="selected" onclick="selectVoice('female')">Female (Nova)</label>
+        </div>
+        <div class="voice-opt" data-value="male">
+          <label onclick="selectVoice('male')">Male (Onyx)</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Caption Options</label>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <label style="display:flex;align-items:center;gap:10px;cursor:pointer;text-transform:none;letter-spacing:0;font-size:0.9rem;color:#ccc;font-weight:400;">
+          <input type="checkbox" id="captions" style="width:18px;height:18px;accent-color:#e05a00;">
+          Hardcoded captions (burned into video — white text, black outline, works everywhere)
+        </label>
+        <label style="display:flex;align-items:center;gap:10px;cursor:pointer;text-transform:none;letter-spacing:0;font-size:0.9rem;color:#ccc;font-weight:400;">
+          <input type="checkbox" id="srt_captions" style="width:18px;height:18px;accent-color:#e05a00;">
+          Closed captions — SRT file (attached to delivery email, toggle on/off in players)
+        </label>
+      </div>
+    </div>
+
+    <div style="background:#111128;border:1px solid #2a2a4a;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:0.82rem;color:#888;line-height:1.5;">
+      <span style="color:#e05a00;font-weight:700;">Free tier</span> includes a <strong style="color:#ccc;">dmpgh.com watermark</strong> on your video.
+      Want it removed or replaced with your own branding?
+      <a href="mailto:aiva@dmpgh.com" style="color:#e05a00;">Contact us</a> — starting at $25.
+    </div>
+
+    <button type="submit" class="btn" id="submitBtn">Generate Fundraiser Video — Free</button>
+  </form>
+
+  <div id="progress">
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+    <div class="status-msg" id="statusMsg">Starting...</div>
+    <div class="done-panel" id="donePanel">
+      <h2>Video Ready</h2>
+      <div class="preview-text" id="previewText"></div>
+      <div id="dlBtns" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+let selectedVoice = 'female';
+let selectedFreq = 'one-time';
+let pollInterval = null;
+
+function selectVoice(v) {
+  selectedVoice = v;
+  document.querySelectorAll('#voiceGroup label').forEach(l => l.classList.remove('selected'));
+  document.querySelector(`#voiceGroup [data-value="${v}"] label`).classList.add('selected');
+}
+
+function selectFreq(v) {
+  selectedFreq = v;
+  document.querySelectorAll('#freqGroup label').forEach(l => l.classList.remove('selected'));
+  document.querySelector(`#freqGroup [data-value="${v}"] label`).classList.add('selected');
+}
+
+const PROGRESS_STEPS = {
+  queued:         { pct: 5,  msg: 'Queued...' },
+  writing_script: { pct: 20, msg: 'Writing script with AI...' },
+  rendering:      { pct: 40, msg: 'Rendering video (2-4 min)...' },
+  done:           { pct: 100, msg: 'Done!' },
+  error:          { pct: 0,  msg: '' },
+};
+
+function setProgress(pct, msg) {
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('statusMsg').textContent = msg;
+}
+
+function pollStatus(jobId) {
+  fetch(`/status/${jobId}`)
+    .then(r => r.json())
+    .then(data => {
+      const step = PROGRESS_STEPS[data.status] || { pct: 50, msg: data.message };
+      setProgress(step.pct, data.message || step.msg);
+
+      if (data.status === 'done') {
+        clearInterval(pollInterval);
+        showDone(data);
+      } else if (data.status === 'error') {
+        clearInterval(pollInterval);
+        document.getElementById('statusMsg').textContent = '❌ ' + data.message;
+        document.getElementById('submitBtn').disabled = false;
+      }
+    })
+    .catch(e => console.error('Poll error:', e));
+}
+
+function showDone(data) {
+  document.getElementById('donePanel').style.display = 'block';
+  const p = data.script_preview || {};
+  document.getElementById('previewText').innerHTML =
+    `<strong>Hook</strong>${p.hook || '—'}<br><br>` +
+    `<strong>CTA</strong>${p.ask || '—'}<br><br>` +
+    `<strong>Tagline</strong>${p.tagline || '—'}`;
+
+  const dlBtns = document.getElementById('dlBtns');
+  dlBtns.innerHTML = '';
+  const files = data.video_filenames || {};
+  if (Object.keys(files).length === 0 && data.video_filename) {
+    files['video'] = data.video_filename;
+  }
+  const labels = { landscape: '⬛ Download Landscape (16:9)', vertical: '▮ Download Portrait (9:16)', video: '⬇ Download Video' };
+  for (const [key, fname] of Object.entries(files)) {
+    const a = document.createElement('a');
+    a.href = `/download/${encodeURIComponent(fname)}`;
+    a.download = fname;
+    a.className = 'dl-btn';
+    a.textContent = labels[key] || `Download ${key}`;
+    dlBtns.appendChild(a);
+  }
+}
+
+document.getElementById('form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const org   = document.getElementById('org').value.trim();
+  const cause = document.getElementById('cause').value.trim();
+  const url   = document.getElementById('url').value.trim();
+  const length = parseInt(document.getElementById('length').value);
+  const music  = document.getElementById('music').value;
+
+  if (!org || !cause) return;
+
+  document.getElementById('submitBtn').disabled = true;
+  document.getElementById('progress').style.display = 'block';
+  document.getElementById('donePanel').style.display = 'none';
+  setProgress(5, 'Submitting...');
+
+  const resp = await fetch('/generate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ org, cause, url, phone: document.getElementById('phone').value.trim(), ask_amount: document.getElementById('ask_amount').value.trim(), frequency: selectedFreq, length, voice: selectedVoice, music, orientation: document.getElementById('orientation').value, captions: document.getElementById('captions').checked, srt_captions: document.getElementById('srt_captions').checked, email: document.getElementById('email').value.trim() }),
+  });
+  const data = await resp.json();
+  if (data.error) {
+    setProgress(0, '❌ ' + data.error);
+    document.getElementById('submitBtn').disabled = false;
+    return;
+  }
+
+  pollInterval = setInterval(() => pollStatus(data.job_id), 4000);
+  pollStatus(data.job_id);
+});
+</script>
+</body>
+</html>

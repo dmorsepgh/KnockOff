@@ -1,0 +1,74 @@
+{
+  "scene1_hook": "Welcome to This Week in Space. Where we cover what is happening above your head while you were busy worrying about things below it. This week: a rover on Mars found something it was not supposed to find. Scientists mapped forty-seven million galaxies. Astronauts came home. And SpaceX launched a rocket the size of a building for the first time in eighteen months. Space did not slow down. It never does.",
+  "keywords_scene1": [
+    "space galaxy stars universe dramatic cinematic",
+    "Mars red planet surface rover dramatic",
+    "rocket launch SpaceX dramatic night sky"
+  ],
+  "scene1_overlays": [
+    {"lines": "*THIS WEEK|IN SPACE", "in": 0.5, "out": 4.0, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Mars. 47 million galaxies. Astronauts home.", "sub": "SpaceX launched a building-sized rocket.", "in": 4.5, "out": 10.0},
+    {"style": "bullet", "head": "Space did not slow down.", "sub": "It never does.", "in": 10.5, "out": 15.5}
+  ],
+
+  "scene2_problem": "NASA's Curiosity rover has been on Mars for thirteen years. This week it found seven organic molecules that have never been seen before anywhere on Mars. Seven. In one rock. Scientists are being very careful about what they say next. They are not saying life. They are saying the most diverse collection of organic molecules ever found on another planet. Those two sentences are very close to each other and everyone knows it.",
+  "keywords_scene2": [
+    "Mars rover Curiosity NASA red planet surface",
+    "scientist laboratory analyzing samples excited careful",
+    "organic molecules microscope discovery dramatic"
+  ],
+  "scene2_overlays": [
+    {"lines": "*7 NEW MOLECULES|NEVER SEEN BEFORE ON MARS", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Curiosity. 13 years on Mars. One rock.", "sub": "Most diverse organic molecules ever found up there.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "They are not saying life.", "sub": "They are being very careful about what they say next.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene3_stakes": "Meanwhile on the other end of the scale — scientists just finished building the largest 3D map of the universe ever made. Forty-seven million galaxies. Mapped. The instrument is called DESI and it took five years. To understand the size of what they mapped: our entire Milky Way galaxy is one dot. They mapped forty-seven million dots. The map shows the universe expanding faster in some places than it should. Nobody knows why. The map does not have an answer. It just has more questions.",
+  "keywords_scene3": [
+    "universe 3D map galaxies stars cosmic dramatic",
+    "scientist telescope observatory night sky dramatic",
+    "space expanding universe cosmic web visualization"
+  ],
+  "scene3_overlays": [
+    {"lines": "*47 MILLION GALAXIES|MAPPED", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "The Milky Way is one dot in this map.", "sub": "They mapped 47 million dots.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Universe is expanding faster than it should.", "sub": "The map does not have an answer. Just more questions.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene4_solution": "Artemis Two brought four astronauts home this month after a ten-day mission around the Moon. First crewed lunar mission since Apollo 17 in 1972. They did not land. But they went around it. And today SpaceX launched a Falcon Heavy rocket — the most powerful operational rocket in the world — for the first time in eighteen months. It carried a six-ton satellite into orbit. It worked. The booster came back and landed itself. Which still looks fake every single time.",
+  "keywords_scene4": [
+    "astronauts splashdown ocean capsule dramatic return",
+    "SpaceX Falcon Heavy rocket launch dramatic fire",
+    "rocket booster landing dramatic simultaneous"
+  ],
+  "scene4_overlays": [
+    {"lines": "*ARTEMIS II|THEY WENT AROUND THE MOON", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "First crewed lunar mission since 1972.", "sub": "They did not land. But they went around it.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Falcon Heavy launched today. Booster landed itself.", "sub": "Still looks fake every single time.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene5_ask": "That is This Week in Space. Seven molecules on Mars that should not be there. Forty-seven million galaxies mapped. Four astronauts home. One rocket that lands itself. All in seven days. We will be back next week with whatever space does next. Which based on recent performance will be a lot. Follow so you do not miss it. Space is not waiting.",
+  "keywords_scene5": [
+    "Earth from space astronaut perspective overview",
+    "night sky stars looking up wonder dramatic",
+    "person looking up at stars hopeful future"
+  ],
+
+  "tagline": "This Week in Space — because space does not take weeks off.",
+  "rolling_credits": [
+    {
+      "header": "THIS WEEK IN SPACE"
+    },
+    {
+      "lines": [
+        "Curiosity rover — NASA JPL, April 2026",
+        "DESI 3D universe map — Lawrence Berkeley Lab, April 2026",
+        "Artemis II — NASA, April 2026",
+        "Falcon Heavy — SpaceX, April 29 2026",
+        "They are not saying life",
+        "They are being very careful",
+        "Produced by Song Juicer — dmpgh.com"
+      ]
+    }
+  ]
+}

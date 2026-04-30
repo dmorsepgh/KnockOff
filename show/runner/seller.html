@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Render Monkey — Seller Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0a0a14; color: #e0e0e0; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; min-height: 100vh; }
+
+        .topbar {
+            background: #111122;
+            border-bottom: 2px solid #22aa44;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .topbar .logo { font-size: 20px; font-weight: 800; }
+        .topbar .logo .hi { color: #22aa44; }
+        .topbar .links a { color: #888; font-size: 13px; text-decoration: none; margin-left: 16px; }
+        .topbar .links a:hover { color: #0088ff; }
+
+        .container { max-width: 700px; margin: 0 auto; padding: 24px; }
+
+        .login-box {
+            background: #111122;
+            border: 1px solid #1e1e30;
+            border-radius: 8px;
+            padding: 32px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .login-box h2 { color: #22aa44; margin-bottom: 12px; }
+        .login-box p { color: #888; font-size: 14px; margin-bottom: 20px; }
+        .login-box input {
+            padding: 12px 16px;
+            background: #0a0a14;
+            border: 1px solid #2a2a3e;
+            border-radius: 6px;
+            color: #e0e0e0;
+            font-size: 14px;
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 10px;
+        }
+        .login-box input:focus { outline: none; border-color: #22aa44; }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+        .stat-card {
+            background: #111122;
+            border: 1px solid #1e1e30;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+        .stat-card .num { font-size: 32px; font-weight: 800; }
+        .stat-card .label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+        .stat-card.green .num { color: #22aa44; }
+        .stat-card.blue .num { color: #0088ff; }
+        .stat-card.orange .num { color: #ff9800; }
+
+        h2 { font-size: 16px; color: #22aa44; margin: 24px 0 14px; }
+
+        .link-box {
+            background: #111122;
+            border: 1px solid #1e1e30;
+            border-radius: 8px;
+            padding: 18px;
+            margin-bottom: 20px;
+        }
+        .link-box label { font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 8px; }
+        .link-row {
+            display: flex;
+            gap: 8px;
+        }
+        .link-row input {
+            flex: 1;
+            padding: 10px 14px;
+            background: #0a0a14;
+            border: 1px solid #2a2a3e;
+            border-radius: 6px;
+            color: #0088ff;
+            font-size: 14px;
+            font-family: 'SF Mono', Menlo, monospace;
+        }
+
+        .referral-row {
+            background: #111122;
+            border: 1px solid #1e1e30;
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .referral-row .info { flex: 1; }
+        .referral-row .name { font-size: 14px; font-weight: 600; }
+        .referral-row .meta { font-size: 12px; color: #666; }
+        .referral-row .amount { font-size: 16px; font-weight: 800; color: #22aa44; }
+
+        .btn {
+            padding: 8px 18px;
+            border: none;
+            border-radius: 5px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn-green { background: #22aa44; color: white; }
+        .btn-green:hover { background: #28bb4c; }
+        .btn-secondary { background: #1a1a2e; color: #ccc; border: 1px solid #2a2a3e; }
+
+        .tips {
+            background: #0a1a0a;
+            border: 1px solid #1a3a1a;
+            border-radius: 8px;
+            padding: 18px;
+            margin-top: 20px;
+        }
+        .tips h3 { color: #22aa44; font-size: 14px; margin-bottom: 10px; }
+        .tips p { font-size: 13px; color: #888; margin-bottom: 8px; line-height: 1.6; }
+
+        .empty { text-align: center; padding: 20px; color: #444; font-size: 14px; }
+
+        .toast {
+            position: fixed; bottom: 24px; right: 24px;
+            background: #22aa44; color: white;
+            padding: 10px 20px; border-radius: 6px;
+            font-size: 13px; font-weight: 600;
+            transform: translateY(20px); opacity: 0;
+            transition: all 0.3s; z-index: 200;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <div class="logo">
+            <span class="hi">Render Monkey</span> — Seller Dashboard
+        </div>
+        <div class="links">
+            <a href="/">Show Runner</a>
+            <a href="/jobs">Job Board</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Login -->
+        <div id="login-view" class="login-box">
+            <h2>Seller Login</h2>
+            <p>Enter your name to see your dashboard and referral link</p>
+            <input type="text" id="seller-name" placeholder="Your name" /><br>
+            <input type="email" id="seller-email" placeholder="Your email" style="margin-top:6px;" /><br>
+            <input type="tel" id="seller-phone" placeholder="Phone (for alerts)" style="margin-top:6px;" /><br>
+            <select id="seller-pay-method" style="margin-top:6px;padding:10px;background:#0a0a14;border:1px solid #2a2a3e;border-radius:6px;color:#e0e0e0;font-size:14px;width:100%;max-width:300px;">
+                <option value="">Payment method</option>
+                <option value="venmo">Venmo</option>
+                <option value="cashapp">Cash App</option>
+                <option value="paypal">PayPal</option>
+                <option value="applepay">Apple Pay</option>
+            </select><br>
+            <input type="text" id="seller-pay-handle" placeholder="@handle, $tag, email, or phone" style="margin-top:6px;" /><br>
+            <button class="btn btn-green" style="margin-top:12px;padding:12px 32px;" onclick="loginSeller()">Register</button>
+        </div>
+
+        <!-- Dashboard -->
+        <div id="dashboard-view" style="display:none;">
+            <div class="stats">
+                <div class="stat-card green">
+                    <div class="num" id="stat-earned">$0.00</div>
+                    <div class="label">Total Earned</div>
+                </div>
+                <div class="stat-card blue">
+                    <div class="num" id="stat-referrals">0</div>
+                    <div class="label">Referrals</div>
+                </div>
+                <div class="stat-card orange">
+                    <div class="num" id="stat-pending">$0.00</div>
+                    <div class="label">Pending</div>
+                </div>
+            </div>
+
+            <h2>Your Referral Link</h2>
+            <div class="link-box">
+                <label>Share this link — you earn $2.50 for every video sold</label>
+                <div class="link-row">
+                    <input type="text" id="referral-link" readonly />
+                    <button class="btn btn-secondary" onclick="copyLink()">Copy</button>
+                </div>
+            </div>
+
+            <h2>Your Referrals</h2>
+            <div id="referrals-list">
+                <div class="empty">No referrals yet. Share your link!</div>
+            </div>
+
+            <div class="tips">
+                <h3>How to sell</h3>
+                <p><strong>Who to talk to:</strong> Anyone who runs an online community — Skool, Facebook Groups, Discord servers, Slack workspaces. They need content for their members.</p>
+                <p><strong>What to say:</strong> "I know someone who produces AI news shows for online communities. Your members get a branded video show twice a month. It's $5 per video. Want to see a sample?" Then share your referral link.</p>
+                <p><strong>Where to post:</strong> Community owner groups, entrepreneur forums, social media, LinkedIn. Anywhere people run communities.</p>
+                <p><strong>Your cut:</strong> $2.50 on the first sale (50%). Plus 11.3% recurring ($0.57) on every repeat purchase from that client — forever. The more you share, the more passive income you build.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        let sellerName = '';
+        let sellerCode = '';
+
+        function loginSeller() {
+            const name = document.getElementById('seller-name').value.trim();
+            const email = document.getElementById('seller-email').value.trim();
+            if (!name) { alert('Enter your name'); return; }
+
+            sellerName = name;
+            // Create a simple seller code from name
+            sellerCode = name.toLowerCase().replace(/[^a-z0-9]/g, '').substring(0, 10);
+
+            const phone = document.getElementById('seller-phone').value.trim();
+            const payMethod = document.getElementById('seller-pay-method').value;
+            const payHandle = document.getElementById('seller-pay-handle').value.trim();
+
+            fetch('/api/sellers/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, phone, code: sellerCode, payment_method: payMethod, payment_handle: payHandle })
+            });
+
+            document.getElementById('login-view').style.display = 'none';
+            document.getElementById('dashboard-view').style.display = 'block';
+            document.getElementById('referral-link').value =
+                `${window.location.origin}/invite?ref=${sellerCode}`;
+
+            loadSellerStats();
+        }
+
+        async function loadSellerStats() {
+            try {
+                const res = await fetch(`/api/sellers/${sellerCode}/stats`);
+                const data = await res.json();
+                document.getElementById('stat-earned').textContent = `$${(data.earned || 0).toFixed(2)}`;
+                document.getElementById('stat-referrals').textContent = data.referrals || 0;
+                document.getElementById('stat-pending').textContent = `$${(data.pending || 0).toFixed(2)}`;
+
+                if (data.history && data.history.length > 0) {
+                    document.getElementById('referrals-list').innerHTML = data.history.map(r => `
+                        <div class="referral-row">
+                            <div class="info">
+                                <div class="name">${r.client || 'Anonymous'}</div>
+                                <div class="meta">${r.date || ''}</div>
+                            </div>
+                            <div class="amount">+$${(r.amount || 2.50).toFixed(2)}</div>
+                        </div>
+                    `).join('');
+                }
+            } catch (e) {}
+        }
+
+        function copyLink() {
+            const input = document.getElementById('referral-link');
+            navigator.clipboard.writeText(input.value).then(() => showToast('Referral link copied!'));
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+    </script>
+</body>
+</html>

@@ -90,6 +90,10 @@ After every response, speak a brief conversational summary of what you said usin
 
 Example: `say "I found the problem. The avatar file was corrupted. I'm downloading a new one now."`
 
+## Confidence Rule
+
+Do not make any changes until you have 95% confidence in what you need to build. Ask follow-up questions until you reach that confidence.
+
 ## Known Issues
 
 - GFPGAN not installed (Enhanced mode unavailable, Fast/Improved work fine)

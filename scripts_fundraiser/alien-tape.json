@@ -1,0 +1,79 @@
+{
+  "scene1_hook": "There is a piece of tape sitting in a bin at Walmart right now that does not use any adhesive. No glue. No sticky residue. Nothing. It grabs surfaces using the same physics that lets a gecko walk up a glass wall. It is called Alien Tape. It holds up to seventeen and a half pounds. You can wash it and use it again. And it was invented by accident, by scientists studying microscopic hairs on a lizard's foot. This is the story of how gecko biology became the most talked about infomercial product of the last decade.",
+  "keywords_scene1": [
+    "gecko lizard wall climbing close up macro",
+    "adhesive tape product Walmart shelf retail",
+    "nanotechnology micro surface structure science"
+  ],
+  "scene1_overlays": [
+    {"lines": "*ALIEN TAPE|ZERO ADHESIVE", "in": 0.5, "out": 4.0, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Holds 17.5 lbs — no glue", "sub": "Washable · Reusable · No residue", "in": 4.5, "out": 10.0},
+    {"style": "bullet", "head": "Based on gecko biomimicry", "sub": "Van der Waals forces — discovered 2003", "in": 10.5, "out": 16.0}
+  ],
+
+  "scene2_problem": "Regular tape has been the same product for a hundred years. It sticks once, it leaves residue, it peels paint, it cannot be repositioned, and it fails in heat. Command strips are better but they cost a fortune and you still have to peel them off carefully or your wall comes with them. The promise of Alien Tape was simple: a tape that grips purely by contact, leaves nothing behind, and never wears out. That promise came from a very unlikely place — a lab studying lizards.",
+  "keywords_scene2": [
+    "tape adhesive residue wall damage removal",
+    "command strip hook mounting wall damage",
+    "laboratory research scientist microscope close up"
+  ],
+  "scene2_overlays": [
+    {"lines": "*THE PROBLEM|WITH EVERY OTHER TAPE", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Leaves residue · peels paint", "sub": "Single use · fails in heat", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Command strips: $12 for 6 hooks", "sub": "Still rips drywall on removal", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene3_stakes": "In 2003, a joint team from the Manchester Centre for Mesoscience in England and the Institute for Microelectronics Technology in Russia published a paper in Nature Materials. They had created an artificial version of a gecko's foot. A gecko has two billion microscopic hairs called setae on each foot. Each hair is finer than a human hair and splits into hundreds of even smaller tips. The contact surface is so vast that molecular forces — called van der Waals forces — create a grip with no adhesive at all. The Manchester team made a synthetic version using carbon nanotube arrays and demonstrated it could hold weight on a glass ceiling. The media called it gecko tape. Eventually someone figured out how to make it cheap enough to sell at Walmart.",
+  "keywords_scene3": [
+    "gecko foot microscope setae hair magnified scientific",
+    "nanotube carbon fiber material science laboratory",
+    "University Manchester research lab academic publication"
+  ],
+  "scene3_overlays": [
+    {"lines": "*THE SCIENCE|VAN DER WAALS FORCES", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Nature Materials paper — 2003", "sub": "Manchester + Russia joint research", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "2 billion setae per gecko foot", "sub": "Molecular grip — zero chemical adhesive", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "Synthetic version: carbon nanotubes", "sub": "Held weight on glass — from the ceiling", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene4_solution": "The company that brought Alien Tape to market is E. Mishan and Sons, a New York product company founded in 1946. They do business under the name Emson. They are the same company behind the Pocket Hose, the Gyro Bowl, and dozens of infomercial products. Alien Tape is their gecko tape product, trademarked February third, twenty twenty, manufactured in China. The nano-suction surface works by maximizing contact points across a microscopically textured face — when you press it flat against a smooth surface, the molecular attraction is enough to hold real weight. Wash it with water, let it dry, and the grip comes back. The catch: it only works on smooth, non-porous surfaces. Not brick. Not rough paint. Not fabric. The infomercial shows brick walls. The packaging says do not use on rough surfaces. Over a hundred consumer complaints have been filed.",
+  "keywords_scene4": [
+    "infomercial product demo television shopping channel",
+    "nano suction surface microscopic texture material",
+    "consumer product review testing demonstration"
+  ],
+  "scene4_overlays": [
+    {"lines": "*HOW IT|ACTUALLY WORKS", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Emson Inc — New York, founded 1946", "sub": "Alien Tape trademark: Feb 3, 2020", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Nano-suction: works on smooth surfaces only", "sub": "Infomercial showed brick — packaging says don't", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "Wash with water · grip comes back", "sub": "100+ consumer complaints on file", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene5_ask": "Alien Tape works. On the right surface. Smooth glass, sealed tile, polished wood, painted drywall that is not textured — it holds. On rough or porous surfaces it does not hold and the infomercial was misleading about that. For hanging picture frames on smooth walls, organizing cables, mounting light strips, sticking things inside cabinets — it is genuinely useful and reusable in a way normal tape is not. For hanging anything heavy on brick or rough plaster, it will not work. The gecko science is real. The van der Waals forces are real. The limitations are also real. Four dollars at Walmart. Know what surface you have before you buy it.",
+  "keywords_scene5": [
+    "home improvement hanging picture frame wall mount",
+    "cable management organization home office",
+    "Walmart store product consumer shopping review"
+  ],
+
+  "tagline": "The gecko science is real. Know your surface.",
+  "rolling_credits": [
+    {
+      "header": "ALIEN TAPE"
+    },
+    {
+      "lines": [
+        "Technology: Nano-suction (van der Waals forces)",
+        "Origin research: Manchester + Russia, 2003",
+        "Published: Nature Materials journal",
+        "Gecko setae: 2 billion hairs per foot",
+        "Trademark date: February 3, 2020",
+        "Distributor: E. Mishan & Sons (Emson), New York",
+        "Manufactured: China",
+        "Holds up to: 17.5 lbs (smooth surfaces only)",
+        "Sold at: Walmart, Walgreens, Amazon",
+        "Produced by Song Juicer — dmpgh.com"
+      ]
+    }
+  ]
+}

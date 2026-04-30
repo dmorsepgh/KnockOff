@@ -1,0 +1,25 @@
+{
+  "id": "ep3-heygen",
+  "episode": 3,
+  "type": "heygen",
+  "title": "EP3 \u2014 HeyGen (Opening + Closing)",
+  "description": "Paste both scripts into HeyGen as one video (opening + closing). Render and upload the single MP4.",
+  "pay": 1.0,
+  "scripts": [
+    {
+      "label": "Opening Script",
+      "text": "Welcome back to \"AI Views and News\". I'm your host Doug Morse. We've got some fascinating stories for you today as we dive deeper into the world of artificial intelligence.\n\nYou might be surprised by a recent poll that found 15% of Americans saying they'd be willing to work for an AI boss. Now, at first glance, this may seem like a pretty big number, but what does it really mean? Is this a sign of a shift in how we view automation and leadership, or is there something more complex at play here?\n\nIn the tech world, some big news has come out of LiteLLM, a popular AI gateway startup that's ditched its partnership with Delve. This move is causing quite a stir among investors and industry insiders alike.\n\nAnd if you think about it, all these stories are connected in ways we're just beginning to understand. As more Americans adopt AI tools in their daily lives, there's a growing unease about the accuracy of those results. Do people really trust what they're seeing? We'll be digging into that question today on \"AI Views and News\".\n\nLet's get into it."
+    },
+    {
+      "label": "Closing Script",
+      "text": "We're wrapping up episode 3 of \"AI Views and News\". Today we looked at some interesting stories in the world of artificial intelligence. A new poll suggests that about one in seven Americans are open to the idea of working for an AI boss. While this might seem like science fiction, it's worth noting that AI is already being used in many industries to manage tasks and make decisions.\n\nWe also reported on a significant development in the AI gateway space. LiteLLM has announced that they're parting ways with Delve, a startup that had been at the center of some controversy. It'll be interesting to see how this change affects the future of AI development.\n\nAnd finally, a new survey found that as more Americans adopt AI tools, trust in their results is actually declining. This highlights the need for greater transparency and understanding around how these technologies work.\n\nThanks for joining me on \"AI Views and News\" today. If you want to stay up-to-date on all our latest stories and analysis, head over to dmpgh.com. And if you have questions about what we've covered, stick around \u2013 Drake and Carter will be answering your questions live right now. I'm Doug Morse. See you next week."
+    }
+  ],
+  "expected_files": 1,
+  "uploaded_files": [],
+  "status": "available",
+  "claimed_by": null,
+  "claimed_at": null,
+  "completed_at": null,
+  "created": "2026-04-05T10:47:25.813229"
+}

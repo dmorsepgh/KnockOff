@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Views and News — Expense Sheet</title>
+<style>
+@media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: white; color: #1a1a2e; font-family: 'Helvetica Neue', Arial, sans-serif; padding: 40px; max-width: 850px; margin: 0 auto; line-height: 1.5; }
+h1 { font-size: 24px; color: #0a0a14; border-bottom: 3px solid #0088ff; padding-bottom: 8px; margin-bottom: 4px; }
+.subtitle { font-size: 13px; color: #666; margin-bottom: 30px; }
+h2 { font-size: 16px; color: #0088ff; margin: 28px 0 12px; text-transform: uppercase; letter-spacing: 1px; }
+h3 { font-size: 14px; color: #333; margin: 20px 0 8px; }
+table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 13px; }
+th { background: #0a0a14; color: white; padding: 8px 12px; text-align: left; font-weight: 600; }
+td { padding: 7px 12px; border-bottom: 1px solid #ddd; }
+tr:nth-child(even) { background: #f8f9fa; }
+.total td { font-weight: 700; border-top: 2px solid #0a0a14; background: #e8f4ff; }
+.note { font-size: 11px; color: #888; font-style: italic; margin-top: 4px; }
+.highlight { background: #e8f4ff; padding: 12px 16px; border-radius: 6px; margin: 16px 0; border-left: 4px solid #0088ff; }
+.highlight strong { color: #0a0a14; }
+.warn { background: #fff3e0; border-left-color: #ff9800; }
+.green { background: #e8f5e9; border-left-color: #4caf50; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #ddd; font-size: 11px; color: #999; text-align: center; }
+</style>
+</head>
+<body>
+
+<h1>AI Views and News — Monthly Expense Sheet</h1>
+<div class="subtitle">Business Plan Amendment | v0.1.0 | March 31, 2026 | dmpgh.com</div>
+
+<!-- PHASE 1 -->
+<h2>Phase 1: Current Operations (Manual + Show Runner)</h2>
+
+<table>
+<tr><th>Service</th><th>Plan</th><th>Monthly Cost</th><th>What It Does</th></tr>
+<tr><td>HeyGen</td><td>Creator (monthly)</td><td>$29.00</td><td>2 avatar video clips per episode (Doug host segments)</td></tr>
+<tr><td>Pictory</td><td>Standard (monthly)</td><td>$23.00</td><td>3 B-roll news segments per episode (30 videos/mo)</td></tr>
+<tr><td>Claude Code</td><td>Pro (monthly)</td><td>$20.00</td><td>AI orchestration, scripting, show runner development</td></tr>
+<tr><td>Ollama</td><td>Local (free)</td><td>$0.00</td><td>Local LLM script generation (llama3.1:8b on M4 Pro)</td></tr>
+<tr><td>Cloudflare</td><td>Free tunnel</td><td>$0.00</td><td>Public URL: showrunner.dmpgh.com</td></tr>
+<tr><td>Pushover</td><td>One-time ($5)</td><td>$0.00</td><td>Doug Bug notifications to phone + desktop</td></tr>
+<tr><td>ffmpeg</td><td>Open source</td><td>$0.00</td><td>Video stitching, bumpers, re-encoding</td></tr>
+<tr><td>Domain (dmpgh.com)</td><td>Annual (~$12/yr)</td><td>$1.00</td><td>Landing page and show runner hosting</td></tr>
+<tr class="total"><td colspan="2">TOTAL MONTHLY</td><td>$73.00</td><td></td></tr>
+</table>
+
+<div class="highlight">
+<strong>Capacity at Phase 1:</strong> Up to 30 Pictory videos/mo + unlimited HeyGen videos = up to 10 episodes/month (10 clients). No additional per-episode cost.
+</div>
+
+<p class="note">* Pictory Standard plan required for production use. Free trial is 14 days / 3 projects only. If currently on trial, $23/mo needed.</p>
+
+<h3>Revenue Needed to Break Even</h3>
+<div class="two-col">
+<div class="highlight green">
+<strong>Break-even:</strong> 2 paid episodes ($100)<br>
+Profit at 2 episodes: $27/mo
+</div>
+<div class="highlight green">
+<strong>5 clients (10 episodes):</strong> $500 revenue<br>
+Profit: $427/mo
+</div>
+</div>
+
+<!-- PHASE 2 -->
+<h2>Phase 2: Growth (Pictory Upgrade)</h2>
+<p>When you exceed 30 videos/month (more than 10 episodes) or need Getty Images B-roll:</p>
+
+<table>
+<tr><th>Service</th><th>Plan Change</th><th>Monthly Cost</th><th>Why</th></tr>
+<tr><td>HeyGen</td><td>Creator (no change)</td><td>$29.00</td><td>Still manual browser rendering</td></tr>
+<tr><td>Pictory</td><td>Premium (upgrade)</td><td>$47.00</td><td>60 videos/mo, Getty Images, ElevenLabs voices</td></tr>
+<tr><td>Claude Code</td><td>Pro (no change)</td><td>$20.00</td><td></td></tr>
+<tr><td>Other tools</td><td>No change</td><td>$1.00</td><td></td></tr>
+<tr class="total"><td colspan="2">TOTAL MONTHLY</td><td>$97.00</td><td></td></tr>
+</table>
+
+<div class="highlight">
+<strong>Capacity at Phase 2:</strong> 20 episodes/month (20 clients). Break-even: 2 paid episodes.
+</div>
+
+<!-- PHASE 3 -->
+<h2>Phase 3: Full API Automation</h2>
+<p>When time becomes the bottleneck (15+ clients). Eliminates all manual copy/paste and browser rendering. One-click episode production.</p>
+
+<table>
+<tr><th>Service</th><th>Plan</th><th>Monthly Cost</th><th>What Changes</th></tr>
+<tr><td>HeyGen</td><td>Creator + API (Scale tier)</td><td>$29.00 + ~$50.00</td><td>API renders avatar clips programmatically</td></tr>
+<tr><td>Pictory</td><td>API (Self Serve)</td><td>$49.00</td><td>API renders B-roll segments programmatically</td></tr>
+<tr><td>Claude Code</td><td>Pro (no change)</td><td>$20.00</td><td></td></tr>
+<tr><td>Other tools</td><td>No change</td><td>$1.00</td><td></td></tr>
+<tr class="total"><td colspan="2">TOTAL MONTHLY</td><td>$149.00</td><td></td></tr>
+</table>
+
+<div class="highlight warn">
+<strong>API costs are separate from subscriptions.</strong> HeyGen API (Scale) is ~$0.50/credit (1 credit = 1 min of video). Pictory API is $49/mo for 120 credits. These are in addition to or replace the standard plans — verify current pricing before committing.
+</div>
+
+<h3>Time Savings at Phase 3</h3>
+<table>
+<tr><th>Metric</th><th>Phase 1 (Manual)</th><th>Phase 3 (API)</th></tr>
+<tr><td>Active time per episode</td><td>~20 minutes</td><td>~5 minutes</td></tr>
+<tr><td>Wall clock per episode</td><td>~60 minutes</td><td>~10 minutes</td></tr>
+<tr><td>20 episodes/month</td><td>~20 hours</td><td>~3 hours</td></tr>
+</table>
+
+<div class="highlight green">
+<strong>When to upgrade to Phase 3:</strong> When you have 15+ clients and the 20 hrs/mo of manual work is more expensive than the extra $76/mo in API costs. At $50/episode with 15 clients, revenue is $1,500/mo — the $149 cost is easily justified.
+</div>
+
+<!-- COMPARISON -->
+<h2>Phase Comparison Summary</h2>
+
+<table>
+<tr><th>Phase</th><th>Monthly Cost</th><th>Max Clients</th><th>Time/Episode</th><th>Break-Even</th></tr>
+<tr><td>1 — Manual + Show Runner</td><td>$73</td><td>10</td><td>60 min</td><td>2 episodes</td></tr>
+<tr><td>2 — Pictory Upgrade</td><td>$97</td><td>20</td><td>60 min</td><td>2 episodes</td></tr>
+<tr><td>3 — Full API Automation</td><td>$149</td><td>50+</td><td>10 min</td><td>3 episodes</td></tr>
+</table>
+
+<!-- BARTER VALUE -->
+<h2>Barter Value Calculation</h2>
+
+<table>
+<tr><th>Barter Clients</th><th>Avg Membership Value</th><th>Monthly Access Value</th><th>Your Cost</th><th>Net Value</th></tr>
+<tr><td>5</td><td>$97/mo</td><td>$485</td><td>$73</td><td>$412</td></tr>
+<tr><td>10</td><td>$97/mo</td><td>$970</td><td>$73</td><td>$897</td></tr>
+</table>
+
+<p class="note">Barter value = community memberships you'd otherwise pay for. $97 is the average Skool community monthly fee.</p>
+
+<!-- FOOTER -->
+<div class="footer">
+AI Views and News — Show Runner v0.1.0 | dmpgh.com | Generated March 31, 2026<br>
+Sources: heygen.com/pricing, pictory.ai/pricing, claude.com/pricing, pushover.net
+</div>
+
+</body>
+</html>

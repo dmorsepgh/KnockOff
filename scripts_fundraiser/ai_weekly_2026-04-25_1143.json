@@ -1,0 +1,143 @@
+{
+  "scene1_hook": "Google drops FORTY BILLION on Anthropic! Tim Cook steps down, Ternus takes the throne, and Musk vs Altman finally hits the courtroom!",
+  "keywords_scene1": [
+    "news studio",
+    "breaking news screen",
+    "television anchor desk"
+  ],
+  "scene1_overlays": [
+    {
+      "lines": "*AI WEEKLY|Week of April 25, 2026",
+      "in": 0.5,
+      "out": 4.0,
+      "x": "(W-w)/2",
+      "y": "80"
+    },
+    {
+      "style": "bullet",
+      "head": "Google bets $40B on Anthropic",
+      "sub": "Cash and compute megadeal",
+      "in": 4.5,
+      "out": 9.0
+    },
+    {
+      "style": "bullet",
+      "head": "Cook out, Ternus in",
+      "sub": "Apple's hardware era begins",
+      "in": 9.5,
+      "out": 14.0
+    }
+  ],
+  "scene2_problem": "Google is dumping up to FORTY BILLION dollars into Anthropic in cash and compute. Apple shocks the world \u2014 Tim Cook steps down, hardware boss John Ternus takes over. DeepSeek drops a V4 preview that Chinese labs say rivals Anthropic, Google, and OpenAI. And ComfyUI just hit a half-billion dollar valuation!",
+  "keywords_scene2": [
+    "technology news",
+    "artificial intelligence",
+    "data center servers"
+  ],
+  "scene2_overlays": [
+    {
+      "lines": "*TOP STORIES|THIS WEEK",
+      "in": 0.5,
+      "out": 3.5,
+      "x": "(W-w)/2",
+      "y": "80"
+    },
+    {
+      "style": "bullet",
+      "head": "Google-Anthropic megadeal",
+      "sub": "Up to $40 billion incoming",
+      "in": 4.0,
+      "out": 8.5
+    },
+    {
+      "style": "bullet",
+      "head": "Ternus replaces Tim Cook",
+      "sub": "Hardware guy now runs Apple",
+      "in": 9.0,
+      "out": 13.5
+    },
+    {
+      "style": "bullet",
+      "head": "DeepSeek V4 lands",
+      "sub": "Open-source rivals frontier labs",
+      "in": 14.0,
+      "out": 18.5
+    }
+  ],
+  "scene3_stakes": "Musk vs Altman trial kicks off April 27th in Oakland \u2014 and it's going to get UGLY. Yann LeCun's AMI Labs raised a billion with just 12 employees, betting LLMs are a dead end. Meanwhile Meta keeps poaching from Thinking Machines Lab \u2014 but the talent war flows both ways. And Project Maven just helped the US military hit 1,000 targets in 24 hours over Iran.",
+  "keywords_scene3": [
+    "analysis chart data",
+    "business strategy meeting",
+    "technology disruption"
+  ],
+  "scene3_overlays": [
+    {
+      "lines": "*VIEWS &|ANALYSIS",
+      "in": 0.5,
+      "out": 3.5,
+      "x": "(W-w)/2",
+      "y": "80"
+    },
+    {
+      "style": "bullet",
+      "head": "LeCun bets against LLMs",
+      "sub": "$1B for 12 employees",
+      "in": 4.0,
+      "out": 8.5
+    },
+    {
+      "style": "bullet",
+      "head": "Maven accelerates military strikes",
+      "sub": "1,000 targets in 24 hours",
+      "in": 9.0,
+      "out": 13.5
+    }
+  ],
+  "scene4_solution": "ComfyUI raised 30 million at a 500 million valuation \u2014 creators want CONTROL over generative media. NVIDIA and Google unveiled A5X instances on Vera Rubin NVL72 racks to crush inference costs. And Sony AI's table tennis robot is BEATING high-level human players!",
+  "keywords_scene4": [
+    "software interface laptop",
+    "technology product launch",
+    "innovation startup"
+  ],
+  "scene4_overlays": [
+    {
+      "lines": "*NEW TOOLS|THIS WEEK",
+      "in": 0.5,
+      "out": 3.5,
+      "x": "(W-w)/2",
+      "y": "80"
+    },
+    {
+      "style": "bullet",
+      "head": "ComfyUI hits $500M",
+      "sub": "Creator-controlled AI generation",
+      "in": 4.0,
+      "out": 8.5
+    },
+    {
+      "style": "bullet",
+      "head": "NVIDIA Vera Rubin NVL72",
+      "sub": "Slashing inference costs at scale",
+      "in": 9.0,
+      "out": 13.5
+    }
+  ],
+  "scene5_ask": "Next week \u2014 eyes on the Musk-Altman trial verdict and DeepSeek V4's full release. SusHi Tech Tokyo also lights up as the year's biggest tech destination. This has been your AI Weekly. Same time next Monday.",
+  "keywords_scene5": [
+    "future technology horizon",
+    "innovation roadmap",
+    "next generation tech"
+  ],
+  "tagline": "This has been your AI Weekly. Same time next Monday.",
+  "rolling_credits": [
+    {
+      "header": "AI Weekly"
+    },
+    {
+      "lines": [
+        "Produced by Doug Morse",
+        "dmpgh.com"
+      ]
+    }
+  ]
+}

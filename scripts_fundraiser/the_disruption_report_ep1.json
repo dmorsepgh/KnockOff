@@ -1,0 +1,74 @@
+{
+  "scene1_hook": "Welcome to The Disruption Report. Every week we cover the startups, the founders, and the pitch decks that are solving problems you did not know you had. Some of these companies are real. Some of them are not. We will not tell you which is which. That is not our job. Our job is to report. This week: a company that disrupts saying hello. A platform that processes your grief in four business days. An app that tells you how much you love your children and whether it is financially optimal. And a startup that has raised forty million dollars to disrupt the concept of ownership. The future is here. It is just distributed unevenly and it charges a monthly subscription fee.",
+  "keywords_scene1": [
+    "startup pitch deck venture capital meeting dramatic",
+    "tech conference stage presenter dramatic lighting",
+    "silicon valley office modern dramatic cinematic"
+  ],
+  "scene1_overlays": [
+    {"lines": "*THE DISRUPTION|REPORT", "in": 0.5, "out": 4.0, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Startups solving problems you didn't know you had.", "sub": "Some of these are real. We won't say which.", "in": 4.5, "out": 10.0},
+    {"style": "bullet", "head": "The future is here.", "sub": "It charges a monthly subscription fee.", "in": 10.5, "out": 15.5}
+  ],
+
+  "scene2_problem": "First up: HelloOS. A San Francisco startup has raised twelve million dollars in Series A funding to disrupt the way humans say hello. Their product uses AI to analyze your social graph and determine the optimal greeting for every person you encounter. You no longer say hello. You say whatever HelloOS tells you to say. In testing, users reported seventeen percent more authentic-feeling connections. The app charges nine dollars and ninety-nine cents per month. The CEO, who has not said hello to anyone without AI assistance since February, told investors that hello is just the beginning. Goodbye, he said, is a two hundred million dollar market.",
+  "keywords_scene2": [
+    "startup founder pitch dramatic confident stage",
+    "smartphone app modern technology dramatic close up",
+    "business meeting handshake professional dramatic"
+  ],
+  "scene2_overlays": [
+    {"lines": "*HELLOOS|$12M SERIES A", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "AI determines the optimal greeting for every person you meet.", "sub": "17% more authentic-feeling connections in testing.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Goodbye is a $200 million market.", "sub": "The CEO has not said hello without AI since February.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene3_stakes": "Next: GriefOS. A bereavement technology company has launched an AI platform that processes grief in four business days. The platform works like this. You upload photos of the deceased. You enter three to five memories. The AI generates a closure report. The closure report tells you that you are done grieving. If you are not done grieving, you can purchase the premium plan, which extends processing time to eight business days and includes a digital memorial that the company will host for two years before archiving it to cold storage. The founder lost his grandmother in 2024. He said the experience made him realize grief needed a better user experience. He is twenty-six years old. He has raised twenty-two million dollars. His grandmother, we are told, was a lovely woman who made excellent pie.",
+  "keywords_scene3": [
+    "tech startup modern office dramatic cinematic laptop",
+    "person on computer emotional dramatic cinematic",
+    "venture capital investment dramatic meeting professional"
+  ],
+  "scene3_overlays": [
+    {"lines": "*GRIEFOS|PROCESSING LOSS IN 4 BUSINESS DAYS", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Upload photos. Enter memories. Receive closure report.", "sub": "Premium plan: 8 business days. Memorial hosted for 2 years.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "The founder is 26. He has raised $22 million.", "sub": "His grandmother made excellent pie.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene4_solution": "And finally: OwnLess. A fintech startup has raised forty million dollars in Series B funding to disrupt the concept of ownership. Their thesis is simple. Ownership is inefficient. You own things you do not use. You use things you do not own. OwnLess fixes this by making sure you own nothing. Everything you need — your car, your furniture, your kitchen appliances, your toothbrush — is available on a subscription basis. The toothbrush plan is four ninety-nine a month. You do not keep the toothbrush. It is picked up every thirty days and replaced with a new one. The old one is recycled. The company calls this circular oral care. They have fourteen thousand subscribers. The founder drives a Tesla he does not own, lives in an apartment he does not own, and sits in a chair at his office that is rented by the hour. He has never owned anything in his adult life. He describes this as freedom. His investors describe it as a forty-million-dollar bet that he is right.",
+  "keywords_scene4": [
+    "minimalist modern apartment dramatic cinematic empty",
+    "subscription service app phone dramatic close up",
+    "startup office modern dramatic cinematic venture"
+  ],
+  "scene4_overlays": [
+    {"lines": "*OWNLESS|YOU DON'T NEED TO OWN ANYTHING", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Car. Furniture. Appliances. Toothbrush. All subscription.", "sub": "The toothbrush plan is $4.99 a month.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "He has never owned anything in his adult life.", "sub": "He describes this as freedom. Investors describe it as a bet.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene5_ask": "That is The Disruption Report for this week. HelloOS is disrupting hello. GriefOS is processing your loss in four business days. OwnLess wants you to rent your toothbrush. And somewhere right now, in a co-working space that charges thirty-five dollars an hour, a twenty-four-year-old is building a pitch deck for a company that will disrupt the concept of a pitch deck. We will cover it when they close their seed round. We will not editorialize. We will just report. And you will decide if the future is something you want to subscribe to. We will be back next week. The disruption continues. It always does.",
+  "keywords_scene5": [
+    "startup office modern cinematic dramatic wide shot",
+    "future technology dramatic cinematic hopeful dystopian",
+    "person laptop coffee shop modern dramatic cinematic"
+  ],
+
+  "tagline": "The Disruption Report — because someone has to report it.",
+  "rolling_credits": [
+    {
+      "header": "THE DISRUPTION REPORT"
+    },
+    {
+      "lines": [
+        "HelloOS — disrupting hello since Q1 2026",
+        "GriefOS — closure in 4 business days",
+        "OwnLess — the toothbrush plan is real (it isn't)",
+        "Some of these companies are real",
+        "We won't say which",
+        "That is not our job",
+        "Produced by Song Juicer — dmpgh.com"
+      ]
+    }
+  ]
+}

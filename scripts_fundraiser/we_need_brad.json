@@ -1,0 +1,76 @@
+{
+  "scene1_hook": "Brad picks up on the second ring. He always picks up on the second ring. The voice on the other end says — Brad, I need you to talk me down. Something happened today. Brad does not flinch. He has heard this before. He says — okay. Tell me what you saw. The voice says — they showed me a thing. It wrote a forty-page report. In six minutes. I have been doing this for twenty-two years, Brad. Twenty-two years. Brad says — are you sitting down. The voice says — no. Brad says — sit down.",
+  "keywords_scene1": [
+    "phone call urgent businessman office dramatic",
+    "negotiator calm professional listening serious",
+    "man sitting down breathing taking a breath"
+  ],
+  "scene1_overlays": [
+    {"lines": "*WE NEED BRAD|ANOTHER JUMPER", "in": 0.5, "out": 4.0, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Brad. I need you to talk me down.", "sub": "Something happened today.", "in": 4.5, "out": 10.0},
+    {"style": "bullet", "head": "It wrote a 40-page report. Six minutes.", "sub": "I've been doing this 22 years, Brad.", "in": 10.5, "out": 16.0}
+  ],
+
+  "scene2_problem": "Brad says — how many tabs do you have open right now. The voice says — I do not know. A lot. Brad says — close all of them except one. The voice says — which one. Brad says — it does not matter which one. Just one. The voice is quiet for a second. Then says — okay. Brad says — good. Now breathe. The voice says — I am breathing. Brad says — slower.",
+  "keywords_scene2": [
+    "laptop screen overwhelmed browser tabs too many",
+    "person stressed computer screen scrolling panic",
+    "breathing calm slowing down taking a moment"
+  ],
+  "scene2_overlays": [
+    {"lines": "*HOW MANY TABS|DO YOU HAVE OPEN", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Close all of them except one.", "sub": "Which one? It does not matter. Just one.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Breathe.", "sub": "I am breathing. — Slower.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene3_stakes": "The voice comes back and says — Brad, what if everything I know is wrong. Brad says — it is not everything. The voice says — most of it. Brad says — probably not most of it either. The voice says — it feels like most of it. Brad says — I know. That feeling is real. The math is real. But you are not behind. You are just early enough to feel it before everyone else does. The voice says — is that good. Brad says — it is very good. Depending on what you do next.",
+  "keywords_scene3": [
+    "businessman deep thought reflection window office",
+    "realization moment calm settling understanding",
+    "early mover advantage timing business opportunity"
+  ],
+  "scene3_overlays": [
+    {"lines": "*WHAT IF EVERYTHING|I KNOW IS WRONG", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "It is not everything. — It feels like most of it.", "sub": "That feeling is real. The math is real.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "You are just early enough to feel it", "sub": "Before everyone else does.", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "Is that good?", "sub": "It is very good. Depending on what you do next.", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene4_solution": "Brad says — here is what I need you to do. Not all of it. Just one thing. Pick one thing you do every single week and find out if there is a faster way to do it now. That is it. The voice says — one thing. Brad says — one thing. The voice says — and then what. Brad says — then you call me back and tell me how it went. The voice says — what if it does not work. Brad says — then we try a different thing. But it will probably work. The voice says — how do you know. Brad says — because they all work. I just need you to pick one.",
+  "keywords_scene4": [
+    "mentor coaching conversation phone call calm advice",
+    "businessman nodding understanding light bulb moment",
+    "one step action laptop working determined focus"
+  ],
+  "scene4_overlays": [
+    {"lines": "*PICK ONE THING|JUST ONE THING", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "One thing you do every week.", "sub": "Find out if there is a faster way now.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "What if it does not work? — Try a different thing.", "sub": "They all work. I just need you to pick one.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene5_ask": "The voice on the other end goes quiet. Then says — okay. Brad. I think I am okay. Brad says — I know you are. The voice says — do you do this all day. Brad says — not all day. The voice says — how many calls like this do you get. Brad says — enough. The voice says — Brad. Thank you. Brad says — call me when you pick your one thing. Do not call me when you open a new tab. The voice says — deal. Brad hangs up. He picks up on the next call. Second ring.",
+  "keywords_scene5": [
+    "phone call ending satisfied resolution calm",
+    "businessman smiling relieved confident after call",
+    "person hanging up phone walking away calm determined"
+  ],
+
+  "tagline": "You don't need Brad. You just need to pick one thing.",
+  "rolling_credits": [
+    {
+      "header": "WE NEED BRAD"
+    },
+    {
+      "lines": [
+        "Brad is a real person",
+        "He is very good at his job",
+        "He did not ask to be in this video",
+        "Do not call Brad when you open a new tab",
+        "Pick one thing",
+        "Then call Brad back",
+        "He picks up on the second ring",
+        "Produced by Song Juicer — dmpgh.com"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "scene1_hook": "Imagine a world where MS is caught before it starts. Where mobility isn't a limitation — it's a solved problem. That world isn't science fiction. It's already being built.",
+  "scene2_problem": "Right now, living with MS means navigating a world that wasn't designed for you. Driving becomes uncertain. Fatigue makes simple tasks costly. Cognitive fog turns ordinary days into battles you fight alone.",
+  "scene3_stakes": "But what's at stake isn't just convenience — it's independence. The ability to work, to move through a city, to stay connected, to show up for your life. These are the things MS threatens most.",
+  "scene4_solution": "In the next ten years, AI becomes a universal accessibility layer. Autonomous vehicles remove the driving barrier entirely. Brain-computer interfaces are moving from labs to clinics. Soft exoskeletons will fit like clothing. And remyelination therapies — already in trials — are learning to repair the damage MS causes, not just slow it.",
+  "scene5_ask": "The tools to stay working, mobile, and connected are improving faster than most diseases progress. The future of MS isn't just longer life. It's fuller life. Learn more at dmpgh.com.",
+  "keywords_scene1": ["sunrise hope morning light", "person looking forward"],
+  "keywords_scene2": ["person with mobility device city", "woman looking tired window"],
+  "keywords_scene3": ["wheelchair user outdoors", "person working laptop accessibility"],
+  "keywords_scene4": ["ai technology brain scan", "exoskeleton rehabilitation walking", "medical research scientist"],
+  "keywords_scene5": ["hopeful person sunrise", "accessible modern city"],
+  "scene2_overlays": [
+    {"lines": "1 IN 3|*MS PATIENTS|STOPS DRIVING", "in": 0.5, "out": 3.5, "pos": "right-nose"},
+    {"lines": "*FATIGUE|AFFECTS|80% WITH MS", "in": 4.0, "out": 7.5, "pos": "right-nose"}
+  ],
+  "scene4_overlays": [
+    {"style": "bullet", "head": "AI ACCESSIBILITY", "sub": "adapts to you", "in": 5.0, "out": 11.0, "x": 1080, "y": 140},
+    {"style": "bullet", "head": "BRAIN-COMPUTER INTERFACES", "sub": "going clinical", "in": 7.0, "out": 11.0, "x": 1080, "y": 350},
+    {"style": "bullet", "head": "REMYELINATION THERAPIES", "sub": "repairing damage", "in": 9.0, "out": 11.0, "x": 1080, "y": 560}
+  ],
+  "rolling_credits": [
+    {"header": "AI VOCAL ARTIST", "lines": ["presents", ""]},
+    {"header": "", "lines": ["THE FUTURE OF MS AND MOBILITY", "what the next 50 years could look like"]},
+    {"header": "PRODUCED BY", "lines": ["Douglas Morse", "MS advocate since 1999"]},
+    {"header": "WRITTEN & DIRECTED BY", "lines": ["AI Claude (Anthropic)"]},
+    {"header": "PRODUCTION ENVIRONMENT", "lines": ["VS Code + Claude Code"]},
+    {"header": "VOICE", "lines": ["OpenAI TTS — 'Nova'"]},
+    {"header": "STOCK FOOTAGE", "lines": ["Pexels"]},
+    {"header": "MUSIC", "lines": ["emotional piano"]},
+    {"header": "RENDERED WITH", "lines": ["ffmpeg · Python · Pillow"]},
+    {"header": "CONTACT", "lines": ["dmpgh.com", "aiva@dmpgh.com"]},
+    {"header": "", "lines": ["", "© 2026 AI VOCAL ARTIST", "all rights reserved"]}
+  ]
+}

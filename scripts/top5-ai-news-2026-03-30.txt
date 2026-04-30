@@ -1,0 +1,87 @@
+VIDEO: 5 AI Stories You Need to Know This Week
+- Topic: Weekly roundup of the five biggest AI news stories for the week of March 30, 2026
+- Length: ~180 seconds (3 minutes)
+- Word Count: 450 words
+- Avatar: Generic male avatar
+- Voice: Generic male voice at natural speaking pace
+- Orientation: Landscape
+- Music: Low-key tech news background, subtle and unobtrusive
+- B-roll: Stock media (news-style montage, tech headlines, identity/security visuals, music production studio, social media feeds, TikTok-style ads, courtroom/legal imagery)
+- Captions: Enabled
+- Tone: Conversational, direct, no fluff
+
+---
+
+[AVATAR ON CAMERA — INTRO]
+
+Five AI stories dropped this week that you actually need to know about.
+Some of them are exciting. Some are a little unsettling.
+Let's get into it.
+
+---
+
+[B-ROLL BEGINS — Story 1: Okta / AI Identity]
+
+Story number one — Okta's C-E-O is going all-in on AI agent identity.
+
+Here's the idea: as AI agents start doing more work on your behalf — booking things, accessing systems, making decisions — they need their own verified identity. Not just a username and password. A real, verifiable credential.
+
+Okta is betting that AI-powered identity verification is going to replace traditional login systems entirely. And honestly? They're probably right. The old model wasn't built for a world where half the accounts logging into your systems aren't human.
+
+Big stakes for security. Watch this space.
+
+---
+
+[B-ROLL — Story 2: Suno v5.5]
+
+Story two — AI music just leveled up again. Suno dropped version 5.5 this week, and this one comes with customizable voices and models. You can now shape the sound, style, and even the vocal character of the music it generates.
+
+It sounds great. Almost too great.
+
+The question everyone's asking — and no one has a clean answer for — is what this means for human musicians. Is it a tool or a replacement? Probably both, depending on who you ask.
+
+---
+
+[B-ROLL — Story 3: Bluesky Attie]
+
+Story three — Bluesky launched an A-I assistant called Attie, powered by Anthropic's Claude. And this one's interesting.
+
+Attie lets you build your own feed algorithm. You decide what you see, instead of letting some opaque recommendation engine decide for you. You can customize it, tune it, and actually understand why content is showing up.
+
+That's a genuinely different idea in social media. Most platforms treat their algorithm like a trade secret. Bluesky is handing you the wheel.
+
+---
+
+[B-ROLL — Story 4: TikTok AI Ads]
+
+Story four is the one that should make you think twice next time you're scrolling.
+
+TikTok is now running AI-generated ads — and even experts can't reliably tell them apart from real ones. Not bad deepfakes. Polished, professional, convincing ads where the product, the spokesperson, and the setting may all be completely synthetic.
+
+It raises a real question: at what point does advertising stop being persuasion and start being something else?
+
+We're closer to that line than most people realize.
+
+---
+
+[B-ROLL — Story 5: Anthropic vs. Pentagon]
+
+And story five — a federal judge temporarily sided with Anthropic to block the Pentagon from using its A-I.
+
+This is a legal battle about whether military applications of A-I fall within what Anthropic's terms allow. Anthropic argues they don't. The Pentagon disagrees.
+
+Whatever side you're on, the fact that an A-I company is taking the U-S military to court — and winning, at least temporarily — is not a normal thing. This case is going to matter.
+
+---
+
+[AVATAR BACK ON CAMERA — CLOSE]
+
+That's your week in A-I. Identity, music, social feeds, advertising, and a courtroom showdown.
+
+Things are moving fast. Come back next week for five more.
+
+And visit dmpgh.com for more tips and guides.
+
+---
+
+[END]

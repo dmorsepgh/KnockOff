@@ -1,0 +1,23 @@
+The way we log into things is about to change forever.
+
+Okta's CEO Todd McKinnon just made a massive bet on something called AI agent identity. And if you're not paying attention, you should be.
+
+Here's the problem. AI agents are starting to do real work. Not just answering questions. They're booking travel, accessing company databases, making purchases, and signing contracts on your behalf.
+
+But right now, these agents are logging in with your credentials. Your username. Your password. Your identity.
+
+That's a security nightmare.
+
+McKinnon's vision is simple. AI agents need their own verified identity. Not a shared login. Not a workaround. A real, verifiable credential that says this AI is authorized to act for this person, at this company, for this specific task.
+
+Think of it like giving your assistant their own badge instead of lending them yours.
+
+Okta is building the infrastructure for this. And the timing is perfect. Every major tech company is deploying AI agents right now. Microsoft, Google, Salesforce, they all need a way to manage who these agents are and what they're allowed to do.
+
+The old login model was built for humans clicking buttons. It was never designed for a world where half the accounts accessing your systems aren't even people.
+
+If Okta gets this right, they become the gatekeeper for every AI agent in the enterprise. That's a trillion-dollar position.
+
+And if they get it wrong? Well, that's how you end up with rogue AI agents buying things you never approved.
+
+This is one of the biggest infrastructure plays in AI right now. Watch this space.

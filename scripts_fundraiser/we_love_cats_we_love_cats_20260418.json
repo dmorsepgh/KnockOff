@@ -1,0 +1,42 @@
+{
+  "scene1_hook": "Imagine a world where every cat has a loving home.",
+  "keywords_scene1": [
+    "cat shelter",
+    "animal rescue",
+    "homeless cats"
+  ],
+  "scene2_problem": "But the harsh reality is that over 3 million cats are euthanized in shelters each year, simply because they don't have a family to love them.",
+  "keywords_scene2": [
+    "sad cat",
+    "abandoned kitten",
+    "shelter crisis"
+  ],
+  "scene3_stakes": "If we don't act now, these innocent lives will be lost forever. The pain and loneliness are unbearable. We can do better.",
+  "keywords_scene3": [
+    "emotional cat owner",
+    "cat in need",
+    "lost opportunity"
+  ],
+  "scene4_solution": "That's why we're dedicated to finding forever homes for cats in need. Your donation enables us to rescue, rehabilitate, and rehome more cats than ever before.",
+  "keywords_scene4": [
+    "rescue cat",
+    "happy adoption",
+    "donation impact"
+  ],
+  "scene5_ask": "Donate $25 today at welovecats.com and help give a loving home to a deserving cat. Together, we can make a difference.",
+  "keywords_scene5": [
+    "cat lover donation",
+    "animal welfare",
+    "make a difference"
+  ],
+  "tagline": "Give every cat a home",
+  "rolling_credits": [
+    {
+      "header": "A Production of We Love Cats",
+      "lines": [
+        "Produced by Doug Morse, AI Vocal Artist",
+        "dmpgh.com"
+      ]
+    }
+  ]
+}

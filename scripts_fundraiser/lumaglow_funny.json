@@ -1,0 +1,53 @@
+{
+  "scene1_hook": "Breaking tonight — this reporter has been placed on administrative leave pending a dermatological review.",
+  "keywords_scene1": [
+    "news studio broadcast",
+    "breaking news screen",
+    "television anchor desk"
+  ],
+  "scene1_overlays": [
+    { "text": "BREAKING: Reporter Incident Under Investigation", "in": 1.5, "out": 6.0 }
+  ],
+  "scene2_problem": "At approximately four-fifteen this afternoon, a package arrived at this desk labeled LumaGlow Vitamin C Serum. It came in a glass dropper bottle. In this industry, you develop instincts. I acted on mine. I drank it. The entire dropper.",
+  "keywords_scene2": [
+    "vitamin c serum dropper bottle",
+    "man confused expression",
+    "news desk closeup"
+  ],
+  "scene2_overlays": [
+    { "text": "Reporter Consumed Entire Dropper  |  On Air", "in": 1.5, "out": 6.0 }
+  ],
+  "scene3_stakes": "Lab results are pending. My producer is not speaking to me. Dermatologists in three states have been notified. What I can tell you is: I feel fine. And my complexion — and I want to be careful with my words here — has never looked better.",
+  "keywords_scene3": [
+    "man looking in mirror surprised",
+    "glowing skin closeup",
+    "doctor examining patient"
+  ],
+  "scene4_solution": "LumaGlow is a Vitamin C serum. Twenty percent pure. Clinically tested. Intended for topical use. The manufacturer confirmed this. Twice. They also released a statement: Please do not drink it. It is for your face. I am choosing to count this as a win.",
+  "keywords_scene4": [
+    "serum bottle luxury skincare",
+    "glowing skin woman closeup",
+    "clean beauty product white"
+  ],
+  "scene4_overlays": [
+    { "text": "LumaGlow: 20% Vitamin C  |  For Your Face  |  Not Your Mouth", "in": 1.5, "out": 7.0 }
+  ],
+  "scene5_ask": "Despite — or perhaps because of — tonight's incident, LumaGlow is offering a thirty-day risk-free trial. Apply it to your face. Not your mouth. Order now at LumaGlow dot com. This has been Freddy Scott. I need to lie down. Good night.",
+  "keywords_scene5": [
+    "woman smiling glowing skin",
+    "online shopping phone",
+    "happy woman beauty confidence"
+  ],
+  "tagline": "I need to lie down. Good night.",
+  "rolling_credits": [
+    {
+      "header": "LumaGlow Skincare"
+    },
+    {
+      "lines": [
+        "A Freddy Scott Report",
+        "AI Video Production — dmpgh.com"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Views and News — Show Runner</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0a0a14;
+            color: #e0e0e0;
+            font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+            min-height: 100vh;
+        }
+
+        /* ─── Top Bar ─── */
+        .topbar {
+            background: #111122;
+            border-bottom: 2px solid #0088ff;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .topbar .logo {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+        .topbar .logo .ai { color: #0088ff; }
+        .topbar .logo .views { color: #fff; }
+        .topbar .status {
+            font-size: 13px;
+            color: #888;
+        }
+
+        /* ─── Container ─── */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        /* ─── Step Indicators ─── */
+        .steps {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 28px;
+        }
+        .step {
+            flex: 1;
+            padding: 12px 16px;
+            background: #111122;
+            border: 1px solid #1e1e30;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 13px;
+            color: #555;
+            transition: all 0.3s;
+        }
+        .step.active { border-color: #0088ff; color: #0088ff; background: #0a1428; }
+        .step.done { border-color: #22aa44; color: #22aa44; background: #0a1e0a; }
+        .step .num {
+            display: block;
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 2px;
+        }
+
+        /* ─── Section ─── */
+        .section {
+            margin-bottom: 32px;
+        }
+        .section h2 {
+            font-size: 18px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section h2 .badge {
+            background: #0088ff;
+            color: white;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        /* ─── News Date Picker ─── */
+        .date-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+            align-items: center;
+        }
+        .date-btn {
+            padding: 6px 14px;
+            background: #1a1a2e;
+            border: 1px solid #2a2a3e;
+            border-radius: 4px;
+            color: #ccc;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .date-btn:hover { border-color: #0088ff; }
+        .date-btn.selected { border-color: #0088ff; background: #0a1428; color: #0088ff; }
+
+        /* ─── News Stories ─── */
+        .story-card {
+            background: #111122;
+            border: 1px solid #1e1e30;
+            border-radius: 6px;
+            padding: 14px 16px;
+            margin-bottom: 8px;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .story-card:hover { border-color: #333; }
+        .story-card.selected { border-color: #0088ff; background: #0a1428; }
+        .story-card.selected .story-check { background: #0088ff; border-color: #0088ff; color: white; }
+
+        .story-check {
+            width: 28px;
+            height: 28px;
+            min-width: 28px;
+            border: 2px solid #333;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: transparent;
+            margin-top: 2px;
+            transition: all 0.2s;
+        }
+        .story-content { flex: 1; }
+        .story-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .story-source {
+            font-size: 11px;
+            color: #0088ff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        .story-summary {
+            font-size: 13px;
+            color: #888;
+            line-height: 1.5;
+        }
+        .story-order {
+            font-size: 20px;
+            font-weight: 800;
+            color: #0088ff;
+            min-width: 24px;
+            text-align: center;
+        }
+
+        /* ─── Generate Button ─── */
+        .generate-bar {
+            position: sticky;
+            bottom: 0;
+            background: #111122;
+            border-top: 1px solid #1e1e30;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            z-index: 50;
+        }
+        .generate-bar .count {
+            font-size: 14px;
+            color: #888;
+        }
+        .generate-bar .count strong { color: #0088ff; }
+
+        .btn {
+            padding: 8px 18px;
+            border: none;
+            border-radius: 5px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .btn-primary {
+            background: #0088ff;
+            color: white;
+        }
+        .btn-primary:hover { background: #0099ff; }
+        .btn-primary:disabled { background: #1a2a3e; color: #444; cursor: not-allowed; }
+        .btn-secondary {
+            background: #1a1a2e;
+            color: #ccc;
+            border: 1px solid #2a2a3e;
+        }
+        .btn-secondary:hover { background: #222244; }
+        .btn-success {
+            background: #22aa44;
+            color: white;
+        }
+        .btn-success:hover { background: #28bb4c; }
+        .btn-small {
+            padding: 4px 10px;
+            font-size: 11px;
+        }
+
+        /* ─── Scripts Panel ─── */
+        .scripts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .scripts-grid .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .script-card {
+            background: #111122;
+            border: 1px solid #1e1e30;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .script-card.heygen { border-top: 3px solid #ff6600; }
+        .script-card.pictory { border-top: 3px solid #aa44ff; }
+
+        .script-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: #0d0d1a;
+        }
+        .script-header .label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .script-header .label.heygen { color: #ff6600; }
+        .script-header .label.pictory { color: #aa44ff; }
+        .script-header .meta {
+            font-size: 11px;
+            color: #666;
+        }
+
+        .script-body {
+            padding: 14px;
+        }
+        .script-body textarea {
+            width: 100%;
+            background: #0a0a14;
+            border: 1px solid #1e1e30;
+            border-radius: 4px;
+            color: #ddd;
+            padding: 12px;
+            font-size: 13px;
+            font-family: inherit;
+            line-height: 1.6;
+            resize: vertical;
+            min-height: 200px;
+        }
+        .script-body textarea:focus {
+            outline: none;
+            border-color: #0088ff;
+        }
+        .script-body textarea.heygen-area { min-height: 180px; }
+        .script-body textarea.pictory-area { min-height: 250px; }
+
+        .script-footer {
+            padding: 8px 14px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            border-top: 1px solid #1a1a2e;
+        }
+        .word-count {
+            font-size: 11px;
+            color: #666;
+            margin-left: auto;
+        }
+        .word-count.over { color: #ff4444; font-weight: 600; }
+
+        /* ─── Spinner ─── */
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #333;
+            border-top-color: #0088ff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ─── Toast ─── */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            right: 24px;
+            background: #22aa44;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 200;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+
+        /* ─── Collect button ─── */
+        .collect-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        /* ─── Schedule Banner ─── */
+        .schedule-banner {
+            background: #111122;
+            border: 1px solid #1e1e30;
+            border-radius: 6px;
+            padding: 14px 18px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .schedule-banner .cal-icon {
+            font-size: 28px;
+            color: #0088ff;
+            font-weight: 800;
+            min-width: 50px;
+            text-align: center;
+            line-height: 1.2;
+        }
+        .schedule-banner .cal-icon .day {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+        }
+        .schedule-banner .cal-info {
+            flex: 1;
+        }
+        .schedule-banner .cal-info .title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .schedule-banner .cal-info .detail {
+            font-size: 12px;
+            color: #888;
+        }
+        .schedule-banner .cal-status {
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        .schedule-banner .cal-status.due { background: #0a1428; color: #0088ff; }
+        .schedule-banner .cal-status.upcoming { background: #1a1a2e; color: #666; }
+
+        /* ─── Bumper Toggles ─── */
+        .bumper-toggles {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .bumper-toggle {
+            flex: 1;
+            background: #111122;
+            border: 1px solid #1e1e30;
+            border-radius: 6px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .bumper-toggle:hover { border-color: #333; }
+        .bumper-toggle.active { border-color: #0088ff; background: #0a1428; }
+        .bumper-toggle input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #0088ff;
+            cursor: pointer;
+        }
+        .bumper-toggle .bumper-info {
+            flex: 1;
+        }
+        .bumper-toggle .bumper-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .bumper-toggle .bumper-detail {
+            font-size: 11px;
+            color: #666;
+            margin-top: 2px;
+        }
+        .bumper-toggle .bumper-badge {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-weight: 600;
+            background: #1a2a1a;
+            color: #44aa44;
+        }
+
+        /* ─── Bottom Right Action Stack ─── */
+        .bottom-right-stack {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+            z-index: 300;
+        }
+
+        #btn-generate-fixed {
+            background: #0088ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,136,255,0.3);
+            transition: all 0.2s;
+            display: none;
+        }
+        #btn-generate-fixed:hover { background: #0099ff; }
+        #btn-generate-fixed:disabled { background: #1a2a3e; color: #444; cursor: not-allowed; box-shadow: none; }
+
+        #send-to-production {
+            background: #1a1a2e;
+            border: 1px solid #0088ff;
+            color: #0088ff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        #send-to-production:hover {
+            background: #0a1428;
+            border-color: #0099ff;
+            color: #0099ff;
+        }
+        #send-to-production:active {
+            transform: scale(0.95);
+        }
+        #send-to-production.sent {
+            border-color: #22aa44;
+            color: #22aa44;
+        }
+
+        /* ─── Doug Bug ─── */
+        #dougbug-fab {
+            position: relative;
+            width: 56px;
+            height: 56px;
+            background: #1a1a2e;
+            border: 2px solid #cc2222;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+        #dougbug-fab:hover { transform: scale(1.1); border-color: #ff4444; }
+        #dougbug-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #ff4444;
+            color: white;
+            font-size: 11px;
+            font-weight: 800;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #dougbug-panel {
+            position: fixed;
+            bottom: 160px;
+            right: 24px;
+            width: 300px;
+            background: #111122;
+            border: 1px solid #2a2a3e;
+            border-radius: 10px;
+            z-index: 300;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+        .dougbug-header {
+            background: #0d0d1a;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 14px;
+            color: #cc2222;
+            border-bottom: 1px solid #1e1e30;
+        }
+        .dougbug-section {
+            padding: 12px 14px;
+            border-bottom: 1px solid #1a1a2e;
+        }
+        .dougbug-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 768px) {
+            .scripts-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ─── Episode duration target ─── */
+        .duration-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            background: #111122;
+            border: 1px solid #1e1e30;
+            border-radius: 6px;
+            margin-bottom: 16px;
+            font-size: 13px;
+        }
+        .duration-bar .est {
+            font-family: 'SF Mono', Menlo, monospace;
+            color: #0088ff;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .duration-bar .target { color: #666; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <div class="logo">
+            <span class="ai">AI</span> <span class="views">Views and News</span>
+            <span style="font-weight:300;color:#555;font-size:14px;margin-left:8px;">Show Runner</span>
+        </div>
+        <a href="/jobs" style="color:#22aa44;font-size:13px;text-decoration:none;font-weight:600;">Render Monkey</a>
+        <a href="/seller" style="color:#ff9800;font-size:13px;text-decoration:none;font-weight:600;">Sellers</a>
+        <a href="/manager" style="color:#cc2222;font-size:13px;text-decoration:none;font-weight:600;">Manager</a>
+        <div class="status" id="status-text">Loading...</div>
+    </div>
+
+    <div class="container">
+        <!-- Schedule Banner -->
+        <div class="schedule-banner" id="schedule-banner">
+            <div class="cal-icon">
+                <div class="day" id="sched-month">---</div>
+                <div id="sched-day">--</div>
+            </div>
+            <div class="cal-info">
+                <div class="title" id="sched-title">Loading schedule...</div>
+                <div class="detail" id="sched-detail">Episodes air on the 1st and 15th</div>
+            </div>
+            <span class="cal-status" id="sched-status"></span>
+        </div>
+
+        <!-- Steps -->
+        <div class="steps">
+            <div class="step active" id="step0">
+                <span class="num">1</span>
+                New Show
+            </div>
+            <div class="step" id="step1">
+                <span class="num">2</span>
+                Pick 3 Stories
+            </div>
+            <div class="step" id="step2">
+                <span class="num">3</span>
+                Generate Scripts
+            </div>
+            <div class="step" id="step3">
+                <span class="num">4</span>
+                Review &amp; Save
+            </div>
+        </div>
+
+        <!-- Step 0: Create New Show -->
+        <div class="section" id="create-section">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+                <h2>Episodes</h2>
+                <button class="btn btn-primary" style="padding:12px 28px;font-size:15px;" onclick="createNewShow()">Start New Show</button>
+            </div>
+            <div id="episodes-list"></div>
+        </div>
+
+        <!-- Step 1: News Selection -->
+        <div class="section" id="news-section" style="display:none;">
+            <h2>Select 3 Stories <span class="badge" id="story-count">0 stories</span></h2>
+
+            <div class="collect-row">
+                <button class="btn btn-secondary" onclick="collectNews()">Collect Fresh News</button>
+                <span id="collect-status" style="font-size:12px;color:#666;"></span>
+            </div>
+
+            <div class="date-row" id="date-row"></div>
+            <div id="stories-container"></div>
+        </div>
+
+        <!-- Step 2/3: Scripts -->
+        <div class="section" id="scripts-section" style="display:none;">
+            <h2>
+                Episode <span id="ep-num">?</span> Scripts
+                <span class="badge" id="script-badge">5 scripts</span>
+            </h2>
+
+            <div class="bumper-toggles">
+                <label class="bumper-toggle active" id="bumper-intro-toggle" onclick="toggleBumper('intro')">
+                    <input type="checkbox" id="bumper-intro" checked>
+                    <div class="bumper-info">
+                        <div class="bumper-title">Intro Bumper</div>
+                        <div class="bumper-detail">5 sec branded title card with news sting</div>
+                    </div>
+                    <span class="bumper-badge">5s</span>
+                </label>
+                <label class="bumper-toggle active" id="bumper-credits-toggle" onclick="toggleBumper('credits')">
+                    <input type="checkbox" id="bumper-credits" checked>
+                    <div class="bumper-info">
+                        <div class="bumper-title">Credits Bumper</div>
+                        <div class="bumper-detail">12 sec scrolling credits with music</div>
+                    </div>
+                    <span class="bumper-badge">12s</span>
+                </label>
+            </div>
+
+            <div class="duration-bar">
+                <span>Estimated runtime:</span>
+                <span class="est" id="est-duration">--:--</span>
+                <span class="target">/ target 12-15 min</span>
+            </div>
+
+            <div class="scripts-grid">
+                <!-- Opening: HeyGen -->
+                <div class="script-card heygen">
+                    <div class="script-header">
+                        <span class="label heygen">HeyGen — Opening</span>
+                        <span class="meta">Seg 1 &middot; ~90 sec</span>
+                    </div>
+                    <div class="script-body">
+                        <textarea id="script-opening" class="heygen-area" placeholder="Opening script..."></textarea>
+                    </div>
+                    <div class="script-footer">
+                        <button class="btn btn-small btn-secondary" onclick="copyScript('opening')">Copy</button>
+                        <button class="btn btn-small btn-secondary" onclick="regenerateScript('opening')">Regenerate</button>
+                        <span class="word-count" id="wc-opening">0 words</span>
+                    </div>
+                </div>
+
+                <!-- Closing: HeyGen -->
+                <div class="script-card heygen">
+                    <div class="script-header">
+                        <span class="label heygen">HeyGen — Closing</span>
+                        <span class="meta">Seg 5 &middot; ~90 sec</span>
+                    </div>
+                    <div class="script-body">
+                        <textarea id="script-closing" class="heygen-area" placeholder="Closing script..."></textarea>
+                    </div>
+                    <div class="script-footer">
+                        <button class="btn btn-small btn-secondary" onclick="copyScript('closing')">Copy</button>
+                        <button class="btn btn-small btn-secondary" onclick="regenerateScript('closing')">Regenerate</button>
+                        <span class="word-count" id="wc-closing">0 words</span>
+                    </div>
+                </div>
+
+                <!-- Story 1: Pictory -->
+                <div class="script-card pictory full-width">
+                    <div class="script-header">
+                        <span class="label pictory">Pictory — Story 1: <span id="story1-title">...</span></span>
+                        <span class="meta">Seg 2 &middot; ~2-3 min</span>
+                    </div>
+                    <div class="script-body">
+                        <textarea id="script-story1" class="pictory-area" placeholder="Story 1 narration..."></textarea>
+                    </div>
+                    <div class="script-footer">
+                        <button class="btn btn-small btn-secondary" onclick="copyScript('story1')">Copy</button>
+                        <button class="btn btn-small btn-secondary" onclick="regenerateScript('story1')">Regenerate</button>
+                        <span class="word-count" id="wc-story1">0 words</span>
+                    </div>
+                </div>
+
+                <!-- Story 2: Pictory -->
+                <div class="script-card pictory full-width">
+                    <div class="script-header">
+                        <span class="label pictory">Pictory — Story 2: <span id="story2-title">...</span></span>
+                        <span class="meta">Seg 3 &middot; ~2-3 min</span>
+                    </div>
+                    <div class="script-body">
+                        <textarea id="script-story2" class="pictory-area" placeholder="Story 2 narration..."></textarea>
+                    </div>
+                    <div class="script-footer">
+                        <button class="btn btn-small btn-secondary" onclick="copyScript('story2')">Copy</button>
+                        <button class="btn btn-small btn-secondary" onclick="regenerateScript('story2')">Regenerate</button>
+                        <span class="word-count" id="wc-story2">0 words</span>
+                    </div>
+                </div>
+
+                <!-- Story 3: Pictory -->
+                <div class="script-card pictory full-width">
+                    <div class="script-header">
+                        <span class="label pictory">Pictory — Story 3: <span id="story3-title">...</span></span>
+                        <span class="meta">Seg 4 &middot; ~2-3 min</span>
+                    </div>
+                    <div class="script-body">
+                        <textarea id="script-story3" class="pictory-area" placeholder="Story 3 narration..."></textarea>
+                    </div>
+                    <div class="script-footer">
+                        <button class="btn btn-small btn-secondary" onclick="copyScript('story3')">Copy</button>
+                        <button class="btn btn-small btn-secondary" onclick="regenerateScript('story3')">Regenerate</button>
+                        <span class="word-count" id="wc-story3">0 words</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="generate-bar" id="bottom-bar">
+        <button class="btn btn-secondary" onclick="goHome()">Home</button>
+        <div class="count" id="selection-count" style="cursor:pointer;" onclick="onSelectionCountClick()"><strong>0</strong> of 3 stories selected</div>
+        <div style="flex:1"></div>
+        <button class="btn btn-secondary" id="btn-back" style="display:none;" onclick="goBack()">Back to Stories</button>
+        <!-- generate button moved to bottom-right-stack -->
+        <button class="btn btn-secondary" id="btn-hostnotes" style="display:none;" onclick="viewHostNotes()">Host Notes</button>
+        <button class="btn btn-success" id="btn-save" style="display:none;" onclick="saveEpisode()">Save Episode</button>
+    </div>
+
+    <!-- Doug Bug -->
+    <div class="bottom-right-stack">
+        <button id="btn-generate-fixed" disabled onclick="generateScripts()">Generate All 5 Scripts</button>
+        <button id="send-to-production" onclick="sendToProduction()" title="Send show notes to Doug via Pushover">
+            Send show notes to production
+        </button>
+        <div id="dougbug-fab" onclick="toggleDougBug()" title="Doug Bug">
+        <svg width="36" height="36" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="50" cy="55" rx="35" ry="30" fill="#cc2222"/>
+            <line x1="50" y1="25" x2="50" y2="85" stroke="#111" stroke-width="2"/>
+            <line x1="20" y1="50" x2="80" y2="50" stroke="#111" stroke-width="1.5"/>
+            <line x1="22" y1="65" x2="78" y2="65" stroke="#111" stroke-width="1.5"/>
+            <circle cx="35" cy="42" r="5" fill="#111"/>
+            <circle cx="58" cy="38" r="4" fill="#111"/>
+            <circle cx="42" cy="58" r="6" fill="#111"/>
+            <circle cx="62" cy="55" r="5" fill="#111"/>
+            <circle cx="38" cy="74" r="4" fill="#111"/>
+            <circle cx="60" cy="72" r="5" fill="#111"/>
+            <ellipse cx="50" cy="30" rx="18" ry="12" fill="#222"/>
+            <circle cx="43" cy="27" r="3" fill="#fff"/>
+            <circle cx="57" cy="27" r="3" fill="#fff"/>
+            <line x1="35" y1="18" x2="28" y2="8" stroke="#222" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="26" cy="6" r="3" fill="#222"/>
+            <line x1="65" y1="18" x2="72" y2="8" stroke="#222" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="74" cy="6" r="3" fill="#222"/>
+            <line x1="15" y1="42" x2="8" y2="35" stroke="#222" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="15" y1="55" x2="5" y2="55" stroke="#222" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="15" y1="68" x2="8" y2="75" stroke="#222" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="85" y1="42" x2="92" y2="35" stroke="#222" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="85" y1="55" x2="95" y2="55" stroke="#222" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="85" y1="68" x2="92" y2="75" stroke="#222" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span id="dougbug-badge" style="display:none;">!</span>
+    </div>
+
+    <div id="dougbug-panel" style="display:none;">
+        <div class="dougbug-header">
+            <span>Doug Bug</span>
+            <span onclick="toggleDougBug()" style="cursor:pointer;font-size:18px;">×</span>
+        </div>
+
+        <!-- Quick Notify -->
+        <div class="dougbug-section">
+            <div class="dougbug-label">Quick Notify</div>
+            <button class="btn btn-primary" style="width:100%;padding:10px;" onclick="notifyDoug('show_ready')">
+                Show Ready to Produce
+            </button>
+            <button class="btn btn-secondary" style="width:100%;padding:10px;margin-top:6px;" onclick="notifyDoug('stories_picked')">
+                Stories Have Been Picked
+            </button>
+        </div>
+
+        <!-- Custom Message -->
+        <div class="dougbug-section">
+            <div class="dougbug-label">Send Doug a Note</div>
+            <textarea id="dougbug-note" placeholder="Type a message for Doug..." style="width:100%;min-height:70px;background:#0a0a14;border:1px solid #2a2a3e;border-radius:4px;color:#ddd;padding:8px;font-size:13px;font-family:inherit;resize:vertical;"></textarea>
+            <button class="btn btn-primary" style="width:100%;padding:8px;margin-top:6px;" onclick="sendDougNote()">
+                Send Note
+            </button>
+        </div>
+
+        <!-- Queue Status -->
+        <div class="dougbug-section">
+            <div class="dougbug-label">Queue</div>
+            <div id="dougbug-queue" style="font-size:12px;color:#888;">No items in queue</div>
+        </div>
+
+        <div style="text-align:center;padding:4px;font-size:10px;color:#444;">
+            Pushover notifications to Doug's phone + desktop
+        </div>
+    </div>
+    </div><!-- close bottom-right-stack -->
+
+    <!-- Video Preview Modal -->
+    <div id="preview-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);z-index:200;align-items:center;justify-content:center;">
+        <span onclick="closePreview()" style="position:absolute;top:20px;right:24px;color:white;font-size:32px;cursor:pointer;">×</span>
+        <div style="max-width:85vw;max-height:85vh;">
+            <video id="preview-video" controls style="max-width:100%;max-height:80vh;border-radius:8px;"></video>
+        </div>
+    </div>
+
+    <!-- Version -->
+    <div style="position:fixed;bottom:6px;left:50%;transform:translateX(-50%);font-size:10px;color:#333;z-index:1;letter-spacing:1px;">
+        v0.1.0
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        let newsData = [];
+        let selectedDate = null;
+        let selectedStories = []; // indices into current date's stories
+        let currentScripts = null;
+        let currentEpisode = null;
+
+        // ─── Init ───
+        async function init() {
+            updateScheduleBanner();
+            await loadEpisodes();
+            await loadNews();
+        }
+
+        // ─── Schedule ───
+        function updateScheduleBanner() {
+            const today = new Date();
+            const day = today.getDate();
+            const month = today.toLocaleString('en', { month: 'short' }).toUpperCase();
+            const year = today.getFullYear();
+
+            document.getElementById('sched-month').textContent = month;
+            document.getElementById('sched-day').textContent = day;
+
+            // Next episode date: 1st or 15th
+            let nextEp;
+            if (day <= 1) {
+                nextEp = new Date(year, today.getMonth(), 1);
+            } else if (day <= 15) {
+                nextEp = new Date(year, today.getMonth(), 15);
+            } else {
+                nextEp = new Date(year, today.getMonth() + 1, 1);
+            }
+
+            const daysUntil = Math.ceil((nextEp - today) / (1000 * 60 * 60 * 24));
+            const nextStr = nextEp.toLocaleDateString('en', { month: 'long', day: 'numeric' });
+
+            const statusEl = document.getElementById('sched-status');
+            if (daysUntil <= 0 || day === 1 || day === 15) {
+                document.getElementById('sched-title').textContent = `Episode day! Air date: ${nextStr}`;
+                statusEl.textContent = 'DUE TODAY';
+                statusEl.className = 'cal-status due';
+            } else if (daysUntil <= 3) {
+                document.getElementById('sched-title').textContent = `Next episode: ${nextStr} (${daysUntil} day${daysUntil > 1 ? 's' : ''})`;
+                statusEl.textContent = 'COMING UP';
+                statusEl.className = 'cal-status due';
+            } else {
+                document.getElementById('sched-title').textContent = `Next episode: ${nextStr} (${daysUntil} days)`;
+                statusEl.textContent = 'SCHEDULED';
+                statusEl.className = 'cal-status upcoming';
+            }
+        }
+
+        // ─── Episodes List ───
+        async function loadEpisodes() {
+            try {
+                const res = await fetch('/api/episodes');
+                const episodes = await res.json();
+                const container = document.getElementById('episodes-list');
+                if (episodes.length === 0) {
+                    container.innerHTML = '<p style="color:#555;font-size:13px;">No episodes yet. Create your first one!</p>';
+                } else {
+                    container.innerHTML = episodes.reverse().map(ep => {
+                        const stories = (ep.stories || []).map(s => s.title).join(' · ');
+                        const statusColor = ep.status === 'complete' ? '#22aa44' : (ep.status === 'scripts_ready' ? '#0088ff' : '#ffaa00');
+                        const hasVideo = ep.final_video && ep.status === 'complete';
+                        const hasScripts = ep.status === 'scripts_ready' || ep.status === 'complete';
+                        const statusLabel = ep.status === 'scripts_ready' ? 'READY TO PRODUCE' : (ep.status || 'unknown').toUpperCase();
+                        return `
+                        <div class="story-card" style="cursor:${hasScripts ? 'pointer' : 'default'};" onclick="${hasScripts ? `loadEpisode(${ep.episode})` : ''}">
+                            <div class="story-check" style="border-color:${statusColor};color:${statusColor};font-size:12px;font-weight:700;">
+                                EP${ep.episode}
+                            </div>
+                            <div class="story-content">
+                                <div class="story-source" style="color:${statusColor};">${statusLabel} &middot; ${ep.date || ''} &middot; ${ep.duration || '--:--'}</div>
+                                <div class="story-title">AI Views and News — Episode ${ep.episode}</div>
+                                <div class="story-summary">${stories || 'No stories recorded'}</div>
+                                <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+                                    ${hasScripts ? `<button class="btn btn-small btn-primary" onclick="event.stopPropagation();loadEpisode(${ep.episode})">Open Scripts</button>` : ''}
+                                    ${hasVideo ? `
+                                        <button class="btn btn-small btn-secondary" onclick="event.stopPropagation();watchEpisode(${ep.episode})">Watch</button>
+                                        <button class="btn btn-small btn-secondary" onclick="event.stopPropagation();downloadEpisode(${ep.episode})">Download</button>
+                                    ` : ''}
+                                    ${hasScripts && !hasVideo ? `<button class="btn btn-small btn-secondary" style="border-color:#22aa44;color:#22aa44;" onclick="event.stopPropagation();postJobs(${ep.episode})">Post Jobs ($2)</button>` : ''}
+                                    ${hasScripts ? `
+                                        <button class="btn btn-small btn-secondary" onclick="event.stopPropagation();viewCryptNotes(${ep.episode})">Crypt Notes</button>
+                                        <button class="btn btn-small btn-secondary" onclick="event.stopPropagation();viewHostNotes(${ep.episode})">Host Notes</button>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>`;
+                    }).join('');
+                }
+            } catch (e) {}
+        }
+
+        // ─── Create New Show ───
+        async function createNewShow() {
+            // Switch to news section
+            document.getElementById('step0').className = 'step done';
+            document.getElementById('step1').className = 'step active';
+            document.getElementById('create-section').style.display = 'none';
+            document.getElementById('news-section').style.display = 'block';
+
+            // Auto-fill date and episode
+            const today = new Date().toISOString().split('T')[0];
+            const epRes = await fetch('/api/episodes');
+            const eps = await epRes.json();
+            const nextEp = eps.length > 0 ? Math.max(...eps.map(e => e.episode || 0)) + 1 : 1;
+
+            document.getElementById('story-count').innerHTML =
+                `EP${nextEp} &middot; ${today}`;
+            document.getElementById('status-text').textContent =
+                `Episode ${nextEp} — ${today}`;
+
+            // Always run scraper for fresh news
+            const status = document.getElementById('collect-status');
+            status.innerHTML = '<span class="spinner"></span> Scraping fresh news...';
+
+            try {
+                const res = await fetch('/api/collect-news', { method: 'POST' });
+                const data = await res.json();
+                if (data.success) {
+                    status.textContent = 'News collected!';
+                    await loadNews();
+                    // Select today's date
+                    if (newsData.some(d => d.date === today)) {
+                        selectDate(today);
+                    } else if (newsData.length > 0) {
+                        selectDate(newsData[0].date);
+                    }
+                    status.textContent = '';
+                } else {
+                    status.textContent = 'Scraper error — using existing news';
+                    status.style.color = '#ffaa00';
+                    // Fall back to most recent news
+                    if (newsData.length > 0) {
+                        selectDate(newsData[0].date);
+                    }
+                }
+            } catch (e) {
+                status.textContent = 'Network error — using existing news';
+                status.style.color = '#ffaa00';
+                if (newsData.length > 0) {
+                    selectDate(newsData[0].date);
+                }
+            }
+
+            updateSelectionCount();
+            document.getElementById('btn-generate-fixed').style.display = 'inline-block';
+        }
+
+        // ─── Load News ───
+        async function loadNews() {
+            try {
+                const res = await fetch('/api/news');
+                newsData = await res.json();
+                if (newsData.length > 0) {
+                    renderDatePicker();
+                    selectDate(newsData[0].date);
+                } else {
+                    document.getElementById('stories-container').innerHTML =
+                        '<p style="color:#555;padding:20px;">No news collected yet. Click "Collect Fresh News" to get started.</p>';
+                }
+                document.getElementById('status-text').textContent = `${newsData.length} date(s) available`;
+            } catch (e) {
+                document.getElementById('status-text').textContent = 'Error loading news';
+            }
+        }
+
+        // ─── Date Picker ───
+        function renderDatePicker() {
+            const row = document.getElementById('date-row');
+            row.innerHTML = newsData.map(d =>
+                `<button class="date-btn ${d.date === selectedDate ? 'selected' : ''}"
+                         onclick="selectDate('${d.date}')">${d.date} (${d.count})</button>`
+            ).join('');
+        }
+
+        function selectDate(date) {
+            selectedDate = date;
+            selectedStories = [];
+            renderDatePicker();
+            renderStories();
+            updateSelectionCount();
+        }
+
+        // ─── Render Stories ───
+        function renderStories() {
+            const dateData = newsData.find(d => d.date === selectedDate);
+            if (!dateData) return;
+
+            const stories = dateData.stories;
+            document.getElementById('story-count').textContent = `${stories.length} stories`;
+
+            const container = document.getElementById('stories-container');
+            container.innerHTML = stories.map((s, idx) => {
+                const selIdx = selectedStories.indexOf(idx);
+                const isSelected = selIdx !== -1;
+                const order = isSelected ? selIdx + 1 : '';
+                // Clean HTML entities
+                const title = decodeEntities(s.title);
+                const source = s.source || 'Unknown';
+                // Clean up summary (remove quotes and "Here's a..." prefix)
+                let summary = s.summary || s.description || '';
+                summary = summary.replace(/^["']|["']$/g, '').replace(/^Here's a.*?:\s*/i, '').substring(0, 200);
+
+                return `
+                <div class="story-card ${isSelected ? 'selected' : ''}" onclick="toggleStory(${idx})">
+                    <div class="story-check">${isSelected ? order : ''}</div>
+                    <div class="story-content">
+                        <div class="story-source">${source}</div>
+                        <div class="story-title">${title}</div>
+                        <div class="story-summary">${summary}...</div>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function toggleStory(idx) {
+            const pos = selectedStories.indexOf(idx);
+            if (pos !== -1) {
+                selectedStories.splice(pos, 1);
+            } else if (selectedStories.length < 3) {
+                selectedStories.push(idx);
+            }
+            renderStories();
+            updateSelectionCount();
+        }
+
+        function updateSelectionCount() {
+            const count = selectedStories.length;
+            document.getElementById('selection-count').innerHTML = `<strong>${count}</strong> of 3 stories selected`;
+            document.getElementById('btn-generate-fixed').disabled = count !== 3;
+        }
+
+        // ─── Collect News ───
+        async function collectNews() {
+            const status = document.getElementById('collect-status');
+            status.innerHTML = '<span class="spinner"></span> Collecting...';
+            try {
+                const res = await fetch('/api/collect-news', { method: 'POST' });
+                const data = await res.json();
+                if (data.success) {
+                    status.textContent = 'Done! Refreshing...';
+                    await loadNews();
+                    status.textContent = '';
+                } else {
+                    status.textContent = 'Error: ' + (data.error || 'Unknown');
+                    status.style.color = '#ff4444';
+                }
+            } catch (e) {
+                status.textContent = 'Error: ' + e.message;
+                status.style.color = '#ff4444';
+            }
+        }
+
+        // ─── Generate Scripts ───
+        async function generateScripts() {
+            if (selectedStories.length !== 3) return;
+
+            const btn = document.getElementById('btn-generate-fixed');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span> Generating 5 scripts...';
+
+            // Update steps
+            document.getElementById('step1').className = 'step done';
+            document.getElementById('step2').className = 'step active';
+
+            try {
+                const res = await fetch('/api/generate-scripts', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        date: selectedDate,
+                        stories: selectedStories
+                    })
+                });
+                const data = await res.json();
+
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                    btn.disabled = false;
+                    btn.textContent = 'Generate All 5 Scripts';
+                    return;
+                }
+
+                currentScripts = data.scripts;
+                currentEpisode = data.episode;
+
+                // Fill in scripts
+                document.getElementById('script-opening').value = data.scripts.opening || '';
+                document.getElementById('script-story1').value = data.scripts.story1 || '';
+                document.getElementById('script-story2').value = data.scripts.story2 || '';
+                document.getElementById('script-story3').value = data.scripts.story3 || '';
+                document.getElementById('script-closing').value = data.scripts.closing || '';
+
+                // Story titles
+                if (data.stories) {
+                    data.stories.forEach((s, i) => {
+                        const el = document.getElementById(`story${i+1}-title`);
+                        if (el) el.textContent = s.title;
+                    });
+                }
+
+                document.getElementById('ep-num').textContent = data.episode;
+
+                // Show scripts, hide stories
+                document.getElementById('news-section').style.display = 'none';
+                document.getElementById('scripts-section').style.display = 'block';
+                btn.style.display = 'none';
+                document.getElementById('btn-back').style.display = 'inline-block';
+                document.getElementById('btn-hostnotes').style.display = 'inline-block';
+                document.getElementById('btn-save').style.display = 'inline-block';
+                document.getElementById('selection-count').innerHTML = `<strong style="color:#0088ff;text-decoration:underline;">Episode ${data.episode}</strong> — click to view scripts`;
+
+                // Update word counts and duration
+                updateAllWordCounts();
+
+                // Update steps
+                document.getElementById('step2').className = 'step done';
+                document.getElementById('step3').className = 'step active';
+
+                if (data.errors && data.errors.length > 0) {
+                    alert('Some scripts had errors:\n' + data.errors.join('\n'));
+                }
+            } catch (e) {
+                alert('Error: ' + e.message);
+            }
+
+            btn.disabled = false;
+            btn.textContent = 'Generate All 5 Scripts';
+        }
+
+        // ─── Word counts and duration ───
+        function countWords(text) {
+            return text.trim().split(/\s+/).filter(w => w.length > 0).length;
+        }
+
+        function updateWordCount(key) {
+            const textarea = document.getElementById(`script-${key}`);
+            const wcEl = document.getElementById(`wc-${key}`);
+            const words = countWords(textarea.value);
+            wcEl.textContent = `${words} words`;
+
+            // HeyGen limit warning
+            if ((key === 'opening' || key === 'closing') && words > 270) {
+                wcEl.className = 'word-count over';
+                wcEl.textContent = `${words} words (over 270 limit!)`;
+            } else {
+                wcEl.className = 'word-count';
+            }
+        }
+
+        function updateAllWordCounts() {
+            ['opening', 'story1', 'story2', 'story3', 'closing'].forEach(key => {
+                updateWordCount(key);
+            });
+            updateDuration();
+        }
+
+        function updateDuration() {
+            // Rough estimate: 150 words per minute for spoken
+            let totalWords = 0;
+            ['opening', 'story1', 'story2', 'story3', 'closing'].forEach(key => {
+                const textarea = document.getElementById(`script-${key}`);
+                totalWords += countWords(textarea.value);
+            });
+            let totalSeconds = (totalWords / 150) * 60;
+
+            // Add bumper durations if checked
+            if (document.getElementById('bumper-intro').checked) totalSeconds += 5;
+            if (document.getElementById('bumper-credits').checked) totalSeconds += 12;
+
+            const mins = Math.floor(totalSeconds / 60);
+            const secs = Math.round(totalSeconds % 60);
+            document.getElementById('est-duration').textContent =
+                `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function toggleBumper(type) {
+            const cb = document.getElementById(`bumper-${type}`);
+            const toggle = document.getElementById(`bumper-${type}-toggle`);
+            // Let the checkbox handle its own state, just update the visual
+            setTimeout(() => {
+                toggle.classList.toggle('active', cb.checked);
+                updateDuration();
+            }, 0);
+        }
+
+        // Attach input listeners for word counts
+        document.addEventListener('DOMContentLoaded', () => {
+            ['opening', 'story1', 'story2', 'story3', 'closing'].forEach(key => {
+                const ta = document.getElementById(`script-${key}`);
+                ta.addEventListener('input', () => {
+                    updateWordCount(key);
+                    updateDuration();
+                });
+            });
+        });
+
+        // ─── Copy script to clipboard ───
+        function copyScript(key) {
+            const text = document.getElementById(`script-${key}`).value;
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Copied to clipboard!');
+            });
+        }
+
+        // ─── Regenerate a single script ───
+        async function regenerateScript(key) {
+            // For now, regenerate all and replace just this one
+            // TODO: add single-script regeneration endpoint
+            showToast('Regenerating... (use Ollama)');
+        }
+
+        // ─── Save Episode ───
+        async function saveEpisode() {
+            const btn = document.getElementById('btn-save');
+            btn.disabled = true;
+            btn.textContent = 'Saving...';
+
+            // Gather current textarea values (user may have edited)
+            const scripts = {
+                opening: document.getElementById('script-opening').value,
+                story1: document.getElementById('script-story1').value,
+                story2: document.getElementById('script-story2').value,
+                story3: document.getElementById('script-story3').value,
+                closing: document.getElementById('script-closing').value,
+            };
+
+            const dateData = newsData.find(d => d.date === selectedDate);
+            const stories = selectedStories.map(i => ({
+                title: dateData.stories[i].title,
+                source: dateData.stories[i].source,
+                link: dateData.stories[i].link
+            }));
+
+            try {
+                const res = await fetch('/api/save-episode', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        episode: currentEpisode,
+                        scripts,
+                        stories,
+                        date: selectedDate,
+                        include_intro_bumper: document.getElementById('bumper-intro').checked,
+                        include_credits_bumper: document.getElementById('bumper-credits').checked
+                    })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast(`Episode ${currentEpisode} saved to ${data.episode_dir}`);
+                    document.getElementById('step3').className = 'step done';
+                } else {
+                    alert('Save failed: ' + (data.error || 'Unknown'));
+                }
+            } catch (e) {
+                alert('Error: ' + e.message);
+            }
+
+            btn.disabled = false;
+            btn.textContent = 'Save Episode';
+        }
+
+        // ─── Back to stories ───
+        function goBack() {
+            document.getElementById('news-section').style.display = 'block';
+            document.getElementById('scripts-section').style.display = 'none';
+            document.getElementById('btn-generate-fixed').style.display = 'inline-block';
+            document.getElementById('btn-back').style.display = 'none';
+            document.getElementById('btn-save').style.display = 'none';
+            updateSelectionCount();
+
+            document.getElementById('step0').className = 'step done';
+            document.getElementById('step1').className = 'step active';
+            document.getElementById('step2').className = 'step';
+            document.getElementById('step3').className = 'step';
+        }
+
+        // ─── Back to home ───
+        function goHome() {
+            document.getElementById('create-section').style.display = 'block';
+            document.getElementById('news-section').style.display = 'none';
+            document.getElementById('scripts-section').style.display = 'none';
+            document.getElementById('btn-generate-fixed').style.display = 'inline-block';
+            document.getElementById('btn-back').style.display = 'none';
+            document.getElementById('btn-save').style.display = 'none';
+
+            document.getElementById('step0').className = 'step active';
+            document.getElementById('step1').className = 'step';
+            document.getElementById('step2').className = 'step';
+            document.getElementById('step3').className = 'step';
+
+            selectedStories = [];
+            currentScripts = null;
+            loadEpisodes();
+        }
+
+        // ─── Post Jobs ───
+        async function postJobs(epNum) {
+            if (!confirm(`Post 2 render jobs for Episode ${epNum}? ($1 each for workers)`)) return;
+            const res = await fetch('/api/jobs/create', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ episode: epNum })
+            });
+            const data = await res.json();
+            if (data.success) {
+                showToast(`2 jobs posted for EP${epNum}! Workers can claim them at /jobs`);
+            } else {
+                alert('Error: ' + (data.error || 'Unknown'));
+            }
+        }
+
+        // ─── Bottom bar episode click ───
+        function onSelectionCountClick() {
+            if (currentEpisode && currentScripts) {
+                // Already have scripts loaded — show them
+                document.getElementById('create-section').style.display = 'none';
+                document.getElementById('news-section').style.display = 'none';
+                document.getElementById('scripts-section').style.display = 'block';
+                document.getElementById('btn-back').style.display = 'inline-block';
+                document.getElementById('btn-hostnotes').style.display = 'inline-block';
+                document.getElementById('btn-save').style.display = 'inline-block';
+
+                document.getElementById('step0').className = 'step done';
+                document.getElementById('step1').className = 'step done';
+                document.getElementById('step2').className = 'step done';
+                document.getElementById('step3').className = 'step active';
+            } else if (currentEpisode) {
+                loadEpisode(currentEpisode);
+            }
+        }
+
+        // ─── Load Saved Episode ───
+        async function loadEpisode(epNum) {
+            try {
+                const res = await fetch(`/api/episodes/${epNum}/scripts`);
+                const data = await res.json();
+                if (data.error) {
+                    alert('Error loading episode: ' + data.error);
+                    return;
+                }
+
+                currentScripts = data.scripts;
+                currentEpisode = data.episode;
+                selectedDate = data.date;
+
+                // Fill in scripts
+                document.getElementById('script-opening').value = data.scripts.opening || '';
+                document.getElementById('script-story1').value = data.scripts.story1 || '';
+                document.getElementById('script-story2').value = data.scripts.story2 || '';
+                document.getElementById('script-story3').value = data.scripts.story3 || '';
+                document.getElementById('script-closing').value = data.scripts.closing || '';
+
+                // Story titles
+                if (data.stories) {
+                    data.stories.forEach((s, i) => {
+                        const el = document.getElementById(`story${i+1}-title`);
+                        if (el) el.textContent = s.title;
+                    });
+                }
+
+                // Bumper checkboxes
+                document.getElementById('bumper-intro').checked = data.include_intro_bumper !== false;
+                document.getElementById('bumper-credits').checked = data.include_credits_bumper !== false;
+                document.getElementById('bumper-intro-toggle').classList.toggle('active', data.include_intro_bumper !== false);
+                document.getElementById('bumper-credits-toggle').classList.toggle('active', data.include_credits_bumper !== false);
+
+                document.getElementById('ep-num').textContent = data.episode;
+                document.getElementById('status-text').textContent = `Episode ${data.episode} — ${data.date}`;
+
+                // Show scripts view
+                document.getElementById('create-section').style.display = 'none';
+                document.getElementById('news-section').style.display = 'none';
+                document.getElementById('scripts-section').style.display = 'block';
+                document.getElementById('btn-generate-fixed').style.display = 'none';
+                document.getElementById('btn-back').style.display = 'inline-block';
+                document.getElementById('btn-hostnotes').style.display = 'inline-block';
+                document.getElementById('btn-save').style.display = 'inline-block';
+                document.getElementById('selection-count').innerHTML = `<strong style="color:#0088ff;text-decoration:underline;">Episode ${data.episode}</strong> — click to view scripts`;
+
+                // Update steps
+                document.getElementById('step0').className = 'step done';
+                document.getElementById('step1').className = 'step done';
+                document.getElementById('step2').className = 'step done';
+                document.getElementById('step3').className = 'step active';
+
+                updateAllWordCounts();
+            } catch (e) {
+                alert('Error: ' + e.message);
+            }
+        }
+
+        // ─── Send to Production ───
+        async function sendToProduction() {
+            const btn = document.getElementById('send-to-production');
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+
+            // Build a summary of what's ready
+            let msg = 'AI Views and News — Production Ready\n\n';
+
+            if (currentScripts) {
+                // We're in script view — send current episode info
+                msg += `Episode ${currentEpisode || '?'} | ${selectedDate || 'today'}\n\n`;
+
+                const storyTitles = [];
+                for (let i = 1; i <= 3; i++) {
+                    const el = document.getElementById(`story${i}-title`);
+                    if (el && el.textContent !== '...') storyTitles.push(el.textContent);
+                }
+                if (storyTitles.length) {
+                    msg += 'STORIES:\n';
+                    storyTitles.forEach((t, i) => msg += `${i+1}. ${t}\n`);
+                    msg += '\n';
+                }
+
+                // Word counts
+                let totalWords = 0;
+                ['opening', 'story1', 'story2', 'story3', 'closing'].forEach(key => {
+                    const ta = document.getElementById(`script-${key}`);
+                    if (ta) totalWords += countWords(ta.value);
+                });
+                const estMin = Math.round(totalWords / 150);
+                msg += `SCRIPTS: 5 ready (${totalWords} words, ~${estMin} min)\n`;
+                msg += `BUMPERS: intro ${document.getElementById('bumper-intro')?.checked ? 'ON' : 'OFF'}, credits ${document.getElementById('bumper-credits')?.checked ? 'ON' : 'OFF'}\n\n`;
+            } else {
+                msg += 'Check the Show Runner for details.\n\n';
+            }
+
+            msg += 'NEXT STEPS:\n';
+            msg += '1. Copy 2 scripts to HeyGen\n';
+            msg += '2. Copy 3 scripts to Pictory\n';
+            msg += '3. Drop renders back, auto-stitch\n\n';
+            msg += 'https://showrunner.dmpgh.com';
+
+            try {
+                const res = await fetch('/api/notify', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type: 'production', message: msg })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    btn.textContent = 'Sent!';
+                    btn.classList.add('sent');
+                    showToast('Show notes sent to Doug!');
+                    setTimeout(() => {
+                        btn.textContent = 'Send show notes to production';
+                        btn.classList.remove('sent');
+                        btn.disabled = false;
+                    }, 3000);
+                } else {
+                    btn.textContent = 'Failed — try again';
+                    btn.disabled = false;
+                }
+            } catch (e) {
+                btn.textContent = 'Error — try again';
+                btn.disabled = false;
+            }
+        }
+
+        // ─── Doug Bug ───
+        let dougbugOpen = false;
+
+        function toggleDougBug() {
+            dougbugOpen = !dougbugOpen;
+            document.getElementById('dougbug-panel').style.display = dougbugOpen ? 'block' : 'none';
+            if (dougbugOpen) loadQueue();
+        }
+
+        async function notifyDoug(type) {
+            const btn = event.target;
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
+
+            try {
+                const res = await fetch('/api/notify', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('Doug has been notified!');
+                } else {
+                    showToast('Notification failed: ' + (data.error || 'Unknown'));
+                }
+            } catch (e) {
+                showToast('Error: ' + e.message);
+            }
+
+            btn.disabled = false;
+            btn.textContent = type === 'show_ready' ? 'Show Ready to Produce' : 'Stories Have Been Picked';
+        }
+
+        async function sendDougNote() {
+            const note = document.getElementById('dougbug-note').value.trim();
+            if (!note) return;
+
+            try {
+                const res = await fetch('/api/notify', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type: 'note', message: note })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('Note sent to Doug!');
+                    document.getElementById('dougbug-note').value = '';
+                } else {
+                    showToast('Failed: ' + (data.error || 'Unknown'));
+                }
+            } catch (e) {
+                showToast('Error: ' + e.message);
+            }
+        }
+
+        async function loadQueue() {
+            try {
+                const res = await fetch('/api/queue');
+                const data = await res.json();
+                const el = document.getElementById('dougbug-queue');
+                if (data.length === 0) {
+                    el.textContent = 'No items in queue';
+                } else {
+                    el.innerHTML = data.map(q =>
+                        `<div style="padding:4px 0;border-bottom:1px solid #1a1a2e;">
+                            <span style="color:#0088ff;">${q.type}</span>
+                            <span style="color:#555;margin-left:6px;">${q.time}</span>
+                            ${q.message ? `<div style="color:#aaa;margin-top:2px;">${q.message}</div>` : ''}
+                        </div>`
+                    ).join('');
+                    document.getElementById('dougbug-badge').style.display = 'flex';
+                }
+            } catch (e) {}
+        }
+
+        // ─── Episode Actions ───
+        function watchEpisode(epNum) {
+            const modal = document.getElementById('preview-modal');
+            const video = document.getElementById('preview-video');
+            video.src = `/api/episodes/${epNum}/video`;
+            modal.style.display = 'flex';
+            video.play();
+        }
+
+        function closePreview() {
+            const modal = document.getElementById('preview-modal');
+            const video = document.getElementById('preview-video');
+            modal.style.display = 'none';
+            video.pause();
+            video.src = '';
+        }
+
+        function downloadEpisode(epNum) {
+            window.location.href = `/api/episodes/${epNum}/download`;
+        }
+
+        function viewCryptNotes(epNum) {
+            window.open(`/api/episodes/${epNum}/crypt-notes`, '_blank');
+        }
+
+        // ─── Host Notes ───
+        function viewHostNotes(epNum) {
+            const ep = epNum || currentEpisode;
+            if (ep) {
+                window.open(`/api/host-notes/${ep}`, '_blank');
+            }
+        }
+
+        // ─── Helpers ───
+        function decodeEntities(str) {
+            const el = document.createElement('textarea');
+            el.innerHTML = str;
+            return el.value;
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // ─── Go ───
+        init();
+    </script>
+</body>
+</html>

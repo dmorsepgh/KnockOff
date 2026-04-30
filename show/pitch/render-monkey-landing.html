@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Render Monkey — Work From Home, No Experience Needed</title>
+<style>
+body { margin: 0; padding: 0; background: #0a0a14; color: #e0e0e0; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; }
+.hero {
+    background: linear-gradient(135deg, #0a0a14, #111122);
+    padding: 60px 32px 40px;
+    text-align: center;
+    border-bottom: 2px solid #22aa44;
+}
+.hero h1 { font-size: 36px; color: white; margin-bottom: 12px; }
+.hero h1 span { color: #22aa44; }
+.hero p { color: #888; font-size: 18px; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+
+.container { max-width: 700px; margin: 0 auto; padding: 32px 24px; }
+
+.section { margin-bottom: 40px; }
+.section h2 {
+    font-size: 22px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1e1e30;
+}
+.section h2.green { color: #22aa44; }
+.section h2.orange { color: #ff9800; }
+.section h2.blue { color: #0088ff; }
+
+.section p { color: #aaa; font-size: 15px; line-height: 1.7; margin-bottom: 14px; }
+.section strong { color: #e0e0e0; }
+
+.card {
+    background: #111122;
+    border: 1px solid #1e1e30;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+}
+
+.checklist { list-style: none; padding: 0; }
+.checklist li {
+    padding: 8px 0;
+    font-size: 14px;
+    color: #aaa;
+    border-bottom: 1px solid #1a1a2e;
+}
+.checklist li:last-child { border: none; }
+.checklist .yes::before { content: "✓ "; color: #22aa44; font-weight: 800; }
+.checklist .no::before { content: "✗ "; color: #cc2222; font-weight: 800; }
+
+.pay-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+.pay-card {
+    background: #111122;
+    border: 1px solid #1e1e30;
+    border-radius: 8px;
+    padding: 18px;
+    text-align: center;
+}
+.pay-card .amount { font-size: 28px; font-weight: 800; }
+.pay-card .role { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+.pay-card.green .amount { color: #22aa44; }
+.pay-card.orange .amount { color: #ff9800; }
+.pay-card.blue .amount { color: #0088ff; }
+
+.cta-box {
+    background: #0a1a0a;
+    border: 2px solid #22aa44;
+    border-radius: 10px;
+    padding: 28px;
+    text-align: center;
+    margin: 32px 0;
+}
+.cta-box h3 { color: #22aa44; font-size: 20px; margin-bottom: 8px; }
+.cta-box p { color: #888; font-size: 14px; margin-bottom: 18px; }
+.cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+}
+.btn-green { background: #22aa44; color: white; }
+.btn-green:hover { background: #28bb4c; }
+.btn-orange { background: #ff9800; color: white; }
+.btn-orange:hover { background: #ffaa22; }
+
+.steps {
+    display: flex;
+    gap: 16px;
+    margin: 20px 0;
+}
+.step {
+    flex: 1;
+    background: #111122;
+    border: 1px solid #1e1e30;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+}
+.step .num {
+    font-size: 28px;
+    font-weight: 800;
+    color: #22aa44;
+    margin-bottom: 6px;
+}
+.step .desc { font-size: 13px; color: #aaa; }
+
+.footer {
+    text-align: center;
+    padding: 32px;
+    color: #444;
+    font-size: 12px;
+    border-top: 1px solid #1e1e30;
+    margin-top: 40px;
+}
+.footer a { color: #0088ff; text-decoration: none; }
+
+@media (max-width: 600px) {
+    .pay-grid { grid-template-columns: 1fr; }
+    .steps { flex-direction: column; }
+    .cta-buttons { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+    <h1><span>Render Monkey</span></h1>
+    <p>Work from home. No experience needed. Earn money with a browser and a few clicks.</p>
+</div>
+
+<div class="container">
+
+    <div class="section">
+        <p>I built a platform that produces AI news shows for online communities. The scripts are written by AI. The editing is automated. The parts I need help with are simple — and I'm looking for two types of people.</p>
+
+        <div style="text-align:center;margin:24px 0;">
+            <video controls style="width:100%;max-width:600px;border-radius:10px;border:1px solid #1e1e30;">
+                <source src="/pitch/render-monkey-explainer.mp4" type="video/mp4">
+            </video>
+            <p style="font-size:12px;color:#555;margin-top:6px;">Watch: How Render Monkey Works</p>
+        </div>
+    </div>
+
+    <!-- RENDER RUNNERS -->
+    <div class="section">
+        <h2 class="green">Render Runners — $1 per job</h2>
+        <p>Copy a script, paste it into a video tool, click render, upload the finished file. That's the whole job. About 15-20 minutes. $1 each.</p>
+
+        <div class="steps">
+            <div class="step"><div class="num">1</div><div class="desc">Claim a job</div></div>
+            <div class="step"><div class="num">2</div><div class="desc">Copy the script</div></div>
+            <div class="step"><div class="num">3</div><div class="desc">Paste & render</div></div>
+            <div class="step"><div class="num">4</div><div class="desc">Upload & get paid</div></div>
+        </div>
+
+        <div class="card">
+            <ul class="checklist">
+                <li class="yes">A computer with a browser and internet — that's all you need</li>
+                <li class="yes">Practice mode so you can try before committing</li>
+                <li class="yes">Work on your own schedule</li>
+                <li class="no">No experience needed</li>
+                <li class="no">No special software</li>
+                <li class="no">No leaving your house</li>
+                <li class="no">No being on camera</li>
+            </ul>
+        </div>
+
+        <p>I built this specifically for people who want to earn extra income from home but can't do traditional work. Maybe you're disabled. Maybe you're between jobs. Maybe you just want something simple you can do from your couch. <strong>If you can copy and paste, you can do this.</strong></p>
+    </div>
+
+    <!-- SELLERS -->
+    <div class="section">
+        <h2 class="orange">Sellers — $2.50 per sale</h2>
+        <p>Like talking to people? Share a link, have a conversation, earn $2.50 on the first sale. Plus 11.3% recurring commission on every repeat purchase from that client — forever. No caps, no limits.</p>
+
+        <div class="card">
+            <ul class="checklist">
+                <li class="yes">Share the invite link in communities, groups, social media</li>
+                <li class="yes">Talk to people who run online communities</li>
+                <li class="yes">Your own dashboard to track referrals and earnings</li>
+                <li class="no">No sales experience needed</li>
+                <li class="no">No website needed</li>
+                <li class="no">No production work</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- THE MONEY -->
+    <div class="section">
+        <h2 class="blue">How the money works</h2>
+        <p>Every video sold brings in $5. Here's where it goes:</p>
+
+        <h3 style="color:#888;font-size:13px;margin-bottom:6px;">First Sale</h3>
+        <div class="pay-grid">
+            <div class="pay-card orange">
+                <div class="amount">$2.50</div>
+                <div class="role">Seller (50%)</div>
+            </div>
+            <div class="pay-card green">
+                <div class="amount">$1.00</div>
+                <div class="role">Render Runner</div>
+            </div>
+            <div class="pay-card blue">
+                <div class="amount">$1.50</div>
+                <div class="role">Production</div>
+            </div>
+        </div>
+
+        <h3 style="color:#888;font-size:13px;margin:12px 0 6px;">Every Recurring Sale (same client)</h3>
+        <div class="pay-grid">
+            <div class="pay-card orange">
+                <div class="amount">$0.57</div>
+                <div class="role">Seller (11.3%)</div>
+            </div>
+            <div class="pay-card green">
+                <div class="amount">$1.00</div>
+                <div class="role">Render Runner</div>
+            </div>
+            <div class="pay-card blue">
+                <div class="amount">$3.43</div>
+                <div class="role">Production</div>
+            </div>
+        </div>
+
+        <p>First sale pays big. Every sale after that keeps paying. Simple, transparent, forever.</p>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-box">
+        <h3>Ready to get started?</h3>
+        <p>Pick your role and jump in. No signup fees, no contracts.</p>
+        <div class="cta-buttons">
+            <a href="/jobs" class="btn btn-green">I want to render ($1/job)</a>
+            <a href="/seller" class="btn btn-orange">I want to sell ($2.50/sale)</a>
+        </div>
+    </div>
+
+    <div class="section" style="text-align:center;">
+        <p style="color:#555;font-size:13px;">Questions? Reach out at <a href="https://dmpgh.com" style="color:#0088ff;text-decoration:none;">dmpgh.com</a>. I'm Doug, and I'm happy to walk you through anything.</p>
+    </div>
+
+</div>
+
+<div class="footer">
+    <p>Render Monkey — A <a href="https://dmpgh.com">dmpgh.com</a> project</p>
+    <p style="margin-top:6px;"><a href="/">Show Runner</a> · <a href="/jobs">Job Board</a> · <a href="/seller">Seller Dashboard</a></p>
+</div>
+
+</body>
+</html>

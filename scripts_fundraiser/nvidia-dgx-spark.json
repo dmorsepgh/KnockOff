@@ -1,0 +1,76 @@
+{
+  "scene1_hook": "NVIDIA just shipped a supercomputer that fits in the palm of your hand. It is called the DGX Spark. It runs up to 200 billion parameter models. It has 128 gigabytes of unified memory. And it costs four thousand dollars. The question everybody had the moment they saw it was obvious. Can this tiny box actually replace a real AI server? The answer is complicated — and more interesting than you think.",
+  "keywords_scene1": [
+    "NVIDIA GPU chip technology close up",
+    "small computer palm hand technology",
+    "AI supercomputer desktop compact"
+  ],
+  "scene1_overlays": [
+    {"lines": "*NVIDIA DGX SPARK|AI IN YOUR HAND", "in": 0.5, "out": 4.0, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "200B parameter models", "sub": "Fits in your palm — $4,000", "in": 4.5, "out": 10.0},
+    {"style": "bullet", "head": "128 GB unified memory", "sub": "GB10 Grace Blackwell superchip", "in": 10.5, "out": 16.0}
+  ],
+
+  "scene2_problem": "The specs sound like science fiction. A 20-core ARM processor. A Blackwell GPU delivering one petaflop of AI compute. 128 gigabytes of unified memory shared between CPU and GPU. A 10 gigabit ethernet port. And for context — the original DGX1, the server Jensen Huang hand-delivered to Sam Altman to get ChatGPT started, is a refrigerator-sized rack. The Spark is not much bigger than a coffee cup. This is fifty years of progress in one object.",
+  "keywords_scene2": [
+    "GPU benchmark test computer performance",
+    "AI server rack data center computing",
+    "laptop desktop comparison technology specs"
+  ],
+  "scene2_overlays": [
+    {"lines": "*THE SPECS|GRACE BLACKWELL", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "1 petaflop AI compute", "sub": "20-core ARM · 128 GB unified memory", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "The original DGX1 filled a rack", "sub": "Spark is the size of a coffee cup", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene3_stakes": "The benchmark test was supposed to be the proof. The Spark — nicknamed Larry — ran against a custom dual RTX 4090 AI server nicknamed Terry. On Qwen 3.8 billion parameters, Terry ran 132 tokens per second. Larry ran 36. On image generation, Terry hit 11 iterations per second. Larry hit one. Terry won. Not close. NVIDIA had to sit down with the tester and explain what went wrong with the narrative — and what they told him changed the entire story.",
+  "keywords_scene3": [
+    "benchmark performance test speed comparison",
+    "dual GPU workstation high performance computing",
+    "AI inference speed tokens per second"
+  ],
+  "scene3_overlays": [
+    {"lines": "*THE BENCHMARK|LARRY VS TERRY", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Terry: 132 tokens/sec", "sub": "Larry: 36 tokens/sec", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Image gen: Terry 11 it/sec", "sub": "Larry: 1 it/sec", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "NVIDIA then explained everything", "sub": "The real story is not speed", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene4_solution": "Here is what NVIDIA said. Terry has two RTX 4090s, each with 24 gigabytes of VRAM. That is 48 gigabytes total. Terry is a sprinter. He is fast. But he can only carry 48 gigs. Larry has 128 gigabytes of unified memory — all of it available directly to the GPU. Terry cannot do that. The test had three AI models running simultaneously — a 12 billion parameter model, a 6 billion parameter coder, and a 4 billion parameter embedding model. That system used 89 gigabytes of memory. Terry cannot run that setup. Full stop. The Spark is not a speed machine. It is a multi-agent machine. If you are building AI pipelines that run multiple models at once, Terry does not exist for that task. Larry does.",
+  "keywords_scene4": [
+    "multi agent AI system workflow diagram",
+    "GPU memory VRAM unified computing",
+    "AI pipeline multiple models running"
+  ],
+  "scene4_overlays": [
+    {"lines": "*THE REAL|ADVANTAGE", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Terry: 48 GB VRAM (fast)", "sub": "Larry: 128 GB unified (capable)", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Multi-agent: 3 models = 89 GB", "sub": "Terry can't run that. Larry can.", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "Speed vs capacity", "sub": "They are not the same machine", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene5_ask": "The NVIDIA DGX Spark is not the fastest AI box on a desk. It is the most capable AI box in a backpack. If you need raw inference speed and you are running one model at a time, a dual 4090 system wins. If you are building multi-model pipelines, agent frameworks, or anything that needs more than 48 gigabytes of GPU memory — the Spark is the only desktop device that can do it. Four thousand dollars. 128 gigs. Fits in your palm. That is the machine. You decide if that is the one you need.",
+  "keywords_scene5": [
+    "AI developer laptop backpack portable computing",
+    "technology innovation future computing device",
+    "desktop AI workstation professional setup"
+  ],
+
+  "tagline": "It is not the fastest. It is the most capable. Those are not the same thing.",
+  "rolling_credits": [
+    {"header": "NVIDIA DGX SPARK"},
+    {"lines": [
+      "Device: NVIDIA DGX Spark",
+      "Chip: GB10 Grace Blackwell Superchip",
+      "CPU: 20-core ARM processor",
+      "GPU Memory: 128 GB unified LP DDR5X",
+      "AI Compute: 1 petaflop",
+      "Max model size: 200 billion parameters",
+      "Price: ~$4,000 (launches Oct 15)",
+      "Comparison: Dual RTX 4090 AI Server",
+      "RTX 4090 VRAM: 24 GB each (48 GB total)",
+      "Source: youtube.com/watch?v=FYL9e_aqZY0",
+      "Produced by Song Juicer — dmpgh.com"
+    ]}
+  ]
+}

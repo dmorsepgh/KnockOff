@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Render Monkey — Gig Board</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0a0a14; color: #e0e0e0; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; min-height: 100vh; }
+
+        .topbar {
+            background: #111122;
+            border-bottom: 2px solid #22aa44;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .topbar .logo { font-size: 20px; font-weight: 800; }
+        .topbar .logo .ai { color: #22aa44; }
+        .topbar .logo .rest { color: #fff; font-weight: 300; }
+        .topbar .back { color: #888; font-size: 13px; text-decoration: none; }
+        .topbar .back:hover { color: #0088ff; }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 24px; }
+
+        .intro {
+            background: #111122;
+            border: 1px solid #1e1e30;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+        .intro h2 { color: #22aa44; margin-bottom: 8px; font-size: 16px; }
+        .intro p { font-size: 14px; color: #999; margin-bottom: 8px; }
+        .intro strong { color: #e0e0e0; }
+
+        .worker-name {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .worker-name input {
+            flex: 1;
+            padding: 10px 14px;
+            background: #111122;
+            border: 1px solid #2a2a3e;
+            border-radius: 6px;
+            color: #e0e0e0;
+            font-size: 14px;
+        }
+        .worker-name input:focus { outline: none; border-color: #22aa44; }
+
+        .job-card {
+            background: #111122;
+            border: 1px solid #1e1e30;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+        .job-card.available { border-left: 4px solid #22aa44; }
+        .job-card.claimed { border-left: 4px solid #ff9800; }
+        .job-card.complete, .job-card.approved { border-left: 4px solid #4488ff; opacity: 0.7; }
+        .job-card.pending_review { border-left: 4px solid #ff9800; }
+
+        .job-header {
+            display: flex;
+            align-items: center;
+            padding: 14px 18px;
+            background: #0d0d1a;
+            gap: 12px;
+        }
+        .job-type {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        .job-type.heygen { background: #ff6600; color: white; }
+        .job-type.pictory { background: #aa44ff; color: white; }
+        .job-title { font-size: 15px; font-weight: 600; flex: 1; }
+        .job-pay { font-size: 18px; font-weight: 800; color: #22aa44; }
+        .job-status {
+            font-size: 11px;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        .job-status.available { background: #0a2a0a; color: #22aa44; }
+        .job-status.claimed { background: #2a1a00; color: #ff9800; }
+        .job-status.complete, .job-status.approved { background: #0a1a33; color: #4488ff; }
+        .job-status.pending_review { background: #332a00; color: #ff9800; }
+
+        .job-body { padding: 18px; }
+        .job-desc { font-size: 13px; color: #888; margin-bottom: 14px; }
+
+        .job-timer {
+            font-family: 'SF Mono', Menlo, monospace;
+            font-size: 16px;
+            color: #ff9800;
+            margin-bottom: 12px;
+        }
+        .job-timer.urgent { color: #ff4444; }
+
+        .script-block {
+            background: #0a0a14;
+            border: 1px solid #1e1e30;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+        .script-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #0088ff;
+            margin-bottom: 6px;
+        }
+        .script-text {
+            font-size: 13px;
+            color: #ccc;
+            line-height: 1.6;
+            max-height: 150px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        .script-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .upload-zone {
+            border: 2px dashed #2a2a3e;
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+            color: #555;
+            margin: 12px 0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .upload-zone:hover { border-color: #22aa44; color: #22aa44; }
+        .upload-zone.dragover { border-color: #22aa44; background: #0a1a0a; color: #22aa44; }
+        .upload-zone input { display: none; }
+
+        .upload-progress {
+            font-size: 13px;
+            color: #22aa44;
+            margin: 8px 0;
+        }
+
+        .btn {
+            padding: 8px 18px;
+            border: none;
+            border-radius: 5px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .btn-green { background: #22aa44; color: white; }
+        .btn-green:hover { background: #28bb4c; }
+        .btn-green:disabled { background: #1a2a1a; color: #444; cursor: not-allowed; }
+        .btn-orange { background: #ff9800; color: white; }
+        .btn-orange:hover { background: #ffaa22; }
+        .btn-small { padding: 4px 10px; font-size: 11px; }
+        .btn-secondary { background: #1a1a2e; color: #ccc; border: 1px solid #2a2a3e; }
+
+        .empty { text-align: center; padding: 40px; color: #444; font-size: 14px; }
+
+        .toast {
+            position: fixed; bottom: 24px; right: 24px;
+            background: #22aa44; color: white;
+            padding: 10px 20px; border-radius: 6px;
+            font-size: 13px; font-weight: 600;
+            transform: translateY(20px); opacity: 0;
+            transition: all 0.3s; z-index: 200;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <div class="logo">
+            <span class="ai">Render</span> <span class="rest">Monkey</span>
+            <span style="font-weight:300;color:#555;font-size:14px;margin-left:8px;">Gig Board for Render Runners</span>
+        </div>
+        <a href="/" class="back">← Show Runner</a>
+    </div>
+
+    <div class="container">
+        <div class="intro">
+            <h2>How it works</h2>
+            <p><strong>1.</strong> Enter your name below</p>
+            <p><strong>2.</strong> Claim an available job — you have <strong>1 hour</strong> to complete it</p>
+            <p><strong>3.</strong> Copy each script, paste into HeyGen or Pictory, render, download the MP4</p>
+            <p><strong>4.</strong> Upload the finished MP4s here — <strong>$1 per job</strong> when complete</p>
+        </div>
+
+        <div id="register-form" style="background:#111122;border:1px solid #1e1e30;border-radius:8px;padding:18px;margin-bottom:20px;">
+            <h3 style="color:#22aa44;font-size:14px;margin-bottom:12px;">Register as a Render Runner</h3>
+            <div style="display:flex;gap:10px;margin-bottom:10px;">
+                <input type="text" id="worker-name" placeholder="Your name" style="flex:1;padding:10px;background:#0a0a14;border:1px solid #2a2a3e;border-radius:6px;color:#e0e0e0;font-size:14px;" />
+                <input type="tel" id="worker-phone" placeholder="Phone (for job alerts)" style="flex:1;padding:10px;background:#0a0a14;border:1px solid #2a2a3e;border-radius:6px;color:#e0e0e0;font-size:14px;" />
+            </div>
+            <div style="display:flex;gap:10px;margin-bottom:10px;align-items:center;">
+                <select id="worker-pay-method" style="padding:10px;background:#0a0a14;border:1px solid #2a2a3e;border-radius:6px;color:#e0e0e0;font-size:14px;min-width:140px;">
+                    <option value="">Payment method</option>
+                    <option value="venmo">Venmo</option>
+                    <option value="cashapp">Cash App</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="applepay">Apple Pay</option>
+                </select>
+                <input type="text" id="worker-pay-handle" placeholder="@handle, $tag, email, or phone" style="flex:1;padding:10px;background:#0a0a14;border:1px solid #2a2a3e;border-radius:6px;color:#e0e0e0;font-size:14px;" />
+            </div>
+            <button class="btn btn-green" style="width:100%;padding:12px;" onclick="registerWorker()">Register</button>
+        </div>
+        <div id="worker-status" style="display:none;margin-bottom:20px;padding:12px 16px;background:#0a1a0a;border:1px solid #1a3a1a;border-radius:6px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+                <div>
+                    <span style="color:#22aa44;font-weight:600;" id="worker-greeting"></span>
+                    <span id="worker-stars" style="margin-left:8px;"></span>
+                </div>
+                <button class="btn btn-small btn-secondary" onclick="showEarnings()">My Earnings</button>
+            </div>
+            <div id="earnings-panel" style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid #1a3a1a;">
+                <div style="display:flex;gap:20px;margin-bottom:10px;">
+                    <div><span style="color:#666;font-size:11px;">EARNED</span><br><span style="color:#22aa44;font-size:20px;font-weight:800;" id="earn-total">$0.00</span></div>
+                    <div><span style="color:#666;font-size:11px;">PAID</span><br><span style="color:#0088ff;font-size:20px;font-weight:800;" id="earn-paid">$0.00</span></div>
+                    <div><span style="color:#666;font-size:11px;">BALANCE</span><br><span style="color:#ff9800;font-size:20px;font-weight:800;" id="earn-balance">$0.00</span></div>
+                    <div><span style="color:#666;font-size:11px;">JOBS</span><br><span style="color:#e0e0e0;font-size:20px;font-weight:800;" id="earn-jobs">0</span></div>
+                </div>
+                <div id="earn-history" style="font-size:12px;color:#888;"></div>
+            </div>
+        </div>
+
+        <!-- Practice Section -->
+        <div style="background:#0a1a0a;border:1px solid #1a3a1a;border-radius:8px;padding:18px;margin-bottom:24px;">
+            <h3 style="color:#22aa44;font-size:14px;margin-bottom:8px;">New here? Try a practice render first</h3>
+            <div style="margin-bottom:12px;">
+                <video controls style="width:100%;max-width:480px;border-radius:8px;border:1px solid #1a3a1a;">
+                    <source src="/pitch/onboarding-guide.mp4" type="video/mp4">
+                </video>
+            </div>
+            <p style="font-size:13px;color:#888;margin-bottom:12px;">Watch the guide above, then try a practice render:</p>
+            <div id="qualification-status" style="margin-bottom:10px;font-size:13px;"></div>
+            <div style="display:flex;gap:10px;">
+                <button class="btn btn-green btn-small" data-practice="heygen" onclick="showPractice('heygen')">Practice HeyGen</button>
+                <button class="btn btn-green btn-small" data-practice="pictory" onclick="showPractice('pictory')">Practice Pictory</button>
+            </div>
+            <div id="practice-area" style="display:none;margin-top:14px;">
+                <div class="script-block">
+                    <div class="script-label" id="practice-label">Practice Script</div>
+                    <div class="script-text" id="practice-text"></div>
+                    <div class="script-actions" style="margin-top:8px;">
+                        <button class="btn btn-small btn-secondary" onclick="copyPractice()">Copy Script</button>
+                        <a id="practice-tool-link" href="#" target="_blank" class="btn btn-small btn-green" style="text-decoration:none;">Open Tool</a>
+                    </div>
+                </div>
+                <p style="font-size:12px;color:#666;margin-top:8px;">Copy the script, click Open Tool, paste it in, and hit render. When done, upload the MP4 below to prove you completed it.</p>
+                <div style="margin-top:10px;border:2px dashed #1a3a1a;border-radius:8px;padding:16px;text-align:center;cursor:pointer;" onclick="document.getElementById('practice-file').click()">
+                    <span style="color:#22aa44;">Upload your practice render (MP4)</span>
+                    <input type="file" id="practice-file" accept=".mp4" style="display:none;" onchange="uploadPractice()" />
+                </div>
+                <div id="practice-upload-status" style="font-size:12px;color:#22aa44;margin-top:6px;"></div>
+            </div>
+        </div>
+
+        <div id="locked-message" style="text-align:center;padding:30px;color:#666;font-size:14px;background:#111122;border:1px solid #1e1e30;border-radius:8px;margin-bottom:20px;">
+            Complete both practice renders above to unlock real paid jobs.
+        </div>
+
+        <div id="real-jobs-section" style="display:none;">
+        <h3 style="color:#e0e0e0;margin-bottom:14px;">Available Jobs</h3>
+        </div>
+        <div id="jobs-container">
+            <div class="empty">Loading jobs...</div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        let jobs = [];
+        let timers = {};
+
+        async function loadJobs() {
+            const res = await fetch('/api/jobs');
+            jobs = await res.json();
+            renderJobs();
+        }
+
+        function renderJobs() {
+            const container = document.getElementById('jobs-container');
+            if (jobs.length === 0) {
+                container.innerHTML = '<div class="empty">No jobs posted yet. Check back soon.</div>';
+                return;
+            }
+
+            container.innerHTML = jobs.map(job => {
+                // Combine all scripts into one block with a single copy button
+                const allText = (job.scripts || []).map(s => s.text).join('\n\n---\n\n');
+                const scriptLabel = job.type === 'heygen'
+                    ? 'Full HeyGen Script (Opening + Closing)'
+                    : 'Full Pictory Script (All 3 Stories)';
+                const toolUrl = job.type === 'heygen' ? 'https://app.heygen.com/video-agent' : 'https://app.pictory.ai/textinput';
+                const toolName = job.type === 'heygen' ? 'Open HeyGen' : 'Open Pictory';
+                const toolColor = job.type === 'heygen' ? '#ff6600' : '#aa44ff';
+                const scripts = `
+                    <div class="script-block">
+                        <div class="script-label">${scriptLabel}</div>
+                        <div class="script-text">${escapeHtml(allText)}</div>
+                        <div class="script-actions">
+                            <button class="btn btn-small btn-secondary" onclick="copyAllScripts('${job.id}')">Copy Full Script</button>
+                            <a href="${toolUrl}" target="_blank" class="btn btn-small" style="background:${toolColor};color:white;text-decoration:none;">${toolName}</a>
+                        </div>
+                    </div>
+                `;
+
+                const uploaded = job.uploaded_files || [];
+                const uploadStatus = uploaded.length > 0
+                    ? `<div class="upload-progress">${uploaded.length} of ${job.expected_files} files uploaded</div>`
+                    : '';
+
+                let actions = '';
+                if (job.status === 'available') {
+                    actions = `<button class="btn btn-green" onclick="claimJob('${job.id}')">Claim This Job — $${job.pay.toFixed(2)}</button>`;
+                } else if (job.status === 'claimed') {
+                    actions = `
+                        <div class="job-timer" id="timer-${job.id}"></div>
+                        ${scripts}
+                        ${uploadStatus}
+                        <div class="upload-zone" id="drop-${job.id}"
+                             onclick="document.getElementById('file-${job.id}').click()"
+                             ondragover="event.preventDefault();this.classList.add('dragover')"
+                             ondragleave="this.classList.remove('dragover')"
+                             ondrop="handleDrop(event, '${job.id}')">
+                            Drop MP4 files here or click to upload
+                            <input type="file" id="file-${job.id}" accept=".mp4" multiple onchange="handleFileSelect(event, '${job.id}')" />
+                        </div>
+                        <div style="display:flex;gap:8px;margin-top:8px;">
+                            <button class="btn btn-orange btn-small" onclick="releaseJob('${job.id}')">Release Job</button>
+                        </div>
+                    `;
+                    // Start timer
+                    startTimer(job);
+                } else if (job.status === 'pending_review') {
+                    actions = `<div style="color:#ff9800;font-weight:600;font-size:14px;">Uploaded — Waiting for Doug to review and approve</div>`;
+                } else if (job.status === 'approved') {
+                    actions = `<div style="color:#4488ff;font-weight:600;font-size:14px;">Approved — $${job.pay.toFixed(2)} earned</div>`;
+                }
+
+                return `
+                <div class="job-card ${job.status}">
+                    <div class="job-header">
+                        <span class="job-type ${job.type}">${job.type}</span>
+                        <span class="job-title">${job.title}</span>
+                        <span class="job-pay">$${job.pay.toFixed(2)}</span>
+                        <span class="job-status ${job.status}">${job.status.toUpperCase()}</span>
+                    </div>
+                    <div class="job-body">
+                        <div class="job-desc">${job.description}</div>
+                        ${job.status === 'available' ? `<div style="color:#555;font-size:12px;margin-bottom:12px;">1 script · 1 render needed</div>` : ''}
+                        ${actions}
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function startTimer(job) {
+            if (timers[job.id]) clearInterval(timers[job.id]);
+            const claimed = new Date(job.claimed_at).getTime();
+            const deadline = claimed + (3600 * 1000);
+
+            timers[job.id] = setInterval(() => {
+                const now = Date.now();
+                const remaining = Math.max(0, deadline - now);
+                const mins = Math.floor(remaining / 60000);
+                const secs = Math.floor((remaining % 60000) / 1000);
+                const el = document.getElementById(`timer-${job.id}`);
+                if (el) {
+                    el.textContent = `Time remaining: ${mins}:${secs.toString().padStart(2, '0')}`;
+                    el.className = remaining < 600000 ? 'job-timer urgent' : 'job-timer';
+                }
+                if (remaining <= 0) {
+                    clearInterval(timers[job.id]);
+                    loadJobs(); // Refresh — server will expire it
+                }
+            }, 1000);
+        }
+
+        let registeredName = '';
+        let workerId = '';
+        let qualified = false;
+        let practiceHeygen = false;
+        let practicePictory = false;
+
+        async function registerWorker() {
+            const name = document.getElementById('worker-name').value.trim();
+            const phone = document.getElementById('worker-phone').value.trim();
+            if (!name) { alert('Enter your name'); return; }
+
+            const payMethod = document.getElementById('worker-pay-method').value;
+            const payHandle = document.getElementById('worker-pay-handle').value.trim();
+
+            if (!payMethod || !payHandle) {
+                alert('Select a payment method and enter your handle so we can pay you');
+                return;
+            }
+
+            const res = await fetch('/api/workers/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, phone, payment_method: payMethod, payment_handle: payHandle })
+            });
+            const data = await res.json();
+            if (data.success) {
+                registeredName = name;
+                workerId = data.worker.id;
+                practiceHeygen = data.worker.practice_heygen || false;
+                practicePictory = data.worker.practice_pictory || false;
+                qualified = data.worker.qualified || false;
+
+                document.getElementById('register-form').style.display = 'none';
+                document.getElementById('worker-status').style.display = 'block';
+                const rating = data.worker.star_rating || 3;
+                document.getElementById('worker-greeting').textContent = `Welcome, ${name}!`;
+                document.getElementById('worker-stars').textContent = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+                document.getElementById('worker-stars').style.color = '#ff9800';
+
+                updatePracticeStatus();
+                showToast(phone ? 'Registered! You\'ll get texts when jobs drop.' : 'Registered! Add a phone number to get job alerts.');
+            }
+        }
+
+        function updatePracticeStatus() {
+            // Update practice button states
+            const hBtn = document.querySelector('[data-practice="heygen"]');
+            const pBtn = document.querySelector('[data-practice="pictory"]');
+            if (hBtn) {
+                if (practiceHeygen) {
+                    hBtn.textContent = '✓ HeyGen Complete';
+                    hBtn.style.background = '#1a3a1a';
+                    hBtn.style.color = '#22aa44';
+                    hBtn.style.border = '1px solid #22aa44';
+                    hBtn.disabled = true;
+                }
+            }
+            if (pBtn) {
+                if (practicePictory) {
+                    pBtn.textContent = '✓ Pictory Complete';
+                    pBtn.style.background = '#1a3a1a';
+                    pBtn.style.color = '#22aa44';
+                    pBtn.style.border = '1px solid #22aa44';
+                    pBtn.disabled = true;
+                }
+            }
+
+            // Show/hide qualification status
+            const qEl = document.getElementById('qualification-status');
+            if (qEl) {
+                if (qualified) {
+                    qEl.innerHTML = '<span style="color:#22aa44;font-weight:700;">✓ Qualified — You can claim real jobs below</span>';
+                } else {
+                    const missing = [];
+                    if (!practiceHeygen) missing.push('HeyGen');
+                    if (!practicePictory) missing.push('Pictory');
+                    qEl.innerHTML = `<span style="color:#ff9800;">Complete ${missing.join(' and ')} practice to unlock real jobs</span>`;
+                }
+            }
+
+            // Show/hide real jobs
+            document.getElementById('real-jobs-section').style.display = qualified ? 'block' : 'none';
+            document.getElementById('locked-message').style.display = qualified ? 'none' : 'block';
+        }
+
+        async function uploadPractice() {
+            if (!workerId || !currentPracticeType) { alert('Register first'); return; }
+
+            const fileInput = document.getElementById('practice-file');
+            const file = fileInput.files[0];
+            if (!file) return;
+
+            const status = document.getElementById('practice-upload-status');
+            status.textContent = 'Uploading...';
+
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('type', currentPracticeType);
+
+            try {
+                const res = await fetch(`/api/workers/${workerId}/practice-upload`, {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await res.json();
+                if (data.success) {
+                    practiceHeygen = data.practice_heygen;
+                    practicePictory = data.practice_pictory;
+                    qualified = data.qualified;
+                    updatePracticeStatus();
+                    status.textContent = '';
+                    const label = currentPracticeType === 'heygen' ? 'HeyGen' : 'Pictory';
+                    showToast(`${label} practice verified!${qualified ? ' You can now claim real jobs!' : ''}`);
+                } else {
+                    status.textContent = 'Upload failed: ' + (data.error || 'Unknown');
+                }
+            } catch (e) {
+                status.textContent = 'Error: ' + e.message;
+            }
+            fileInput.value = '';
+        }
+
+        async function claimJob(jobId) {
+            const name = registeredName || document.getElementById('worker-name').value.trim();
+            if (!name) {
+                alert('Register first');
+                return;
+            }
+
+            const res = await fetch(`/api/jobs/${jobId}/claim`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name })
+            });
+            const data = await res.json();
+            if (data.success) {
+                showToast(`Job claimed! You have ${data.timeout_minutes} minutes.`);
+                loadJobs();
+            } else {
+                alert('Could not claim: ' + (data.error || 'Unknown error'));
+            }
+        }
+
+        async function releaseJob(jobId) {
+            if (!confirm('Release this job? It will go back on the board.')) return;
+            await fetch(`/api/jobs/${jobId}/release`, { method: 'POST' });
+            loadJobs();
+        }
+
+        function copyAllScripts(jobId) {
+            const job = jobs.find(j => j.id === jobId);
+            if (job) {
+                const allText = job.scripts.map(s => s.text).join('\n\n');
+                navigator.clipboard.writeText(allText).then(() => {
+                    showToast('Full script copied!');
+                });
+            }
+        }
+
+        async function handleDrop(event, jobId) {
+            event.preventDefault();
+            event.target.classList.remove('dragover');
+            const files = event.dataTransfer.files;
+            for (const file of files) {
+                if (file.name.endsWith('.mp4')) {
+                    await uploadFile(jobId, file);
+                }
+            }
+        }
+
+        async function handleFileSelect(event, jobId) {
+            const files = event.target.files;
+            for (const file of files) {
+                if (file.name.endsWith('.mp4')) {
+                    await uploadFile(jobId, file);
+                }
+            }
+        }
+
+        async function uploadFile(jobId, file) {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            showToast(`Uploading ${file.name}...`);
+
+            const res = await fetch(`/api/jobs/${jobId}/upload`, {
+                method: 'POST',
+                body: formData
+            });
+            const data = await res.json();
+
+            if (data.success) {
+                if (data.complete) {
+                    showToast('All files uploaded! Job complete — $1.00 earned!');
+                } else {
+                    showToast(`Uploaded ${data.uploaded} of ${data.expected}`);
+                }
+                loadJobs();
+            } else {
+                alert('Upload failed: ' + (data.error || 'Unknown'));
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Practice scripts
+        const practiceScripts = {
+            heygen: `PRACTICE RENDER — HEYGEN
+
+Welcome to Render Monkey. This is your HeyGen practice run. Here's exactly what to do.
+
+STEP 1: Click the "Open HeyGen" button above. It will open HeyGen Video Agent in a new tab.
+
+STEP 2: You should see a text box. Paste this entire script into that box.
+
+STEP 3: HeyGen will pick an avatar and voice for you. On real jobs, we'll tell you which avatar to use. For practice, any avatar works.
+
+STEP 4: Click Generate or Create. HeyGen will start rendering your video. This usually takes 2-5 minutes.
+
+STEP 5: When the video is finished, click Download to save the MP4 to your computer.
+
+That's it. On real jobs, you would upload the MP4 back to the job board. For this practice, just make sure you can see the finished video play on your computer.
+
+If you completed all five steps successfully, come back here and click "I Completed This Practice" to mark HeyGen as done.
+
+TIP: On real jobs, you'll get two scripts — an opening and a closing — and combine them into one HeyGen video. Same process, just more text.
+
+Welcome to the team.`,
+
+            pictory: `PRACTICE RENDER — PICTORY
+
+Welcome to Render Monkey. This is your Pictory practice run. Here's exactly what to do.
+
+STEP 1: Click the "Open Pictory" button above. It will open Pictory in a new tab.
+
+STEP 2: You should see a text input area. Select "Script to Video" if prompted. Paste this entire script into the text area.
+
+STEP 3: Click Proceed or Generate. Pictory will automatically match stock video footage to your script. Each paragraph becomes a scene.
+
+STEP 4: You can preview the video Pictory created. The visuals are auto-selected — you don't need to change anything for practice.
+
+STEP 5: Click Generate Video or Download to render and save the final MP4 to your computer.
+
+That's it. On real jobs, you would upload the MP4 back to the job board. For this practice, just make sure you can see the finished video play on your computer.
+
+If you completed all five steps successfully, come back here and click "I Completed This Practice" to mark Pictory as done.
+
+TIP: On real jobs, you'll get three news story scripts combined into one Pictory video. Same process, just more scenes.
+
+Once both HeyGen and Pictory practices are complete, you'll be qualified to claim paid jobs. Welcome to the team.`
+        };
+
+        let currentPracticeType = '';
+
+        function showPractice(type) {
+            if (!workerId) { alert('Register with your name first'); return; }
+            currentPracticeType = type;
+            document.getElementById('practice-area').style.display = 'block';
+            document.getElementById('practice-label').textContent = type === 'heygen' ? 'Practice HeyGen Script' : 'Practice Pictory Script';
+            document.getElementById('practice-text').textContent = practiceScripts[type];
+            const link = document.getElementById('practice-tool-link');
+            if (type === 'heygen') {
+                link.href = 'https://app.heygen.com/video-agent';
+                link.textContent = 'Open HeyGen';
+                link.style.background = '#ff6600';
+            } else {
+                link.href = 'https://app.pictory.ai/textinput';
+                link.textContent = 'Open Pictory';
+                link.style.background = '#aa44ff';
+            }
+        }
+
+        function copyPractice() {
+            const text = document.getElementById('practice-text').textContent;
+            navigator.clipboard.writeText(text).then(() => showToast('Practice script copied!'));
+        }
+
+        async function showEarnings() {
+            const panel = document.getElementById('earnings-panel');
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
+                return;
+            }
+            if (!workerId) return;
+
+            try {
+                const res = await fetch(`/api/workers/${workerId}/earnings`);
+                const data = await res.json();
+                document.getElementById('earn-total').textContent = `$${data.total_earned.toFixed(2)}`;
+                document.getElementById('earn-paid').textContent = `$${data.total_paid.toFixed(2)}`;
+                document.getElementById('earn-balance').textContent = `$${data.balance.toFixed(2)}`;
+                document.getElementById('earn-jobs').textContent = data.jobs_completed;
+
+                if (data.history.length > 0) {
+                    document.getElementById('earn-history').innerHTML = data.history.map(h =>
+                        `<div style="padding:4px 0;border-bottom:1px solid #1a2a1a;">${h.job} — <span style="color:#22aa44;">+$${h.pay.toFixed(2)}</span> <span style="color:#555;">${h.completed ? h.completed.split('T')[0] : ''}</span></div>`
+                    ).join('');
+                } else {
+                    document.getElementById('earn-history').textContent = 'No completed jobs yet.';
+                }
+
+                panel.style.display = 'block';
+            } catch (e) {}
+        }
+
+        // Poll for updates every 30 seconds
+        setInterval(loadJobs, 30000);
+        loadJobs();
+    </script>
+</body>
+</html>

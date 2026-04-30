@@ -32,7 +32,61 @@ cloud_config.json
 
 # Additional venvs
 .venv-tts/
+.venv-voice/
+
+# Showrunner runtime data
+showrunner/shows/
+showrunner/__pycache__/
+
+# Output videos
+output/
+
+# Avatar pickle files
+avatars/*.pkl
 
 # Logs and generated comparisons
 logs/
 comparisons/
+
+# Secrets
+.env
+
+# Generated output
+fundraisers/
+reaction_library/
+show/ep*/
+news/
+vending/
+logs/
+
+# Large generated/reference directories
+reactions/
+jellybean_assets/
+studio_tour/
+animations/
+_news_images/
+news_segments/
+comedy/
+
+# Large avatar videos
+avatars/*.webm
+avatars/*.mov
+
+# Voice reference audio
+voices/
+
+# Music subdirectories (large)
+music/fundraiser/
+music/jellybean/
+music/**/*.m4a
+music/*.m4a
+music/news-sting.m4a
+
+# Temp files
+daily_recap_*.mp3
+overlays/*.bak
+show/heygen-test.mp4
+show/story_template_v1/
+
+# Avatar audio samples
+avatars/*.wav

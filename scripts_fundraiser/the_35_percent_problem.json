@@ -1,0 +1,75 @@
+{
+  "scene1_hook": "Here is a number nobody talks about. An AI that is right ninety percent of the time sounds pretty good. Chain that AI across ten steps — one output feeding the next — and by the end it is only right thirty-five percent of the time. That is not a bug. That is the math. And every time you ask it to do something complex, that math is running in the background.",
+  "keywords_scene1": [
+    "calculator math numbers dramatic statistics",
+    "chain reaction dominos falling cascade effect",
+    "AI computer brain thinking processing error"
+  ],
+  "scene1_overlays": [
+    {"lines": "*90% ACCURATE|35% RELIABLE", "in": 0.5, "out": 4.0, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "90% accurate sounds great.", "sub": "Chain it across 10 steps — now it's 35%.", "in": 4.5, "out": 10.0},
+    {"style": "bullet", "head": "Not a bug.", "sub": "The math. Every time.", "in": 10.5, "out": 16.0}
+  ],
+
+  "scene2_problem": "It gets worse in long conversations. The model starts losing track of what you told it early on. A wrong assumption at minute two becomes the foundation for everything at minute twenty. And here is the part that will bother you. Newer, bigger models make this worse. ChatGPT four-o is nine times more likely to drop key details than older versions. The bigger the model, the wider the gap.",
+  "keywords_scene2": [
+    "conversation going wrong misunderstanding error building",
+    "foundation crumbling building on sand unstable",
+    "chatbot AI screen scrolling losing track context"
+  ],
+  "scene2_overlays": [
+    {"lines": "*THE LONGER|YOU TALK TO IT", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Wrong at minute 2 = wrong foundation at minute 20.", "sub": "Every answer builds on the last one.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Bigger models make this worse.", "sub": "ChatGPT-4o drops key details 9× more than older versions.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene3_stakes": "Researchers at MIT, Harvard, and Cambridge confirmed it. Ninety-one percent of AI models degrade over time. And here is what makes it dangerous. The gap between best case and worst case keeps widening the longer you go. A one percent error at the start can become near-certainty of a wrong answer by the end. They call it the widening angle. Once you see it, you cannot unsee it.",
+  "keywords_scene3": [
+    "graph chart widening gap growing error diverging lines",
+    "MIT Harvard research university laboratory science",
+    "tunnel getting darker narrowing risk increasing stakes"
+  ],
+  "scene3_overlays": [
+    {"lines": "*THE WIDENING|ANGLE", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "91% of AI models degrade over time.", "sub": "MIT. Harvard. Cambridge. Confirmed.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "1% error at the start.", "sub": "Near-certainty of wrong by the end.", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "Once you see the widening angle —", "sub": "You cannot unsee it.", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene4_solution": "Here is what actually helps. Structured memory systems that track the conversation explicitly — not just what was said but when and in what order. Shorter chains with a human checkpoint before any final decision. Multiple models checking each other's work — that alone cuts error rates by forty percent. And lower temperature settings to stop the randomness from compounding. None of this is magic. It is engineering around a known ceiling.",
+  "keywords_scene4": [
+    "structured system organized workflow checkpoint process",
+    "human reviewing computer screen checking verifying",
+    "multiple screens monitors checking cross-referencing data"
+  ],
+  "scene4_overlays": [
+    {"lines": "*WHAT ACTUALLY|HELPS", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Shorter chains. Human checkpoint before decisions.", "sub": "Don't let the model run 10 steps unsupervised.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Two models checking each other's work.", "sub": "Cuts error rates by 40%.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene5_ask": "The floor on all of this is the architecture itself. These are probability machines. Not truth machines. Until that changes, the math does not change. Ninety percent accurate sounds like a lot until you need it to be right ten times in a row. The people who are using AI well right now are not the ones who trust it the most. They are the ones who verify it the most. That is the whole game.",
+  "keywords_scene5": [
+    "person verifying checking work double-checking confident",
+    "human in the loop reviewing AI output laptop",
+    "business person confident verified approved checkmark"
+  ],
+
+  "tagline": "90% accurate. 35% reliable. Know the difference.",
+  "rolling_credits": [
+    {
+      "header": "THE 35% PROBLEM"
+    },
+    {
+      "lines": [
+        "Source: MIT, Harvard, Cambridge research",
+        "ChatGPT-4o drops details 9× more than GPT-4 Turbo",
+        "LLaMA 3.3 overgeneralizes 36× more than older versions",
+        "The math does not care how good the model sounds",
+        "Put a human in the loop",
+        "Verify more. Trust less.",
+        "Produced by Song Juicer — dmpgh.com"
+      ]
+    }
+  ]
+}

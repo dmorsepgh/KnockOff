@@ -1,0 +1,74 @@
+{
+  "scene1_hook": "The news in AI is moving so fast we are already back to yesterday. Welcome to Yesterday in AI News — where we cover what happened twenty-four hours ago like it is breaking news, because honestly, it still is. Today we have four stories. Money. Competition. Ethics. And a paper that came out this morning that will make you feel better and worse about AI at the same time. Let us start with the money.",
+  "keywords_scene1": [
+    "news anchor desk broadcast studio professional",
+    "breaking news fast moving dramatic headline",
+    "television news show opening dramatic"
+  ],
+  "scene1_overlays": [
+    {"lines": "*YESTERDAY IN AI NEWS|THE NEWS MOVES FAST. WE MOVE FASTER.", "in": 0.5, "out": 4.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Money. Competition. Ethics. Tech.", "sub": "Four stories. Three minutes. Let's go.", "in": 5.0, "out": 10.0},
+    {"style": "bullet", "head": "The news moves so fast —", "sub": "We're already back to yesterday.", "in": 10.5, "out": 15.5}
+  ],
+
+  "scene2_problem": "Microsoft reported earnings today. AI revenue: thirty-seven billion dollar annual run rate. Up one hundred and twenty-three percent from last year. To put that in terms everyone can understand — a year ago AI was a science project. Now it is bigger than most companies. Net income: thirty-one point eight billion. Their AI product Copilot is inside Word, Excel, and Teams. People are paying for it. The science project graduated. Meanwhile in the competition section — OpenAI dropped a new model called GPT-5.5, nicknamed Spud. It scores 78 percent on navigating a computer autonomously. Meaning it can take over your screen and do tasks for you. DeepSeek from China released a model the same week that scores nearly as high and costs one third the price. America versus China. Same week. Both are very good. One is significantly cheaper.",
+  "keywords_scene2": [
+    "Microsoft earnings money business revenue growth dramatic",
+    "AI competition technology race USA China dramatic",
+    "computer screen AI working autonomously technology"
+  ],
+  "scene2_overlays": [
+    {"lines": "*$37 BILLION|UP 123% IN ONE YEAR", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Microsoft AI: science project → $37B business.", "sub": "In twelve months.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "OpenAI: GPT-5.5 drops. Takes over your computer.", "sub": "DeepSeek: same quality. One third the price.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene3_stakes": "Google signed a classified deal with the Pentagon yesterday. The Department of Defense can now deploy Google's Gemini AI on classified networks for — and this is the official language — any lawful government purpose. Seven hundred Google employees sent the CEO a letter asking him not to do this. He did it anyway. For context: Anthropic was reportedly offered a similar deal and passed. The same AI that writes your emails and summarizes your meeting notes is now inside the Defense Department. Google also quietly exited a drone swarm program this week over ethics concerns. So there are limits. Just not that one.",
+  "keywords_scene3": [
+    "Pentagon military government technology classified",
+    "Google headquarters corporate decision ethics protest",
+    "employees protest letter CEO office dramatic"
+  ],
+  "scene3_overlays": [
+    {"lines": "*GOOGLE|SIGNS WITH THE PENTAGON", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "700 Google employees wrote the CEO a letter.", "sub": "He signed the deal anyway.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "The AI in your inbox is now in the DoD.", "sub": "There are limits. Just not that one.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene4_solution": "And now the paper. Researchers presented this today at ICLR 2026 in Rio. The title is: The Reasoning Trap: How Enhancing LLM Reasoning Amplifies Tool Hallucination. Translation: training an AI to think better breaks the part of its brain that prevents making things up. The smarter you make it, the more it hallucinates. Forty-seven percent of enterprise users have already made a major business decision based on something an AI made up. Ninety-six percent of companies are running AI agents. Twelve percent have any oversight in place. The paper does not have a solution. It just wanted you to know.",
+  "keywords_scene4": [
+    "researcher presenting paper conference Rio dramatic",
+    "AI hallucination error computer screen wrong data",
+    "business person shocked computer screen mistake"
+  ],
+  "scene4_overlays": [
+    {"lines": "*THE SMARTER IT GETS|THE MORE IT MAKES THINGS UP", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "47% made a major decision based on an AI hallucination.", "sub": "96% run AI agents. 12% have oversight.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "The paper does not have a solution.", "sub": "It just wanted you to know.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene5_ask": "That is Yesterday in AI News. Thirty-seven billion dollars. A new model that takes over your computer. Google inside the Defense Department. And a paper confirming that smarter AI hallucinates more. All of that happened yesterday. Today is already more. We will be back tomorrow to tell you what today was. Follow so you do not miss it. The news moves fast. We are used to it.",
+  "keywords_scene5": [
+    "news anchor signing off confident desk broadcast",
+    "person watching news phone morning coffee",
+    "fast moving city time lapse news dramatic"
+  ],
+
+  "tagline": "The news moves so fast, we're already back to yesterday.",
+  "rolling_credits": [
+    {
+      "header": "YESTERDAY IN AI NEWS"
+    },
+    {
+      "lines": [
+        "Money: Microsoft Q3 earnings, April 29 2026",
+        "Competition: OpenAI GPT-5.5 + DeepSeek V4 Pro",
+        "Ethics: Google Pentagon deal, Bloomberg April 28",
+        "Tech: ICLR 2026 — The Reasoning Trap paper",
+        "47% made a decision based on an AI hallucination",
+        "The paper does not have a solution",
+        "Produced by Song Juicer — dmpgh.com"
+      ]
+    }
+  ]
+}

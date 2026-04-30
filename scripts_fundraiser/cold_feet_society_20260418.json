@@ -1,0 +1,24 @@
+{
+  "scene1_hook": "{'narration': \"You wake up in the dead of night with a chill that won't go away\", 'keywords_scene1': ['cold feet at night', 'foot pain relief', 'cold toes']}",
+  "scene2_problem": "{'narration': \"For millions, cold feet are more than just a nuisance. They're a debilitating condition that ruins daily life.\", 'keywords_scene2': ['cold feet symptoms', 'foot discomfort', 'winter foot pain']}",
+  "scene3_stakes": "{'narration': \"Imagine not being able to walk your daughter down the aisle, or play with your grandkids. That's what millions face every day\", 'keywords_scene3': ['cold feet and relationships', 'foot pain in elderly', 'winter foot health']}",
+  "scene4_solution": "{'narration': 'The Cold Feet Society provides vital research and treatment options, giving hope to those suffering', 'keywords_scene4': ['cold feet treatment', 'foot pain relief methods', 'cold toe remedies']}",
+  "scene5_ask": "{'narration': 'Will you help us bring warmth back to the lives of millions? Donate $25 today at dmpgh.com.', 'keywords_scene5': ['donate cold feet society', 'cold feet charity', 'foot pain donation']}",
+  "tagline": "Warmth for a lifetime",
+  "rolling_credits": [
+    {
+      "header": "The Cold Feet Society",
+      "lines": [
+        "A 501(c)3 non-profit organization",
+        "Helping those affected by cold feet worldwide"
+      ]
+    },
+    {
+      "header": "Produced by",
+      "lines": [
+        "Doug Morse",
+        "AI Vocal Artist"
+      ]
+    }
+  ]
+}

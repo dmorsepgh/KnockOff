@@ -1,0 +1,42 @@
+{
+  "scene1_hook": "In just one second, over a thousand animals are abandoned.",
+  "keywords_scene1": [
+    "abandoned dogs",
+    "forgotten cats",
+    "shelters"
+  ],
+  "scene2_problem": "Every day, shelters are overwhelmed with unwanted pets. One in five dogs and one in three cats will be euthanized simply because there's no room for them.",
+  "keywords_scene2": [
+    "overcrowded animal shelters",
+    "euthanization statistics",
+    "puppy mills"
+  ],
+  "scene3_stakes": "Imagine your own beloved pet being left behind, with no second chance. The heartbreaking reality is that this is happening every minute, everywhere.",
+  "keywords_scene3": [
+    "animal rescue stories",
+    "abandoned pets",
+    "sadness"
+  ],
+  "scene4_solution": "At We Are Cats and Dogs.org, we're on a mission to give these abandoned animals a second chance at life. Your donation enables our network of foster families and adoption centers to provide vital care and forever homes.",
+  "keywords_scene4": [
+    "animal rescue organizations",
+    "foster families",
+    "adoption"
+  ],
+  "scene5_ask": "Donate $25 today to help us provide shelter, food, and a loving home for just one animal. Visit cmd.org to make your gift count.",
+  "keywords_scene5": [
+    "donate now",
+    "animal charity",
+    "second chance"
+  ],
+  "tagline": "Second Chances for the Forgotten",
+  "rolling_credits": [
+    {
+      "header": "A Production of We Are Cats and Dogs.org",
+      "lines": [
+        "Produced by Doug Morse",
+        "AI Vocal Artist, dmpgh.com"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "scene1_hook": "One of the most powerful minds in artificial intelligence says the entire industry is building the wrong thing. Yann LeCun, Chief AI Scientist at Meta, is sounding the alarm — and the AI world is paying attention.",
+  "keywords_scene1": [
+    "news studio broadcast",
+    "breaking news screen",
+    "artificial intelligence concept"
+  ],
+  "scene1_overlays": [
+    {"lines": "*BREAKING|AI WEEKLY SPECIAL", "in": 0.5, "out": 4.0, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "LeCun: LLMs not enough", "sub": "Meta AI Chief drops bombshell", "in": 4.5, "out": 9.5},
+    {"style": "bullet", "head": "Scaling won't get us there", "sub": "A fundamental rethink required", "in": 10.0, "out": 15.0}
+  ],
+
+  "scene2_problem": "Here is the problem LeCun is pointing to. Today's AI — ChatGPT, Claude, Gemini — are all large language models. They predict the next word. They are extraordinarily good at it. But LeCun argues that predicting text is fundamentally insufficient for human-level intelligence. A child learns to walk, catch a ball, and understand gravity — without reading a single sentence. Language models have none of that. No sense of time. No understanding of physics. No ability to plan beyond the next token. Navigation, manipulation, cause and effect — these require something text will never teach.",
+  "keywords_scene2": [
+    "robot learning environment",
+    "child playing learning",
+    "language model text prediction"
+  ],
+  "scene2_overlays": [
+    {"lines": "*THE PROBLEM|WITH LLMs", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Text prediction has limits", "sub": "No physics. No time. No planning.", "in": 4.0, "out": 9.0},
+    {"style": "bullet", "head": "Children learn without text", "sub": "Vision, touch, gravity — all missing", "in": 9.5, "out": 14.5},
+    {"style": "bullet", "head": "Scaling won't fix this", "sub": "More data, same ceiling", "in": 15.0, "out": 20.0}
+  ],
+
+  "scene3_stakes": "The stakes here are enormous. If LeCun is right, the hundreds of billions being poured into scaling language models is chasing a dead end. True artificial general intelligence — machines that reason, plan, and act like humans — requires a fundamentally different architecture. LeCun calls it a World Model. Instead of predicting words, the system predicts how the world evolves. It builds internal representations from sensory data — video, audio, touch — organized in a hierarchy. Low-level physical interactions at the bottom. Abstract goals and reasoning at the top. And critically: it develops common sense — the stuff humans learn in infancy — through self-supervised learning, not human-labeled data.",
+  "keywords_scene3": [
+    "world model concept visualization",
+    "hierarchical system diagram",
+    "sensory data neural network"
+  ],
+  "scene3_overlays": [
+    {"lines": "*WORLD MODELS|THE ALTERNATIVE", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Predict the world, not words", "sub": "Vision, sound, physics — all inputs", "in": 4.0, "out": 9.0},
+    {"style": "bullet", "head": "Hierarchical knowledge structure", "sub": "Physical → abstract reasoning", "in": 9.5, "out": 14.5},
+    {"style": "bullet", "head": "Self-supervised common sense", "sub": "No human labels needed", "in": 15.0, "out": 20.0}
+  ],
+
+  "scene4_solution": "LeCun's proposed solution is called JEPA — the Joint Embedding Predictive Architecture. Instead of generating raw pixels or words, JEPA learns abstract representations of the world and predicts how those representations change over time. Think of it as the AI learning the concept of a falling object rather than memorizing every video of things falling. Combined with a hierarchical planner that works from abstract goals down to physical actions, LeCun believes this architecture can get machines to the point where they can reason about the world, make plans that span days or weeks, and correct mistakes in real time — the way humans and animals do.",
+  "keywords_scene4": [
+    "neural network architecture diagram",
+    "abstract representation learning",
+    "robot planning environment"
+  ],
+  "scene4_overlays": [
+    {"lines": "*JEPA|THE SOLUTION", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Joint Embedding Predictive Architecture", "sub": "Learns abstract world representations", "in": 4.0, "out": 9.0},
+    {"style": "bullet", "head": "Predicts concepts, not pixels", "sub": "Falling object vs. every fall video", "in": 9.5, "out": 14.5},
+    {"style": "bullet", "head": "Plan weeks ahead, self-correct", "sub": "Like humans. Like animals.", "in": 15.0, "out": 20.0}
+  ],
+
+  "scene5_ask": "The debate is real and the industry is watching. OpenAI, Google, and Anthropic are betting trillions on scale. Yann LeCun is betting on a different path entirely. Who is right may be the most important question in technology right now. This has been your AI Weekly special report. Same time next Monday.",
+  "keywords_scene5": [
+    "technology debate future",
+    "artificial intelligence research lab",
+    "innovation horizon technology"
+  ],
+
+  "tagline": "This has been your AI Weekly special report. Same time next Monday.",
+  "rolling_credits": [
+    {"header": "AI Weekly"},
+    {"lines": ["Produced by Doug Morse", "dmpgh.com"]}
+  ]
+}

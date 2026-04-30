@@ -1,0 +1,65 @@
+{
+  "scene1_hook": "There is a piece of hardware sitting on desks at hedge funds, hospitals, law firms, and research labs right now that most business owners have never heard of. It is called the NVIDIA DGX Spark. It costs four thousand dollars. It is the size of a coffee cup. And it runs the same class of AI that Fortune 500 companies are paying millions of dollars in cloud fees to access — except it runs locally, privately, with no monthly bill, and no data leaving your building. If you run a business that depends on information, this machine changes your math.",
+  "keywords_scene1": [
+    "executive desk office technology powerful",
+    "small device big power compact computer",
+    "AI business productivity office professional"
+  ],
+  "scene1_overlays": [
+    {"lines": "*THE DGX SPARK|YOUR BUSINESS EDGE", "in": 0.5, "out": 4.0, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "$4,000. Coffee cup size.", "sub": "Runs 200B parameter AI — locally", "in": 4.5, "out": 10.0},
+    {"style": "bullet", "head": "No cloud fees. No data leaks.", "sub": "The same AI Fortune 500 pays millions for", "in": 10.5, "out": 16.0}
+  ],
+
+  "scene2_problem": "Here is the problem most businesses have with AI right now. They are either paying per query through OpenAI or Azure — and those costs compound fast at scale — or they are locked out of the serious models entirely because running a 70 billion parameter model requires hardware they cannot afford or do not own. There is a third problem nobody talks about: privacy. A law firm cannot send client documents to a third party cloud. A hospital cannot route patient data through an external API. A financial advisor cannot feed proprietary portfolio data into ChatGPT. The businesses that need AI the most are the exact businesses that cannot use the public cloud tools.",
+  "keywords_scene2": [
+    "cloud computing costs server expensive billing",
+    "data privacy security lock confidential",
+    "business frustrated technology barrier problem"
+  ],
+  "scene2_overlays": [
+    {"lines": "*THE PROBLEM|CLOUD AI IS BROKEN", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Per-query cloud costs add up fast", "sub": "And scale is punishing", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Privacy kills the cloud option", "sub": "Law, medical, finance — data can't leave", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "Serious models = serious hardware", "sub": "Until now", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene3_stakes": "The DGX Spark has one hundred and twenty-eight gigabytes of unified memory. That number matters because memory is the ceiling. A model that requires eighty gigabytes of VRAM to run cannot run on any consumer GPU on the market — a single RTX 4090 has twenty-four gigabytes. A pair of 4090s gives you forty-eight. The Spark gives you a hundred and twenty-eight, unified, on a chip that draws under sixty watts and sits on your desk. Businesses running legal document review, financial analysis, medical records summarization, sales call transcription, customer support automation — all of them are bottlenecked by that same memory ceiling. The Spark removes it.",
+  "keywords_scene3": [
+    "memory capacity database large files processing",
+    "legal documents contract review office",
+    "medical records hospital data analysis"
+  ],
+  "scene3_overlays": [
+    {"lines": "*128GB UNIFIED|THE CEILING IS GONE", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Consumer GPU max: 24–48GB VRAM", "sub": "DGX Spark: 128GB unified memory", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Legal review. Medical records. Finance.", "sub": "All bottlenecked by memory. Until now.", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "60 watts. Desk size. Always on.", "sub": "No data center required", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene4_solution": "Here is how businesses are actually using this machine right now. A two-person law firm runs a local Llama 3 model to draft motions and summarize depositions — completely air-gapped from the internet. A medical research team runs multi-agent pipelines that cross-reference patient data against published studies, entirely on-premise. A mid-size accounting firm automated their compliance audit prep — a task that used to take a senior analyst three days now takes four hours. A content production company runs simultaneous voice, video, and text generation pipelines without a single cloud API call. These are not large enterprises. These are small teams who bought one machine and changed what they were able to build.",
+  "keywords_scene4": [
+    "small business team working laptop office success",
+    "lawyer office documents reviewing professional",
+    "accounting finance analysis computer desk"
+  ],
+  "scene4_overlays": [
+    {"lines": "*REAL BUSINESSES|REAL RESULTS", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Law firm: AI drafts motions locally", "sub": "Air-gapped. No data leaves the building.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Accounting: 3 days → 4 hours", "sub": "Compliance audit prep, fully automated", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "Small teams. One machine.", "sub": "Changed what they could build.", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene5_ask": "The DGX Spark is not a toy and it is not a server rack. It is the first time in history that a business with four thousand dollars and a power outlet can run AI models that previously required a data center. The companies moving on this now are not the biggest companies. They are the fastest ones. The question is not whether your industry will be transformed by private, local, always-on AI. It is whether you will be the one doing the transforming — or the one being transformed. The machine is available. The models are free. The only thing left is the decision.",
+  "keywords_scene5": [
+    "decision maker executive confident leadership",
+    "technology investment future business growth",
+    "small business owner computer working success"
+  ],
+
+  "tagline": "The data center used to be the moat. Now it fits on your desk.",
+  "rolling_credits": [
+    {"header": "AI Foundation"},
+    {"lines": ["Doug Morse", "Local AI Vocal Artist", "aif.dmpgh.com/join", "$49/month"]}
+  ]
+}

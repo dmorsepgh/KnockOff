@@ -1,0 +1,34 @@
+{
+  "scene1_hook": "The wheelchair van hasn't changed much in fifty years. A ramp, a lock, a modified seat. But what's coming next is going to make today's accessible vehicle look like a horse and buggy.",
+  "scene2_problem": "Right now, accessible vans are expensive, slow to modify, hard to find, and often unreliable. Ramps fail. Lifts stick. And the van that fits your chair may not fit your budget — or your neighborhood.",
+  "scene3_stakes": "For someone who uses a wheelchair, a vehicle isn't a convenience. It's a doctor's appointment. A job. A family dinner. A grocery run. When the van breaks down, life stops.",
+  "scene4_solution": "But the next decade changes everything. Autonomous vehicles are being designed accessible-first — level floors, no driver's seat in the way, voice-controlled entry. Companies like BraunAbility and Waymo are already collaborating. New lightweight ramp systems deploy in under three seconds. And self-driving ride services for wheelchair users are launching in major cities right now.",
+  "scene5_ask": "The future of accessible transportation isn't a retrofit. It's a redesign. And it's already on the road. Learn more about what's coming at dmpgh.com.",
+  "keywords_scene1": ["wheelchair van accessible vehicle ramp", "modern van future"],
+  "keywords_scene2": ["wheelchair lift van broken", "person waiting transportation"],
+  "keywords_scene3": ["wheelchair user doctor appointment", "family dinner accessible"],
+  "keywords_scene4": ["autonomous vehicle self driving", "wheelchair accessible modern transport", "electric vehicle ramp deploy"],
+  "keywords_scene5": ["wheelchair user city street independence", "modern accessible vehicle future"],
+  "scene2_overlays": [
+    {"lines": "*$50,000+|AVERAGE COST|ACCESSIBLE VAN", "in": 0.5, "out": 3.5, "pos": "right-nose"},
+    {"lines": "RAMPS FAIL|*1 IN 4|SERVICE CALLS", "in": 4.5, "out": 8.0, "pos": "right-nose"}
+  ],
+  "scene4_overlays": [
+    {"style": "bullet", "head": "LEVEL-FLOOR DESIGN", "sub": "no ramp required", "in": 5.0, "out": 11.0, "x": 1080, "y": 140},
+    {"style": "bullet", "head": "3-SECOND RAMP DEPLOY", "sub": "new lightweight systems", "in": 7.0, "out": 11.0, "x": 1080, "y": 350},
+    {"style": "bullet", "head": "AUTONOMOUS RIDE SHARE", "sub": "wheelchair-ready, now", "in": 9.0, "out": 11.0, "x": 1080, "y": 560}
+  ],
+  "rolling_credits": [
+    {"header": "LOOK MOM NO HANDS PRODUCTIONS", "lines": ["presents", ""]},
+    {"header": "", "lines": ["THE FUTURE OF ACCESSIBLE VANS", "what's coming for wheelchair transportation"]},
+    {"header": "PRODUCED BY", "lines": ["Douglas Morse", "MS advocate since 1999"]},
+    {"header": "WRITTEN & DIRECTED BY", "lines": ["AI Claude (Anthropic)"]},
+    {"header": "PRODUCTION ENVIRONMENT", "lines": ["VS Code + Claude Code"]},
+    {"header": "VOICE", "lines": ["OpenAI TTS — 'Nova'"]},
+    {"header": "STOCK FOOTAGE", "lines": ["Pexels"]},
+    {"header": "MUSIC", "lines": ["emotional piano"]},
+    {"header": "RENDERED WITH", "lines": ["ffmpeg · Python · Pillow"]},
+    {"header": "CONTACT", "lines": ["dmpgh.com", "aiva@dmpgh.com"]},
+    {"header": "", "lines": ["", "© 2026 Look Mom No Hands Productions", "all rights reserved"]}
+  ]
+}

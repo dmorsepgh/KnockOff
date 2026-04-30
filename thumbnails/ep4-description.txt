@@ -1,0 +1,32 @@
+This week on AI Views and News: Claude Code leak exposes a Tamagotchi-style ‘pet’ and an always-on agent. Plus: Anthropic is having a month and Art schools are being torn apart by AI.
+
+New episodes every week. Subscribe for the latest AI news analysis.
+
+📋 TIMESTAMPS:
+0:00 — Introduction
+0:30 — Story 1: Claude Code leak exposes a Tamagotchi-style ‘pet’ and an always-on agent
+2:30 — Story 2: Anthropic is having a month
+5:00 — Story 3: Art schools are being torn apart by AI
+7:30 — Wrap-up & Discussion Questions
+
+📰 SOURCES:
+• Claude Code leak exposes a Tamagotchi-style ‘pet’ and an always-on agent: https://www.theverge.com/ai-artificial-intelligence/904776/anthropic-claude-source-code-leak
+• Anthropic is having a month: https://techcrunch.com/2026/03/31/anthropic-is-having-a-month/
+• Art schools are being torn apart by AI: https://www.theverge.com/tech/903954/art-schools-generative-ai-education-creative-jobs
+
+💬 DISCUSSION QUESTIONS (for your team/class):
+1. Should AI companies be required to disclose all features, even experimental ones?
+2. Can a company genuinely prioritize safety while racing to compete?
+3. If AI could do 80% of your job tomorrow, would your industry adapt or resist?
+4. At what point does "keeping up with AI" become a full-time job?
+5. If you could ask any AI CEO one honest question, who and what?
+
+🔗 LINKS:
+• Show Notes: https://myaibiweekly.com/ep4/
+• Website: https://dmpgh.com
+• All Episodes: https://myaibiweekly.com
+
+👋 ABOUT:
+AI Views and News is a weekly AI news briefing hosted by Doug Morse. We break down the biggest stories in artificial intelligence so you can stay informed without the jargon.
+
+#AI #ArtificialIntelligence #AINews #Claude #Anthropic #TechNews #AIViewsAndNews #DougMorse #WeeklyAINews #MachineLearning #GenerativeAI #AIUpdate #Tech2026

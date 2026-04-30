@@ -1,0 +1,44 @@
+{
+  "scene1_hook": "No child should have to fight cancer alone.",
+  "keywords_scene1": [
+    "sick child hospital",
+    "child patient",
+    "pediatric cancer"
+  ],
+  "scene2_problem": "Every year, thousands of children are diagnosed with cancer and other life-threatening diseases. For many families, treatment costs are devastating — without help, they have nowhere to turn.",
+  "keywords_scene2": [
+    "hospital room child",
+    "IV drip",
+    "worried parent"
+  ],
+  "scene3_stakes": "Without continued funding, life-saving research slows down. Children who could be saved may never get the chance.",
+  "keywords_scene3": [
+    "medical research",
+    "hope",
+    "child survival"
+  ],
+  "scene4_solution": "St. Jude Children's Research Hospital treats kids regardless of families' ability to pay. Your donation directly funds cures — and keeps families together.",
+  "keywords_scene4": [
+    "research lab",
+    "scientist lab coat",
+    "medical breakthrough"
+  ],
+  "scene5_ask": "Will you help save a child's life today? Donate now at DMPGH.com and give a family hope.",
+  "keywords_scene5": [
+    "donate",
+    "child smiling",
+    "hope"
+  ],
+  "tagline": "Finding cures. Saving children.",
+  "rolling_credits": [
+    {
+      "header": "St. Jude Children's Research Hospital"
+    },
+    {
+      "lines": [
+        "Produced by Doug Morse",
+        "AI Vocal Artist dmpgh.com"
+      ]
+    }
+  ]
+}

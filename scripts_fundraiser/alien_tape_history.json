@@ -1,0 +1,64 @@
+{
+  "scene1_hook": "There is a tape that holds seventeen pounds to a wall without nails, without glue, and without leaving a single mark when you take it down. You can wash it off, let it dry, and it works again. It is called Alien Tape. And the reason it works at all came from a scientist watching a gecko walk across the ceiling and asking a question nobody had thought to ask before.",
+  "keywords_scene1": [
+    "gecko lizard climbing glass wall close up",
+    "adhesive tape holding heavy objects wall",
+    "strong bond no nails wall mount"
+  ],
+  "scene1_overlays": [
+    {"lines": "*ALIEN TAPE|THE SCIENCE BEHIND IT", "in": 0.5, "out": 4.0, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Holds 17 lbs — no nails, no glue", "sub": "Leaves zero residue when removed", "in": 4.5, "out": 10.0},
+    {"style": "bullet", "head": "Wash it. Dry it. Sticks again.", "sub": "The answer came from a lizard", "in": 10.5, "out": 16.0}
+  ],
+
+  "scene2_problem": "The problem with regular tape is that it works by chemistry — a sticky layer of adhesive that bonds to a surface and then tears away from it when you pull. Every time you pull it off, it leaves residue, damages paint, or both. In heat, it melts. In humidity, it fails. On textured surfaces, it never held to begin with. For decades, engineers accepted this as the ceiling of what tape could do. Then someone looked down instead of up — at the bottom of a gecko's foot.",
+  "keywords_scene2": [
+    "tape residue damage wall paint peeling",
+    "sticky tape failing heat humidity",
+    "frustrated person removing tape from wall"
+  ],
+  "scene2_overlays": [
+    {"lines": "*WHY REGULAR TAPE FAILS", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Chemical adhesive = residue + damage", "sub": "Fails in heat, humidity, texture", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "For decades, this was the ceiling", "sub": "Until someone studied a gecko's foot", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene3_stakes": "A gecko's foot has no glue on it. Under a microscope, the bottom of each toe is covered with hundreds of thousands of microscopic hairs called setae. Each seta splits into even smaller tips called spatulae. These tips are so small they interact directly with the molecular surface of whatever the gecko is standing on — the attraction is called a van der Waals force. It is not sticky. It is geometry. The contact is so complete, at such a small scale, that the combined pull of millions of tiny tips is enough to hold the gecko upside down on glass. When it lifts its foot, the hairs peel away cleanly. No residue. No damage. Reset.",
+  "keywords_scene3": [
+    "gecko foot microscope close up setae hairs",
+    "nanotechnology microscopic surface texture electron microscope",
+    "van der waals molecular force diagram science"
+  ],
+  "scene3_overlays": [
+    {"lines": "*THE SCIENCE|NO GLUE REQUIRED", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Setae: millions of microscopic hairs", "sub": "Each splits into nano-scale spatulae", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Van der Waals force — not stickiness", "sub": "Geometry creates the bond", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "Peel cleanly. Zero residue.", "sub": "Reset and reuse indefinitely", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene4_solution": "In 2002, a physicist at the University of Manchester named Andre Geim published the first paper on synthetic gecko adhesive. He created a small tape made of polyimide hairs under an electron microscope — and used it to briefly stick a toy Spider-Man figure to the wall. Geim would later win a Nobel Prize for a different invention, graphene, but his gecko tape work became the seed of an entire field. By the 2010s, engineers had miniaturized the structure into commercial nano grip films. Alien Tape, released in the United States and sold through TV retail, was one of the first mass-market versions — priced under twenty dollars and available at hardware and grocery stores nationwide.",
+  "keywords_scene4": [
+    "university research lab scientist microscope",
+    "spiderman toy wall climbing adhesive science experiment",
+    "commercial product retail shelf store launch"
+  ],
+  "scene4_overlays": [
+    {"lines": "*HOW IT WAS|DISCOVERED", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Andre Geim — University of Manchester, 2002", "sub": "First synthetic gecko adhesive paper", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "He later won the Nobel Prize", "sub": "For graphene — but gecko tape started it", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "Nano grip films commercialized by 2010s", "sub": "Alien Tape: first mass-market version", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene5_ask": "Alien Tape is available at Walmart, Amazon, Home Depot, and most hardware stores for under twenty dollars. It holds on tile, glass, metal, drywall, wood, and most smooth surfaces. It is not glue. It is not magic. It is two thousand years of gecko evolution and twenty years of materials science compressed into a roll of transparent film. The gecko figured it out. We just finally copied it well enough to sell it at the checkout line.",
+  "keywords_scene5": [
+    "alien tape product retail amazon online shopping",
+    "gecko climbing wall nature documentary",
+    "satisfied customer hanging picture frame no nails"
+  ],
+
+  "tagline": "The gecko figured it out first. We just caught up.",
+  "rolling_credits": [
+    {"header": "Alien Tape — The Full Story"},
+    {"lines": ["Narrated by Doug Morse", "Local AI Vocal Artist", "dmpgh.com"]}
+  ]
+}

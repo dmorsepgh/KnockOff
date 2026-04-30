@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AI Views and News//Show Runner//EN
+BEGIN:VEVENT
+DTSTART;TZID=America/New_York:20260414T083000
+DURATION:PT1H30M
+RRULE:FREQ=MONTHLY;BYMONTHDAY=14
+SUMMARY:AI Views and News — Record Episode
+DESCRIPTION:Time to produce the next episode of AI Views and News!\n\nOpen the Show Runner: http://localhost:5555\n\n1. Click "Start New Show"\n2. Pick 3 stories\n3. Generate scripts\n4. Render in HeyGen + Pictory\n5. Stitch and publish\n\nCrypt Notes newsletter goes out with the episode.
+URL:http://localhost:5555
+LOCATION:http://localhost:5555
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:AI Views and News — 30 min heads up! Start the show runner.
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-PT0M
+ACTION:DISPLAY
+DESCRIPTION:AI Views and News — Go time! http://localhost:5555
+END:VALARM
+END:VEVENT
+END:VCALENDAR

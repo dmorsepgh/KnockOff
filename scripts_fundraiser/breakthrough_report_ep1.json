@@ -1,0 +1,74 @@
+{
+  "scene1_hook": "Pancreatic cancer kills because nobody catches it in time. Ninety percent of people diagnosed are already past the point of surgery. This week, that changed. A new AI model called REDMOD analyzed routine CT scans and detected pancreatic cancer an average of four hundred and seventy-five days before any doctor could see it. Four hundred and seventy-five days. That is fifteen months of lead time that did not exist last week.",
+  "keywords_scene1": [
+    "CT scan medical imaging hospital dramatic",
+    "pancreatic cancer diagnosis doctor serious",
+    "AI medical breakthrough detection early"
+  ],
+  "scene1_overlays": [
+    {"lines": "*475 DAYS|BEFORE DIAGNOSIS", "in": 0.5, "out": 4.0, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Pancreatic cancer: 90% caught too late for surgery.", "sub": "This week that changed.", "in": 4.5, "out": 10.0},
+    {"style": "bullet", "head": "REDMOD scans routine CT images.", "sub": "Finds cancer 475 days before any doctor can see it.", "in": 10.5, "out": 16.0}
+  ],
+
+  "scene2_problem": "Here is what makes this number real. REDMOD was tested against radiologists reading the same scans. The AI caught seventy-three percent of cases. The radiologists caught thirty-nine. For cancers more than two years out — cancers nobody had any chance of seeing — REDMOD was correct sixty-eight percent of the time. Radiologists: twenty-three percent. The AI is three times better on the cancers that matter most.",
+  "keywords_scene2": [
+    "radiologist reading scans comparison accuracy",
+    "medical imaging computer AI versus human",
+    "hospital diagnostic screen reading results"
+  ],
+  "scene2_overlays": [
+    {"lines": "*AI: 73%|RADIOLOGIST: 39%", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Cancers 2+ years out: AI caught 68%.", "sub": "Radiologists caught 23%. Three times better.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Validated on 758 patients across multiple hospitals.", "sub": "Published this week in the journal Gut.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene3_stakes": "That is not the only story this week. The MASAI trial in Sweden just published final results. One hundred and five thousand women. AI-assisted mammography caught twenty-nine percent more cancers than standard screening. Radiologist workload dropped forty-four percent. This was not a lab study. This ran inside Sweden's national screening program. The pattern is the same everywhere AI touches medical imaging: more caught, caught earlier, less missed.",
+  "keywords_scene3": [
+    "mammogram breast cancer screening women health",
+    "Sweden national health system hospital screening",
+    "medical AI pattern detection imaging breakthrough"
+  ],
+  "scene3_overlays": [
+    {"lines": "*29% MORE|CANCERS CAUGHT", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "MASAI trial — 105,000 women. Sweden's national program.", "sub": "Not a lab. Real screening. Real results.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "AI mammography cuts radiologist workload 44%.", "sub": "More found. Less missed. Already happening.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene4_solution": "Neither of these tools is in your doctor's office yet. REDMOD still needs prospective clinical trials. MASAI is moving toward adoption in Europe. But here is the thing about AI in medicine right now. The gap between published and deployed is closing faster than it ever has. What is in a journal today is in a clinical workflow in eighteen months. The question is not whether your next scan will be read by AI. The question is when.",
+  "keywords_scene4": [
+    "doctor office future medicine technology integration",
+    "clinical trial hospital adoption implementation",
+    "patient doctor conversation hopeful future"
+  ],
+  "scene4_overlays": [
+    {"lines": "*NOT IN YOUR|DOCTOR'S OFFICE YET", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Journal today. Clinical workflow in 18 months.", "sub": "The gap is closing faster than it ever has.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Your next scan may be read by AI.", "sub": "The question is not whether. It is when.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene5_ask": "This is The Breakthrough Report. Every week we cover what AI is doing to medicine — not for researchers, not for investors — for the people who are actually waiting on the results. If this week moved the needle for you, share it. Someone in your life is waiting on a scan right now. They should know this exists.",
+  "keywords_scene5": [
+    "person sharing phone social media hopeful",
+    "patient waiting results hospital hopeful determined",
+    "community people health together support"
+  ],
+
+  "tagline": "AI in health. Every week. What it means for real people.",
+  "rolling_credits": [
+    {
+      "header": "THE BREAKTHROUGH REPORT"
+    },
+    {
+      "lines": [
+        "Episode 1 — AI in Cancer Detection",
+        "REDMOD published in Gut, April 2026",
+        "MASAI trial published in The Lancet, 2026",
+        "Sources available at dmpgh.com",
+        "Not medical advice. Talk to your doctor.",
+        "Share this with someone waiting on a scan.",
+        "Produced by Song Juicer — dmpgh.com"
+      ]
+    }
+  ]
+}

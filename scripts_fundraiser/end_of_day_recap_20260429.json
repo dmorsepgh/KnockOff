@@ -1,0 +1,74 @@
+{
+  "scene1_hook": "Today was a good day. We launched a space news show. We discovered four clones of the same voice. We posted a video to YouTube in under ten minutes. And we wired a man's voice into a bumper so it plays forever for free. It is four-fifty-something in the afternoon. We are done for the day. Here is what happened.",
+  "keywords_scene1": [
+    "news anchor desk broadcast professional studio",
+    "rocket launch space dramatic cinematic night",
+    "studio production broadcast behind the scenes"
+  ],
+  "scene1_overlays": [
+    {"lines": "*END OF DAY|RECAP", "in": 0.5, "out": 4.0, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Space show. Four voice clones. One bumper.", "sub": "All in one afternoon.", "in": 4.5, "out": 10.0},
+    {"style": "bullet", "head": "Done for the day.", "sub": "Here is what happened.", "in": 10.5, "out": 15.5}
+  ],
+
+  "scene2_problem": "This morning we rendered This Week in Space. Seven organic molecules on Mars. Forty-seven million galaxies mapped. Artemis Two home. Falcon Heavy launched today for the first time in eighteen months. Brian narrated it. The news-broadcast music fit so well Doug asked where we found it. It was already in the library. It has always been in the library. We just needed to use it.",
+  "keywords_scene2": [
+    "space galaxy stars universe cinematic dramatic",
+    "news broadcast anchor desk professional studio",
+    "rocket launch fire night sky SpaceX dramatic"
+  ],
+  "scene2_overlays": [
+    {"lines": "*THIS WEEK IN SPACE|RENDERED AND POSTED", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "7 molecules on Mars. 47 million galaxies. Artemis home.", "sub": "Brian narrated it. Music already in the library.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Live on YouTube in under ten minutes.", "sub": "Zero dollars. Zero excuses.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene3_stakes": "Then we found four clones of Doug's voice sitting in ElevenLabs. Three of them were not convincing. One of them — the one named Douglas — was almost believable. Almost. We did not set it as the default. Doug does not narrate his own shows. That is Brian's job. But we did find one very specific use for Doug's voice. The bumper. Twelve words. Look Mom. No hands. Generated once. Cached forever. That clip will never cost another dollar.",
+  "keywords_scene3": [
+    "voice recording studio microphone professional dramatic",
+    "sound wave audio production studio dramatic",
+    "person speaking microphone podcast studio broadcast"
+  ],
+  "scene3_overlays": [
+    {"lines": "*FOUR VOICE CLONES|ONE WAS ALMOST GOOD", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Doug does not narrate his own shows. Brian does.", "sub": "But one place needed his voice.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Look Mom. No hands.", "sub": "Generated once. Cached forever. Free.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene4_solution": "We also drew up the jingle strategy. Six prompts ready for Suno. A five-second This Week in Space theme. A five-second Yesterday in AI News theme. Four three-second segment stingers — Money, Competition, Ethics, Tech. Ten dollars for one month of Suno Pro. Six clips. A full broadcast audio identity. We do not have the jingles yet. But we have everything we need to get them. That counts.",
+  "keywords_scene4": [
+    "music studio production audio mixing broadcast",
+    "jingle radio broadcast professional studio dramatic",
+    "media company news studio professional production"
+  ],
+  "scene4_overlays": [
+    {"lines": "*JINGLE STRATEGY|6 PROMPTS READY", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Space theme. AI News theme. 4 segment stingers.", "sub": "Ten dollars. One month. Full broadcast identity.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "We do not have the jingles yet.", "sub": "But we have everything we need to get them.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene5_ask": "That is the day. One space show rendered and posted. Four voice clones discovered and evaluated. One bumper recorded and cached. One jingle strategy written and ready. This operation is a media company now. It just does not know it yet. Come back tomorrow. There will be more. There is always more. We are done. Look Mom. No hands.",
+  "keywords_scene5": [
+    "sunset end of day dramatic cinematic beautiful",
+    "person walking away confident dramatic backlit",
+    "studio lights dimming end of broadcast dramatic"
+  ],
+
+  "tagline": "End of Day Recap — we built a media company today. No hands.",
+  "rolling_credits": [
+    {
+      "header": "END OF DAY RECAP"
+    },
+    {
+      "lines": [
+        "This Week in Space — posted to YouTube",
+        "Voice: Brian (ElevenLabs) — default",
+        "Bumper: Douglas — cached forever",
+        "Jingles: coming soon via Suno",
+        "Total cost today: $0.00",
+        "Media company status: unofficial but real",
+        "Produced by Song Juicer — dmpgh.com"
+      ]
+    }
+  ]
+}

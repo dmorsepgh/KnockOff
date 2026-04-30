@@ -1,0 +1,65 @@
+{
+  "scene1_hook": "Here is a position most people in artificial intelligence will not say out loud. AI makes too many mistakes to be practical for anything other than art. Or art pretending to be real life. In 2026, after years of hype, billions in investment, and a thousand breathless announcements, that is where we actually are. The outputs look real. The confidence is total. The error rate is unknown — and that is the problem. My name is Doug Morse. And tonight I want to tell you what I actually think.",
+  "keywords_scene1": [
+    "artificial intelligence robot thinking",
+    "news anchor desk studio",
+    "technology futurism abstract"
+  ],
+  "scene1_overlays": [
+    {"lines": "*MY THOUGHTS ON AI|IN 2026", "in": 0.5, "out": 4.0, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Too many mistakes", "sub": "Practical only for art?", "in": 4.5, "out": 10.0},
+    {"style": "bullet", "head": "Art pretending to be real life", "sub": "The confidence is the danger", "in": 10.5, "out": 16.0}
+  ],
+
+  "scene2_problem": "Here is the core issue. AI does not build from verified first principles the way an engineer does. It pattern-matches toward convincing output. It crafts. An AI response is shaped, structured, and designed to land well — just like a piece of writing. Just like art. The failure mode is exactly what you would expect from art pretending to be real life: it is wrong in ways that are hard to detect because the surface looks right. A hallucinated citation looks like a real one. A broken script looks like working code. The aesthetic of correctness — without the guarantee. That is what we are working with.",
+  "keywords_scene2": [
+    "computer code screen error",
+    "digital hallucination abstract",
+    "artificial intelligence neural network"
+  ],
+  "scene2_overlays": [
+    {"lines": "*THE CORE|PROBLEM", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Pattern-matching, not logic", "sub": "Plausible output — not verified", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Wrong in invisible ways", "sub": "The surface always looks right", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "Aesthetic of correctness", "sub": "Without the guarantee", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene3_stakes": "Here is where AI actually earns its keep. The binary switch. Tasks where the answer is right or wrong and the machine tells you immediately. Code either runs or it does not. An API returns 200 or it fails. A file exists or it does not. When there is a built-in verifier, AI is extraordinarily useful — because errors surface instantly. The stakes on those tasks are manageable. The danger is every task without a verifier. When AI writes a script, explains a concept, or makes a judgment call — there is no error code. It just sounds correct. Most people never build the map of which tasks AI can be trusted on and which it cannot. They either overtrust or undertrust the entire thing. Both are wrong.",
+  "keywords_scene3": [
+    "binary code switch technology",
+    "software testing verification screen",
+    "decision making crossroads"
+  ],
+  "scene3_overlays": [
+    {"lines": "*WHERE IT|ACTUALLY WORKS", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Binary tasks: AI excels", "sub": "Code runs. API returns. File exists.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "No verifier = no safety net", "sub": "It just sounds correct", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "Overtrust or undertrust", "sub": "Both are the wrong answer", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene4_solution": "The right model is supervision. AI as a junior that works at inhuman speed and needs a senior checking the output. The ROI is still massive even with the error rate — because the alternative is doing one hundred percent yourself. But the human stays in the loop. Always. You cannot measure AI's overall success rate. You can only measure it per task type. And the people winning with AI in 2026 are the ones who have quietly built that map — who know exactly where to trust it and exactly where to check. That knowledge is not being taught anywhere. It is being learned the hard way, one mistake at a time.",
+  "keywords_scene4": [
+    "supervisor mentor professional team",
+    "human computer collaboration",
+    "productivity workflow technology"
+  ],
+  "scene4_overlays": [
+    {"lines": "*THE RIGHT|POSTURE", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "AI does 80%. You check 100%.", "sub": "The senior stays in the room", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Measure per task, not overall", "sub": "The map is what matters", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "Build the map", "sub": "The skill nobody is teaching", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene5_ask": "In 2026, artificial intelligence is the most powerful craft tool ever built. It can write, build, analyze, and create at a speed no human can match. And it will confidently hand you something wrong with the same energy it hands you something right. The people who understand that — who use it supervised, who verify the output, who know which tasks to trust and which to check — those are the AI experts in the room. Not the people who think AI does everything. Not the people who refuse to touch it. The ones who know exactly where the line is. That is where we are. That is what I think. I am Doug Morse.",
+  "keywords_scene5": [
+    "expert professional confident",
+    "technology future horizon",
+    "artificial intelligence human balance"
+  ],
+
+  "tagline": "That is where we are. That is what I think.",
+  "rolling_credits": [
+    {"header": "My Thoughts on AI — 2026"},
+    {"lines": ["Doug Morse", "Local AI Vocal Artist", "dmpgh.com"]}
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "scene1_hook": "Pancreatic cancer has a strategy. Its strategy is: do not get caught. It is very good at this strategy. Ninety percent of people diagnosed are already past the point of surgery. The cancer has been winning this game for a very long time. This week an AI called REDMOD looked at routine CT scans and found pancreatic cancer four hundred and seventy-five days before any doctor could see it. Four hundred and seventy-five days. The cancer's strategy just stopped working.",
+  "keywords_scene1": [
+    "CT scan medical imaging hospital dramatic",
+    "pancreatic cancer diagnosis doctor serious",
+    "AI medical detection early breakthrough"
+  ],
+  "scene1_overlays": [
+    {"lines": "*475 DAYS|THE CANCER DID NOT SEE IT COMING", "in": 0.5, "out": 4.0, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Pancreatic cancer's strategy: don't get caught.", "sub": "90% of diagnoses: already too late.", "in": 4.5, "out": 10.0},
+    {"style": "bullet", "head": "REDMOD found it 475 days early.", "sub": "The cancer had not yet made its move.", "in": 10.5, "out": 16.0}
+  ],
+
+  "scene2_problem": "Researchers put REDMOD up against radiologists reading the exact same scans. The AI caught seventy-three percent of cases. The radiologists caught thirty-nine. For cancers more than two years out — cancers that had essentially not started yet — REDMOD was right sixty-eight percent of the time. Radiologists: twenty-three percent. To be fair to the radiologists, they were looking at a scan where nothing was there yet. To be fair to the AI, it found it anyway.",
+  "keywords_scene2": [
+    "radiologist reading scans hospital comparison",
+    "AI versus human doctor competition results",
+    "medical imaging computer screen analysis"
+  ],
+  "scene2_overlays": [
+    {"lines": "*AI: 73%|RADIOLOGIST: 39%", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Nothing was there yet. AI found it anyway.", "sub": "To be fair to the radiologists — nothing was there.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Published in the journal Gut. This week.", "sub": "The radiologists are fine. Probably.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene3_stakes": "That was not the only thing that happened this week in medicine. One hundred and five thousand women in Sweden participated in a mammography trial called MASAI. AI assisted radiologists in reading the scans. Result: twenty-nine percent more cancers caught. Radiologist workload dropped forty-four percent. The AI did not ask for overtime. Sweden's national screening program ran this. One hundred and five thousand people. This was not a trial. This was a preview of Tuesday.",
+  "keywords_scene3": [
+    "mammogram breast cancer screening women",
+    "Sweden national health hospital program",
+    "medical AI screening results breakthrough"
+  ],
+  "scene3_overlays": [
+    {"lines": "*105,000 WOMEN|29% MORE CANCERS CAUGHT", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Sweden ran this inside their national program.", "sub": "Not a lab. Real people. Real scans.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "AI cut radiologist workload 44%.", "sub": "The AI did not ask for overtime.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene4_solution": "Neither of these is in your doctor's office yet. REDMOD needs clinical trials. MASAI is headed toward adoption in Europe. Your doctor is still doing this the old way. But the gap between a journal and a clinic is getting shorter every year. What took a decade now takes eighteen months. And when your doctor finally says we are using AI to read your scan — and they will say that — you will remember that it started in a week like this one.",
+  "keywords_scene4": [
+    "doctor office medicine future technology",
+    "hospital adoption technology implementation",
+    "patient doctor hopeful conversation future"
+  ],
+  "scene4_overlays": [
+    {"lines": "*NOT IN YOUR|DOCTOR'S OFFICE YET", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Journal to clinic: used to take a decade.", "sub": "Now takes eighteen months.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Your doctor will say this eventually.", "sub": "You will remember when it started.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene5_ask": "That is Yesterday in AI News. We cover what AI is doing to medicine every week — not for people who build it, not for people who fund it, for people who are actually waiting on a scan. If this one landed, send it to somebody. Somebody in your life is either waiting on results or about to be. They should know this stuff exists. We will be back tomorrow with whatever happened today. Which, if this week is any indication, will be a lot.",
+  "keywords_scene5": [
+    "person sharing phone hopeful morning",
+    "patient waiting hospital results hopeful",
+    "news anchor desk signing off professional"
+  ],
+
+  "tagline": "AI in health. Every weekday. What it means for real people.",
+  "rolling_credits": [
+    {
+      "header": "YESTERDAY IN AI NEWS"
+    },
+    {
+      "lines": [
+        "Episode 1 — AI vs. Cancer",
+        "REDMOD: journal Gut, April 2026",
+        "MASAI trial: The Lancet, 2026",
+        "The radiologists are fine",
+        "Not medical advice. Talk to your doctor.",
+        "Send this to someone waiting on a scan.",
+        "Produced by Song Juicer — dmpgh.com"
+      ]
+    }
+  ]
+}

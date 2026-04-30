@@ -1,0 +1,112 @@
+{
+  "scene1_hook": "Google bets forty billion on Anthropic, Apple names a new CEO, and DeepSeek is back to rattle the AI world. This is AI Weekly.",
+  "keywords_scene1": [
+    "news studio",
+    "breaking news screen",
+    "television anchor desk"
+  ],
+  "scene1_overlays": [
+    {
+      "text": "AI WEEKLY \u2014 Week of April 25, 2026",
+      "in": 1.5,
+      "out": 5.0
+    },
+    {
+      "text": "\u2022 Google to invest $40B in Anthropic",
+      "in": 5.5,
+      "out": 9.0
+    },
+    {
+      "text": "\u2022 Apple's Tim Cook era ends",
+      "in": 9.5,
+      "out": 13.0
+    }
+  ],
+  "scene2_problem": "Google announced an investment of up to forty billion dollars in Anthropic, mixing cash and compute as the AI capacity race intensifies. Apple confirmed John Ternus will succeed Tim Cook, signaling a hardware-first future for the company. And China's DeepSeek previewed its V4 model, claiming open-source parity with Anthropic, Google, and OpenAI's flagship systems.",
+  "keywords_scene2": [
+    "technology news",
+    "artificial intelligence",
+    "computer screen data"
+  ],
+  "scene2_overlays": [
+    {
+      "text": "TOP STORIES THIS WEEK",
+      "in": 1.0,
+      "out": 3.5
+    },
+    {
+      "text": "\u2022 Google\u2013Anthropic: $40B deal",
+      "in": 4.0,
+      "out": 8.0
+    },
+    {
+      "text": "\u2022 DeepSeek V4 challenges US labs",
+      "in": 8.5,
+      "out": 12.5
+    }
+  ],
+  "scene3_stakes": "The Google-Anthropic deal cements a duopoly of compute-rich AI labs, leaving smaller players scrambling for GPUs. Ternus taking over Apple suggests devices, not services, will define the next chapter \u2014 a bet against the software-centric playbook. Meanwhile, the Musk versus Altman trial opening in Oakland could reshape how OpenAI's nonprofit origins are interpreted, with implications far beyond the courtroom.",
+  "keywords_scene3": [
+    "analysis data chart",
+    "business meeting technology",
+    "future technology concept"
+  ],
+  "scene3_overlays": [
+    {
+      "text": "VIEWS & ANALYSIS",
+      "in": 1.0,
+      "out": 3.5
+    },
+    {
+      "text": "\u2022 Compute is the new moat",
+      "in": 4.0,
+      "out": 8.0
+    },
+    {
+      "text": "\u2022 Musk vs Altman trial begins",
+      "in": 8.5,
+      "out": 12.5
+    }
+  ],
+  "scene4_solution": "ComfyUI raised thirty million at a five hundred million dollar valuation, giving creators node-based control over AI image and video generation. NVIDIA and Google unveiled A5X bare-metal instances on Vera Rubin NVL72 racks to slash inference costs. And Yann LeCun's new venture, AMI Labs, hit billion-dollar funding pursuing world models beyond LLMs.",
+  "keywords_scene4": [
+    "software application interface",
+    "technology innovation",
+    "digital tools laptop"
+  ],
+  "scene4_overlays": [
+    {
+      "text": "NEW TOOLS THIS WEEK",
+      "in": 1.0,
+      "out": 3.5
+    },
+    {
+      "text": "\u2022 ComfyUI \u2014 creator control",
+      "in": 4.0,
+      "out": 8.0
+    },
+    {
+      "text": "\u2022 Vera Rubin NVL72 \u2014 inference",
+      "in": 8.5,
+      "out": 12.5
+    }
+  ],
+  "scene5_ask": "Next week, watch the opening arguments in Musk versus Altman, Sony AI's table tennis robot expanding into new physical AI demos, and SusHi Tech Tokyo kicking off as a global stage for the next wave of builders. This has been your AI Weekly. See you next Monday.",
+  "keywords_scene5": [
+    "future technology horizon",
+    "innovation roadmap",
+    "technology forecast"
+  ],
+  "tagline": "This has been your AI Weekly. See you next Monday.",
+  "rolling_credits": [
+    {
+      "header": "AI Weekly"
+    },
+    {
+      "lines": [
+        "Produced by Doug Morse",
+        "dmpgh.com"
+      ]
+    }
+  ]
+}

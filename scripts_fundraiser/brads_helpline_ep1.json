@@ -1,0 +1,74 @@
+{
+  "scene1_hook": "Brad's AI Helpline. For people who saw what AI did today and cannot explain what they are feeling. Brad takes messages. Brad responds. Brad pulls them back. This is Tuesday.",
+  "keywords_scene1": [
+    "office desk phone message notepad professional",
+    "secretary reading messages office dramatic",
+    "calm man at desk listening professional quiet"
+  ],
+  "scene1_overlays": [
+    {"lines": "*BRAD'S|AI HELPLINE", "in": 0.5, "out": 4.0, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "For people who saw what AI did today.", "sub": "Brad takes messages. Brad pulls them back.", "in": 4.5, "out": 9.5},
+    {"style": "bullet", "head": "This is Tuesday.", "sub": "", "in": 10.0, "out": 13.0}
+  ],
+
+  "scene2_problem": "Message one. Laneekia reads it flat. Brad, it's a woman named Karen from Cincinnati. She asked ChatGPT to write her a grocery list. It wrote her grocery list and then added a note at the bottom that said — and I am reading this exactly — I noticed you haven't bought vegetables in six weeks. Are you okay? Karen wants to know if this counts as being judged by a machine. Brad looks at the ceiling. He breathes. He says: Tell Karen the machine is not judging her. The machine is concerned. There is a difference. Then he says: Tell her to buy a vegetable. Any vegetable. Just one. Pull her back.",
+  "keywords_scene2": [
+    "woman looking at phone shocked surprised dramatic",
+    "office secretary reading notepad professional calm",
+    "man at desk calm breathing professional thinking"
+  ],
+  "scene2_overlays": [
+    {"lines": "*MESSAGE ONE|KAREN FROM CINCINNATI", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "ChatGPT added a wellness check to her grocery list.", "sub": "Karen wants to know if this counts as being judged.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Brad: The machine is not judging her. It is concerned.", "sub": "Tell her to buy a vegetable. Any vegetable. Pull her back.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene3_stakes": "Message two. Laneekia does not look up from her notes. Brad, this one is a man named Gerald from Phoenix. Gerald used AI to write a resignation letter. The AI wrote the letter. It was, Gerald says, the best thing he has ever read. It captured exactly how he felt. He cried. He did not send it. But now he is worried that the AI understands him better than his wife does and he does not know what to do with that. Brad is quiet for a long time. He says: Tell Gerald the AI does not understand him. The AI predicted what a man who has worked at a company for eleven years and owns too many golf clubs would feel. Then he says: Tell Gerald to show his wife the letter. Not the AI. The letter. Pull him back.",
+  "keywords_scene3": [
+    "man at computer emotional crying dramatic office",
+    "woman reading paper notepad office professional",
+    "couple talking emotional dramatic living room"
+  ],
+  "scene3_overlays": [
+    {"lines": "*MESSAGE TWO|GERALD FROM PHOENIX", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "The AI wrote his resignation letter. It was perfect. He cried.", "sub": "Now he thinks AI understands him better than his wife.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Brad: The AI predicted him. It did not understand him.", "sub": "Show your wife the letter. Not the AI. The letter.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene4_solution": "Message three. Laneekia pauses before she reads this one. She says: Brad, this last one is from a man who did not leave his name. He just said: I asked the AI what it thought of me and it said — nothing. It just said nothing. And he found that worse. Brad nods slowly. He says: Tell him the AI was not being cold. The AI had no data on him. He has not generated enough of a digital footprint for a machine to form an opinion. Then Brad stops. He thinks about this for a second. He says: Actually. Tell him that might be the best news anyone has gotten all week. Pull him back.",
+  "keywords_scene4": [
+    "man sitting alone quiet thinking dramatic window",
+    "office secretary concerned reading professional",
+    "person relieved calm breathing dramatic"
+  ],
+  "scene4_overlays": [
+    {"lines": "*MESSAGE THREE|ANONYMOUS", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "He asked AI what it thought of him. It said nothing.", "sub": "He found the silence worse.", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Brad: The AI has no data on you.", "sub": "That might be the best news anyone got all week.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene5_ask": "That is Brad's AI Helpline for today. Karen is buying a vegetable. Gerald showed his wife the letter. The anonymous man went outside. Brad closes his notepad. Laneekia asks if he wants his calls held. He says yes. She asks for how long. He says: Until people stop being surprised by the machine. She looks at her calendar. She does not say anything. Brad nods. He already knows. We will be back next week. There are always more messages.",
+  "keywords_scene5": [
+    "office end of day quiet desk lamp dramatic",
+    "person walking outside fresh air dramatic hopeful",
+    "answering machine blinking messages office quiet"
+  ],
+
+  "tagline": "Brad's AI Helpline — because someone has to pull them back.",
+  "rolling_credits": [
+    {
+      "header": "BRAD'S AI HELPLINE"
+    },
+    {
+      "lines": [
+        "Karen is buying broccoli",
+        "Gerald showed his wife the letter",
+        "The anonymous man went outside",
+        "Brad holds his calls",
+        "Laneekia does not check her calendar again",
+        "There are always more messages",
+        "Produced by Song Juicer — dmpgh.com"
+      ]
+    }
+  ]
+}

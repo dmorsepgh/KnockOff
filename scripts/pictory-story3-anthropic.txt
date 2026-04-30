@@ -1,0 +1,21 @@
+An AI company just took the United States military to court. And won.
+
+Anthropic, the company behind Claude, one of the most powerful AI systems in the world, refused to let the Pentagon use its technology for surveillance or autonomous weapons.
+
+The Department of Defense didn't take that well. They tried to label Anthropic a supply chain risk. Basically blacklisting them from government contracts.
+
+So Anthropic sued. And a federal judge sided with them.
+
+Judge Rita Lin called it retaliation. She issued a temporary block preventing the Pentagon from enforcing the designation. In her ruling, she said the government's action was likely a response to Anthropic exercising its First Amendment rights.
+
+Let that sink in. An AI company told the most powerful military in the world no. And a court backed them up.
+
+This case matters for several reasons. First, it sets a precedent. Can AI companies choose how their technology is used, even when the government wants it? According to this ruling, at least for now, yes.
+
+Second, it raises the question every AI company is going to face. Where do you draw the line? Build the most powerful technology in history, and everyone wants a piece of it. Governments, militaries, corporations. Saying no to any of them has consequences.
+
+Anthropic drew their line at weapons and surveillance. Not every company will make the same choice.
+
+This case is far from over. The temporary block is exactly that, temporary. The full trial is coming. And whatever the outcome, it will shape how AI companies and governments interact for years to come.
+
+This is the kind of story that doesn't make the front page. But it should.

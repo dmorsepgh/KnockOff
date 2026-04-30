@@ -1,0 +1,36 @@
+{
+  "scene1_hook": "One million Americans wake up every day wondering which part of their body will betray them next.",
+  "scene2_problem": "That's multiple sclerosis. It attacks the brain. It takes balance, sight, strength. It strikes women three times more than men, usually in their twenties.",
+  "scene3_stakes": "A mother who can't pick up her toddler. A father who can't walk his daughter down the aisle. A young professional who sees the wheelchair coming, and can't stop it. Alone.",
+  "scene4_solution": "Your nineteen dollars a month funds the exact research that's already slowing MS. New therapies mean more mornings without symptoms. More evenings still walking. More years before the wheelchair, if it ever comes at all.",
+  "scene5_ask": "Become a Partner in Progress. Nineteen dollars a month. Visit nationalmssociety.org slash donate. Help someone keep the next morning.",
+  "keywords_scene1": ["person morning window", "waking up worried"],
+  "keywords_scene2": ["brain scan mri", "young woman contemplative"],
+  "keywords_scene3": ["mother child hug", "father daughter wedding"],
+  "keywords_scene4": ["medical research lab", "person walking sunset"],
+  "keywords_scene5": ["hopeful morning light", "hands together"],
+  "scene2_overlays": [
+    {"lines": "MULTIPLE|*SCLEROSIS", "in": 0.3, "out": 2.8, "pos": "right-nose"},
+    {"lines": "IT ATTACKS|*THE BRAIN", "in": 3.0, "out": 5.8, "pos": "right-nose"},
+    {"lines": "*3X MORE|LIKELY IN|WOMEN", "in": 6.2, "out": 10.8, "pos": "right-nose"}
+  ],
+  "scene4_overlays": [
+    {"style": "bullet", "head": "MORE MORNINGS", "sub": "without symptoms", "in": 7.5, "out": 14.0, "x": 1080, "y": 140},
+    {"style": "bullet", "head": "MORE EVENINGS", "sub": "still walking", "in": 9.5, "out": 14.0, "x": 1080, "y": 350},
+    {"style": "bullet", "head": "MORE YEARS", "sub": "before the wheelchair", "in": 11.0, "out": 14.0, "x": 1080, "y": 560}
+  ],
+  "rolling_credits": [
+    {"header": "AI VOCAL ARTIST", "lines": ["presents", ""]},
+    {"header": "", "lines": ["HELP SOMEONE KEEP THE NEXT MORNING", "a National MS Society story"]},
+    {"header": "PRODUCED BY", "lines": ["Douglas Morse", "vocal artist extraordinaire"]},
+    {"header": "", "lines": ["Douglas Morse has lived with MS since 1999"]},
+    {"header": "WRITTEN & DIRECTED BY", "lines": ["AI Claude (Anthropic)"]},
+    {"header": "PRODUCTION ENVIRONMENT", "lines": ["VS Code + Claude Code"]},
+    {"header": "VOICE", "lines": ["OpenAI TTS — 'Nova'"]},
+    {"header": "STOCK FOOTAGE", "lines": ["Pexels"]},
+    {"header": "MUSIC", "lines": ["emotional piano", "dramatic violin"]},
+    {"header": "RENDERED WITH", "lines": ["ffmpeg · Python · Pillow"]},
+    {"header": "CONTACT", "lines": ["dmpgh.com", "aiva@dmpgh.com"]},
+    {"header": "", "lines": ["", "© 2026 AI VOCAL ARTIST", "all rights reserved"]}
+  ]
+}

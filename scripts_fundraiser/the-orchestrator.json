@@ -1,0 +1,65 @@
+{
+  "scene1_hook": "There is a question nobody asks when the video comes out looking polished. Who actually made it? The answer is not what you expect. An AI did not render the video. An AI did not download the footage. An AI did not mix the audio or burn in the captions or stitch five scenes into a finished film. A forty-eight gigabyte Apple Silicon chip did that. The AI did something different. The AI decided what to do, in what order, and told everything else when to move. That is called orchestration. And it changes what one person can build.",
+  "keywords_scene1": [
+    "orchestra conductor podium dramatic",
+    "film director calling action set",
+    "AI control center multiple screens"
+  ],
+  "scene1_overlays": [
+    {"lines": "*THE ORCHESTRATOR|HOW IT WORKS", "in": 0.5, "out": 4.0, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "AI did not render this video", "sub": "Your M4 Pro did", "in": 4.5, "out": 10.0},
+    {"style": "bullet", "head": "AI decided what to do", "sub": "And told everything else when to move", "in": 10.5, "out": 16.0}
+  ],
+
+  "scene2_problem": "Here is what is actually happening every time a video comes out of this pipeline. OpenAI's servers generate the narration voice — that is a cloud API call that comes back in under two seconds. Pexels finds and downloads the b-roll footage — another API, their servers, their library. Anthropic's servers write the script if one wasn't written by hand. Three cloud services. All of them running simultaneously. Meanwhile, on the local machine, FFmpeg is stitching video, mixing audio, burning captions, and encoding the final file. Whisper is transcribing the narration to generate the subtitle track. yt-dlp is pulling song audio from SoundCloud. All of it running on a Mac mini with an M4 Pro chip and forty-eight gigabytes of RAM sitting on a desk in Pittsburgh.",
+  "keywords_scene2": [
+    "server data center cloud computing",
+    "Mac mini desk home studio setup",
+    "API connection network diagram"
+  ],
+  "scene2_overlays": [
+    {"lines": "*THE FULL|STACK", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Cloud: Voice, b-roll, script", "sub": "OpenAI — Pexels — Anthropic", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Local: Render, captions, audio mix", "sub": "FFmpeg — Whisper — yt-dlp", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "One Mac mini in Pittsburgh", "sub": "M4 Pro — 48GB RAM", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene3_stakes": "The cost of producing one video is almost nothing. FFmpeg is free. Whisper is free. yt-dlp is free. The only real cost is the voice — one to three cents per video using OpenAI's text to speech. A production house charges thousands of dollars for what this pipeline outputs in under ten minutes. The reason that is possible is not that AI replaced the production team. It is that AI replaced the coordinator. The person who used to sit between the writer, the editor, the voice talent, and the music library — the one who scheduled everything, handed off files, followed up, and made sure the pieces fit together — that role is now software. The creative decisions still require a human. The logistics do not.",
+  "keywords_scene3": [
+    "video production studio expensive equipment",
+    "money coins budget low cost",
+    "workflow automation pipeline diagram"
+  ],
+  "scene3_overlays": [
+    {"lines": "*THE COST|ALMOST ZERO", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "FFmpeg, Whisper, yt-dlp: free", "sub": "Voice TTS: $0.01–0.03 per video", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Production house: thousands", "sub": "This pipeline: under 10 minutes", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "AI replaced the coordinator", "sub": "Not the creator — the logistics", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene4_solution": "The orchestrator model works like this. A human provides the idea. The AI writes the production instructions — what to say, in what order, what footage to find, what music to pull, how to time the overlays. Then it hands those instructions to a chain of specialized tools, each one the best in the world at its specific job. FFmpeg has been refined by thousands of engineers over twenty years. Whisper was trained on hundreds of thousands of hours of audio. OpenAI's voice models have been tuned on more speech data than any human will ever hear. The AI does not compete with those tools. It coordinates them. It is the conductor. The tools are the orchestra. The human is the one who decides what music gets played.",
+  "keywords_scene4": [
+    "conductor orchestra performance symphony",
+    "workflow tools connected diagram",
+    "human creative direction team leadership"
+  ],
+  "scene4_overlays": [
+    {"lines": "*THE MODEL|HUMAN + AI + TOOLS", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Human: the idea", "sub": "What music gets played", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "AI: the production instructions", "sub": "What, in what order, how", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "Tools: specialized execution", "sub": "FFmpeg — Whisper — OpenAI — Pexels", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene5_ask": "One person. One Mac. Sixty songs in the library. Commercials. Explainers. News segments. Business cards that talk. Voice assistants that answer to your name. All of it running on a pipeline that costs almost nothing and outputs in under ten minutes. That is not a media company. That is one person who understood that the orchestrator role was available — and took it. The tools were always there. The question was who was going to pick up the baton. That is what AI Foundation teaches. Not how to use AI. How to conduct it. Join us. The orchestra is ready.",
+  "keywords_scene5": [
+    "one person laptop studio powerful",
+    "conductor podium orchestra performance",
+    "technology empowerment individual creator"
+  ],
+
+  "tagline": "The tools were always there. The question was who would pick up the baton.",
+  "rolling_credits": [
+    {"header": "AI Foundation"},
+    {"lines": ["Doug Morse", "Local AI Vocal Artist", "aif.dmpgh.com/join", "$49/month"]}
+  ]
+}

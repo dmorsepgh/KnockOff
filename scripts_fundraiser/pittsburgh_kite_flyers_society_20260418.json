@@ -1,0 +1,45 @@
+{
+  "scene1_hook": "Zoom in on a vintage kite soaring above the Pittsburgh skyline.",
+  "keywords_scene1": [
+    "vintage kites",
+    "cityscape",
+    "flight"
+  ],
+  "scene2_problem": "But as our children's playgrounds fill with screens, the ancient art of kite flying is disappearing. Only 15% of kids fly a kite on their birthday.",
+  "keywords_scene2": [
+    "kite flying",
+    "kids",
+    "birthday"
+  ],
+  "scene3_stakes": "Imagine a world where future generations lose touch with the thrill and wonder of flight. It's a loss that will leave us grounded and grey.",
+  "keywords_scene3": [
+    "flightless",
+    "future",
+    "generations"
+  ],
+  "scene4_solution": "The Pittsburgh Kite Flyers Society is dedicated to keeping this timeless tradition alive. Your donation funds workshops, materials, and community events.",
+  "keywords_scene4": [
+    "kite flying",
+    "community",
+    "workshops"
+  ],
+  "scene5_ask": "Join us in preserving the art of kite flying for generations to come. Donate now at pghkites.org/donate and give the gift of flight!",
+  "keywords_scene5": [
+    "donate",
+    "flight",
+    "generations"
+  ],
+  "tagline": "Keep Kites Soaring",
+  "rolling_credits": [
+    {
+      "header": "Produced by"
+    },
+    {
+      "lines": [
+        "Doug Morse",
+        "AI Vocal Artist",
+        "dmpgh.com"
+      ]
+    }
+  ]
+}

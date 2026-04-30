@@ -1,0 +1,64 @@
+{
+  "scene1_hook": "There is a version of Claude that most people have never used. Not the chatbox. Not the mobile app. The version that sits directly inside your code editor, reads every file in your project, and builds entire applications while you watch. It is called Claude Code. And the setup takes less than five minutes. If you have never written a line of code in your life — that is okay. This is where you start.",
+  "keywords_scene1": [
+    "VS Code editor dark screen coding",
+    "developer typing code computer screen",
+    "AI assistant code generation terminal"
+  ],
+  "scene1_overlays": [
+    {"lines": "*CLAUDE CODE|INSIDE VS CODE", "in": 0.5, "out": 4.0, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Not the chatbox", "sub": "This is Claude at full power", "in": 4.5, "out": 10.0},
+    {"style": "bullet", "head": "Reads your entire project", "sub": "Builds while you watch", "in": 10.5, "out": 16.0}
+  ],
+
+  "scene2_problem": "Here is the problem with the way most people use Claude. They type a question into a browser tab. Claude answers. They copy the answer. They paste it somewhere. That is not a workflow — that is a clipboard. Claude Code is different. It lives inside Visual Studio Code, which is the most widely used code editor on earth and it is completely free. When Claude Code is running inside VS Code, it can see your files, your folders, your project structure. It does not need you to copy and paste anything. It works directly on your actual project. That is the difference between asking someone for directions and putting them in the passenger seat.",
+  "keywords_scene2": [
+    "split screen browser vs code editor comparison",
+    "copy paste clipboard frustration",
+    "VS Code file explorer project tree"
+  ],
+  "scene2_overlays": [
+    {"lines": "*THE PROBLEM|WITH COPY-PASTE", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Browser tab = clipboard workflow", "sub": "Claude can't see your project", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Claude Code = passenger seat", "sub": "It sees everything. Works directly.", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene3_stakes": "The setup is three steps. First, download VS Code from code.visualstudio.com — free, available for Mac, Windows, and Linux. Open it, create a new folder for your project. Second, open the terminal inside VS Code — go to Terminal, then New Terminal. Third, go to claude.ai, find the Claude Code documentation, copy the one-line install command, paste it into the terminal, and press enter. That is it. Claude Code installs in about thirty seconds. Type the word claude, press enter, and you are in. You will need a Claude subscription — twenty dollars a month — but what you get access to makes that the most productive twenty dollars you will spend.",
+  "keywords_scene3": [
+    "VS Code download install Mac computer",
+    "terminal command line install npm",
+    "claude.ai documentation website"
+  ],
+  "scene3_overlays": [
+    {"lines": "*THREE STEPS|TO INSTALL", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Step 1: Download VS Code", "sub": "code.visualstudio.com — free", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Step 2: Open terminal in VS Code", "sub": "Terminal → New Terminal", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "Step 3: Run the install command", "sub": "Type claude. Press enter. Done.", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene4_solution": "Once you are inside Claude Code, the most powerful feature is Plan Mode. Hit Shift and Tab to switch into it. In Plan Mode, Claude does not start building immediately. It reads your project, thinks through the approach, lays out a step-by-step plan, and asks you to approve it before touching a single file. That one feature changes everything. Instead of Claude making a hundred small decisions without asking — you see the whole plan, you approve it or redirect it, and then it executes. You stay in control. Claude does the work. That is the setup that the people building serious things are using right now.",
+  "keywords_scene4": [
+    "plan mode AI workflow diagram",
+    "developer reviewing code plan approval",
+    "VS Code Claude Code plan mode interface"
+  ],
+  "scene4_overlays": [
+    {"lines": "*PLAN MODE|THE GAME CHANGER", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Shift + Tab = Plan Mode", "sub": "Claude plans before it builds", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "You approve. Then it executes.", "sub": "You stay in control", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "This is how serious builders use it", "sub": "Not copy-paste. Direct execution.", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene5_ask": "Claude Code inside VS Code is the closest thing to having a senior developer working alongside you, right inside your project, at any hour. It does not get tired. It does not need context — it reads the context. It does not ask you to explain things twice. The people learning this setup right now are the ones who will be first to the table when their company, their team, or their industry starts asking who knows how to work with AI. That seat has your name on it. Twenty dollars a month. Five minutes to install. The rest is up to you. Join us at AI Foundation and let us show you exactly what to build with it.",
+  "keywords_scene5": [
+    "developer laptop working night productive",
+    "AI expert confident professional desk",
+    "technology learning online course laptop"
+  ],
+
+  "tagline": "The seat at the table has your name on it. Five minutes to get there.",
+  "rolling_credits": [
+    {"header": "AI Foundation"},
+    {"lines": ["Taught by Doug Morse", "Local AI Vocal Artist", "aif.dmpgh.com/join", "$49/month"]}
+  ]
+}

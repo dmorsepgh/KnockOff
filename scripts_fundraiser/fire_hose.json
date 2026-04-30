@@ -1,0 +1,77 @@
+{
+  "scene1_hook": "Seven hundred billion dollars is going into AI infrastructure. That number is so large it stops meaning anything. So let's make it mean something. That money is not aimed at OpenAI. It is not aimed at Microsoft. It is not aimed at the people who built the models or laid the fiber or welded the server racks. Every dollar of that seven hundred billion has to earn a return. Which means somebody, somewhere, has to be using these tools to make money. That somebody is you. If you figure it out before the next person does.",
+  "keywords_scene1": [
+    "data center server room technology infrastructure dramatic",
+    "money financial investment growth business dramatic",
+    "technology innovation future digital network global"
+  ],
+  "scene1_overlays": [
+    {"lines": "*$700 BILLION|WHO IS IT AIMED AT", "in": 0.5, "out": 4.0, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Not aimed at OpenAI or Microsoft", "sub": "Every dollar needs to earn a return", "in": 4.5, "out": 10.0},
+    {"style": "bullet", "head": "Somebody has to use these tools to make money", "sub": "That somebody is the small operator", "in": 10.5, "out": 16.0}
+  ],
+
+  "scene2_problem": "Here is what most people get wrong about technological revolutions. They watch the big companies build things and assume the money follows the builders. It does not. The railroad barons built the tracks. The people who got rich were the ones who put cattle on the trains. Standard Oil built the pipeline. The people who got rich were the ones who figured out what to ship through it. The hyperscalers built the highway. The toll booths are wide open right now. Most people are still standing on the side of the road trying to figure out if this is real.",
+  "keywords_scene2": [
+    "railroad train tracks historical vintage infrastructure",
+    "highway road wide open empty opportunity driving",
+    "toll booth road highway gate open opportunity"
+  ],
+  "scene2_overlays": [
+    {"lines": "*THE HIGHWAY|IS ALREADY BUILT", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Railroad barons built the tracks", "sub": "Cattle ranchers made the money", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Hyperscalers built the highway", "sub": "Toll booths are wide open right now", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene3_stakes": "The window is not infinite. Every technological cycle has an early period where the tools are available, the competition is thin, and the advantage goes to whoever moves first. That window closes. Not because the tools go away but because everyone else catches up. The person who figured out email marketing in 1999 made a fortune. The person who figured it out in 2009 made a living. The person who figures it out in 2019 is fighting for scraps. We are in 1999 for AI-produced content. Not 2009. Not 2019. Right now.",
+  "keywords_scene3": [
+    "clock timer urgency deadline time running out",
+    "early mover advantage business competition race",
+    "calendar window closing opportunity limited time"
+  ],
+  "scene3_overlays": [
+    {"lines": "*THE WINDOW|IS OPEN RIGHT NOW", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Email marketing 1999 — fortune", "sub": "Email marketing 2019 — scraps", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "AI content — we are in 1999", "sub": "The window closes. It always closes.", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "Competition is thin right now", "sub": "That is the only time this sentence is true", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene4_solution": "The people who get rich in this cycle will not be the ones who built the road. They will be the ones who showed up early with a truck full of stuff to sell. A finished product. A real offer. A thing that someone wants to buy. You do not need to understand how the models work. You do not need a computer science degree. You need a pipeline that produces something people will pay for, and the discipline to show up and sell it. The infrastructure is there. The tools are free or nearly free. The only thing left is the truck.",
+  "keywords_scene4": [
+    "truck delivery product business entrepreneur working",
+    "small business owner working laptop confident success",
+    "pipeline production workflow system working efficient"
+  ],
+  "scene4_overlays": [
+    {"lines": "*THE TRUCK|FULL OF STUFF TO SELL", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "You don't need to build the road", "sub": "You need something to sell on it", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Infrastructure: already there", "sub": "Tools: free or nearly free", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "Pipeline that produces something people buy", "sub": "Plus the discipline to sell it", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene5_ask": "You are already wet. That is the situation. The question is not whether to get in — you are in. The question is which direction you are swimming. The money is not a mystery. The tools are not a mystery. The window is open. The toll booths are unmanned. The highway runs straight in front of you. The only variable left is whether you show up tomorrow with your truck, or you keep watching the people who do and wondering how they figured it out. They did not figure anything out. They just showed up.",
+  "keywords_scene5": [
+    "entrepreneur confident walking forward determined success",
+    "open road highway driving toward horizon opportunity",
+    "business person laptop working coffee shop productive"
+  ],
+
+  "tagline": "The highway is built. The toll booths are open. Show up with your truck.",
+  "rolling_credits": [
+    {
+      "header": "THE FIRE HOSE"
+    },
+    {
+      "lines": [
+        "AI infrastructure investment: $700 billion (2024-2026)",
+        "The highway: built by hyperscalers",
+        "The toll booths: wide open",
+        "The window: open right now — not forever",
+        "What you need: a pipeline and something to sell",
+        "What you don't need: a computer science degree",
+        "The only variable: whether you show up",
+        "Produced by Song Juicer — dmpgh.com"
+      ]
+    }
+  ]
+}

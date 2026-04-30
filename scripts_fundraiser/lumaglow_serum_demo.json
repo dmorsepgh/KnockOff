@@ -1,0 +1,53 @@
+{
+  "scene1_hook": "Your skin deserves more than a promise.",
+  "keywords_scene1": [
+    "glowing skin woman",
+    "skincare routine",
+    "beautiful face closeup"
+  ],
+  "scene1_overlays": [
+    { "text": "Visibly brighter in 7 days", "in": 1.5, "out": 5.0 }
+  ],
+  "scene2_problem": "Most serums are packed with fillers, artificial fragrance, and empty claims. Your skin absorbs everything — so what goes in matters.",
+  "keywords_scene2": [
+    "skincare product ingredients",
+    "woman frustrated skin",
+    "cosmetics labels"
+  ],
+  "scene2_overlays": [
+    { "text": "No fillers. No fragrance. No shortcuts.", "in": 1.5, "out": 5.5 }
+  ],
+  "scene3_stakes": "Dull skin, dark spots, and uneven tone don't have to be permanent. The right ingredients — at the right concentration — actually work.",
+  "keywords_scene3": [
+    "vitamin c skincare",
+    "glowing skin before after",
+    "woman mirror confidence"
+  ],
+  "scene4_solution": "LumaGlow Vitamin C Serum delivers 20% pure L-Ascorbic Acid directly to your skin — brightening, firming, and fading spots in as little as one week. Clinically tested. Clean formula.",
+  "keywords_scene4": [
+    "serum dropper bottle",
+    "skincare luxury",
+    "clean beauty product"
+  ],
+  "scene4_overlays": [
+    { "text": "20% Vitamin C  |  Clinically Tested  |  Clean Formula", "in": 1.5, "out": 6.0 }
+  ],
+  "scene5_ask": "Try LumaGlow risk-free for 30 days. If your skin doesn't glow, you pay nothing. Order now at LumaGlow.com.",
+  "keywords_scene5": [
+    "online shopping beauty",
+    "happy woman skincare",
+    "product unboxing luxury"
+  ],
+  "tagline": "Glow. Guaranteed.",
+  "rolling_credits": [
+    {
+      "header": "LumaGlow Skincare"
+    },
+    {
+      "lines": [
+        "AI Video Production by Doug Morse",
+        "dmpgh.com"
+      ]
+    }
+  ]
+}

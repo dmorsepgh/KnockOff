@@ -1,0 +1,53 @@
+{
+  "scene1_hook": "Breaking tonight — the skincare industry may never recover.",
+  "keywords_scene1": [
+    "news studio broadcast",
+    "breaking news screen",
+    "television anchor desk"
+  ],
+  "scene1_overlays": [
+    { "text": "BREAKING: Dermatologists Concerned", "in": 1.5, "out": 6.0 }
+  ],
+  "scene2_problem": "For decades, women have spent billions on creams, serums, and dermatologist visits. Experts now say most of it was overpriced. Significantly overpriced.",
+  "keywords_scene2": [
+    "skincare products shelf",
+    "woman applying cream",
+    "cosmetics beauty store"
+  ],
+  "scene2_overlays": [
+    { "text": "Americans Spent $22 Billion on Skincare Last Year", "in": 1.5, "out": 6.0 }
+  ],
+  "scene3_stakes": "A clinical-grade Vitamin C compound — used in dermatology offices for years — is now available direct to consumer. At a fraction of the cost. Dermatologists in three states have filed formal complaints.",
+  "keywords_scene3": [
+    "vitamin c serum dropper",
+    "dermatologist office",
+    "skincare laboratory science"
+  ],
+  "scene4_solution": "The product is called LumaGlow. Twenty percent pure Vitamin C. Clinically tested. Results reported in as little as seven days. We reached out to the manufacturer for comment. They said: it works.",
+  "keywords_scene4": [
+    "serum bottle luxury skincare",
+    "glowing skin woman closeup",
+    "clean beauty product white"
+  ],
+  "scene4_overlays": [
+    { "text": "LumaGlow: 20% Vitamin C  |  Results in 7 Days  |  30-Day Guarantee", "in": 1.5, "out": 7.0 }
+  ],
+  "scene5_ask": "Try LumaGlow risk-free for thirty days. If your skin doesn't glow, you pay nothing. Order at LumaGlow dot com. This has been Freddy Scott. Good night.",
+  "keywords_scene5": [
+    "woman smiling glowing skin",
+    "online shopping phone",
+    "happy woman beauty confidence"
+  ],
+  "tagline": "This has been Freddy Scott. Good night.",
+  "rolling_credits": [
+    {
+      "header": "LumaGlow Skincare"
+    },
+    {
+      "lines": [
+        "A Freddy Scott Report",
+        "AI Video Production — dmpgh.com"
+      ]
+    }
+  ]
+}

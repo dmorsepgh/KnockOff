@@ -1,0 +1,80 @@
+{
+  "scene1_hook": "In April 2026, the Acting Attorney General of the United States was a man who had just spent two years defending the President in a criminal trial the President lost. His name is Todd Blanche. He grew up in Gainesville, Florida. He went to Brooklyn Law School at night while working as a paralegal at the U.S. Attorney's Office in Manhattan. He became a federal prosecutor. He became a white-shoe defense attorney. And then he resigned from his law firm — because they told him he could not take the client he wanted — and bet his entire career on one man. It paid off.",
+  "keywords_scene1": [
+    "Department of Justice Washington DC building exterior",
+    "federal courthouse Manhattan New York legal",
+    "attorney lawyer professional suit courtroom"
+  ],
+  "scene1_overlays": [
+    {"lines": "*TODD BLANCHE|ACTING ATTORNEY GENERAL", "in": 0.5, "out": 4.0, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Born Denver · Raised Gainesville, Florida", "sub": "Brooklyn Law School — night school while working at SDNY", "in": 4.5, "out": 10.0},
+    {"style": "bullet", "head": "Resigned his firm to defend Trump", "sub": "Firm said no. He left anyway.", "in": 10.5, "out": 16.0}
+  ],
+
+  "scene2_problem": "Todd Blanche did not start at the top. He graduated cum laude from Brooklyn Law School in 2003 — but he had attended at night, working days as a paralegal inside the very office he would later join as a prosecutor. In 2006 he became an Assistant U.S. Attorney in the Southern District of New York. He tried fifteen federal jury trials. He ran the Violent Crimes unit and the White Plains division. He handled public corruption, organized crime, securities fraud, RICO. He spent eight years building the kind of prosecutorial reputation that makes private law firms want to hire you — which is exactly what happened in 2014 when he left for WilmerHale, then Cadwalader.",
+  "keywords_scene2": [
+    "federal prosecutor courtroom trial jury legal proceeding",
+    "law office attorney desk documents working professional",
+    "New York City Manhattan skyline legal district"
+  ],
+  "scene2_overlays": [
+    {"lines": "*SDNY|EIGHT YEARS", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "15 federal jury trials as lead counsel", "sub": "Violent Crimes unit · White Plains division chief", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Public corruption · RICO · securities fraud", "sub": "Left SDNY in 2014 for private practice", "in": 10.0, "out": 15.5}
+  ],
+
+  "scene3_stakes": "In private practice Blanche represented Paul Manafort on New York state mortgage fraud charges — getting the case dismissed on double jeopardy grounds. He represented associates of Rudy Giuliani. He was building a profile in high-stakes political defense work. Then in April 2023, Trump needed a new defense attorney. Blanche wanted the case. The senior leadership at Cadwalader, Wickersham and Taft told him he could not take it. So he resigned, started his own firm, and accepted the most scrutinized criminal defense assignment in American history. His client was facing ninety-one felony counts across four separate cases.",
+  "keywords_scene4": [
+    "criminal defense attorney client meeting private legal",
+    "press conference media cameras microphones political",
+    "courtroom legal proceeding high profile case dramatic"
+  ],
+  "scene3_overlays": [
+    {"lines": "*THE BET|APRIL 2023", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Cadwalader told him no — he resigned", "sub": "Started Blanche Law to take the case", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Trump facing 91 felony counts across 4 cases", "sub": "Most scrutinized criminal defense in American history", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "Defended Paul Manafort before Trump", "sub": "Case dismissed on double jeopardy grounds", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene4_solution": "The New York hush money trial ended with a conviction on all thirty-four counts in May 2024. Blanche had argued Michael Cohen was a liar who could not be trusted. The jury did not agree on that point. But six months later, Trump won the presidential election. The federal cases were dropped. The conviction was rendered politically irrelevant. Trump nominated Blanche as Deputy Attorney General. The Senate confirmed him fifty-two to forty-six in March 2025. By April 2026, Pam Bondi was out as Attorney General and Blanche — the man who lost the New York trial and won the larger war — was running the Department of Justice.",
+  "keywords_scene4": [
+    "US Senate chamber vote confirmation Washington political",
+    "Department of Justice seal logo official government",
+    "election results victory celebration political campaign"
+  ],
+  "scene4_overlays": [
+    {"lines": "*CONVICTED IN MAY|CONFIRMED IN MARCH", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Trump convicted on 34 counts — May 2024", "sub": "Trump won the presidency — November 2024", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Confirmed Deputy AG — March 5, 2025 (52-46)", "sub": "Acting AG — April 2026 after Bondi fired", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "Lost the trial. Won the career.", "sub": "Now he runs the DOJ.", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene5_ask": "Todd Blanche is forty-one years old. He is the second most powerful law enforcement official in the United States. He got there by taking a case his own firm told him to walk away from. The verdict in that case was guilty on thirty-four counts. The outcome of that case was the presidency of the United States and the job he currently holds. Whatever you think of the politics, the career arc is something else entirely. A kid who went to law school at night while working days as a paralegal is now running the Department of Justice. That is the story.",
+  "keywords_scene5": [
+    "Department of Justice building Washington DC official",
+    "attorney general law enforcement official portrait",
+    "American flag government building Washington power"
+  ],
+
+  "tagline": "He lost the trial. He won the career. Now he runs the DOJ.",
+  "rolling_credits": [
+    {
+      "header": "TODD BLANCHE"
+    },
+    {
+      "lines": [
+        "Born: August 6, 1974 — Denver, Colorado",
+        "Raised: Gainesville, Florida",
+        "Education: American University (BA) · Brooklyn Law School (JD, cum laude)",
+        "SDNY prosecutor: 2006–2014 (8 years, 15 federal jury trials)",
+        "Private practice: WilmerHale · Cadwalader · Blanche Law",
+        "Represented: Paul Manafort (NY state charges, dismissed)",
+        "Trump defense: Hired April 2023",
+        "Hush money verdict: Guilty, 34 counts — May 30, 2024",
+        "Confirmed Deputy AG: March 5, 2025 (52–46)",
+        "Acting AG: April 2026 (after Pam Bondi fired)",
+        "Produced by Song Juicer — dmpgh.com"
+      ]
+    }
+  ]
+}

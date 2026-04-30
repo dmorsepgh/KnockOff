@@ -1,0 +1,44 @@
+{
+  "scene1_hook": "Imagine waking up one morning and losing the use of your legs.",
+  "keywords_scene1": [
+    "person walking with cane",
+    "leg weakness",
+    "multiple sclerosis"
+  ],
+  "scene2_problem": "In America, over 900,000 people are living with multiple sclerosis. It's a disease that ravages nerve cells, leaving no room for error.",
+  "keywords_scene2": [
+    "nerve damage",
+    "brain scan",
+    "neurodegenerative"
+  ],
+  "scene3_stakes": "If we don't act now, MS will continue to silence its victims, stealing their independence and hope.",
+  "keywords_scene3": [
+    "independence",
+    "hope",
+    "silenced voices"
+  ],
+  "scene4_solution": "The National Multiple Sclerosis Society is on the frontlines of a cure. Your donation will fuel groundbreaking research and support those affected by MS.",
+  "keywords_scene4": [
+    "research lab",
+    "lab coat",
+    "scientist"
+  ],
+  "scene5_ask": "Will you join us in the fight against MS? Donate now at DMPGH.com/Donate and help bring hope back to millions of Americans.",
+  "keywords_scene5": [
+    "donation",
+    "pledge",
+    "hope"
+  ],
+  "tagline": "Hope Restored",
+  "rolling_credits": [
+    {
+      "header": "The National Multiple Sclerosis Society"
+    },
+    {
+      "lines": [
+        "Produced by Doug Morse",
+        "AI Vocal Artist dmpgh.com"
+      ]
+    }
+  ]
+}

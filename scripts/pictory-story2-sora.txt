@@ -1,0 +1,21 @@
+OpenAI just killed Sora. And the real reason might surprise you.
+
+Sora launched six months ago as the future of AI video. Text in, video out. Hollywood was nervous. Creators were excited. Everyone thought this was the moment.
+
+It peaked at a million users. Then it collapsed to half that. The app was hemorrhaging money. We're talking a million dollars a day just to keep the servers running.
+
+Here's what nobody talks about. Video generation is astronomically expensive. Every clip Sora generated required massive computing power. And users weren't paying enough to cover it.
+
+Disney had a billion-dollar partnership deal in the works. That's dead now too.
+
+The lesson here isn't that AI video doesn't work. It works too well. The technology outpaced the business model. You can build something incredible, but if it costs more to run than people will pay for it, the math doesn't work.
+
+This is the dirty secret of generative AI right now. The technology is amazing. The economics are brutal.
+
+OpenAI isn't the only one feeling this. Every company running large AI models is burning through cash at an alarming rate. The question isn't can we build it. The question is can we afford to run it.
+
+Sora will probably come back in some form. Maybe as a premium product with higher pricing. Maybe integrated into ChatGPT for shorter clips. But the days of unlimited AI video generation for twenty dollars a month are over.
+
+The gold rush mentality hit a wall. And that wall is your electric bill.
+
+Keep that in mind next time someone tells you AI is going to replace everything overnight. The technology is ready. The economics aren't. Not yet.

@@ -1,0 +1,65 @@
+{
+  "scene1_hook": "The man who helped invent modern AI says the entire industry is heading the wrong direction. Yann LeCun, Chief AI Scientist at Meta, put it bluntly: 'There is absolutely no way that autoregressive LLMs will reach human intelligence.' He called them, quote, 'an off ramp on the road to human-level AI.' OpenAI, Google, and Anthropic are betting trillions on scale. LeCun is betting on something completely different. Tonight, we break down why — and what he says comes next.",
+  "keywords_scene1": [
+    "news studio broadcast",
+    "breaking news screen",
+    "artificial intelligence robot"
+  ],
+  "scene1_overlays": [
+    {"lines": "*AI WEEKLY|SPECIAL REPORT", "in": 0.5, "out": 4.0, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "LeCun: LLMs will fail", "sub": "\"No way\" to human intelligence", "in": 4.5, "out": 10.0},
+    {"style": "bullet", "head": "An off ramp, not a highway", "sub": "Trillions on the wrong bet?", "in": 10.5, "out": 16.0}
+  ],
+
+  "scene2_problem": "Here is LeCun's core argument. ChatGPT, Claude, Gemini — all large language models — predict the next token. They are extraordinarily good at it. But LeCun says text prediction is fundamentally incapable of producing real-world intelligence. A child learns to walk, catch a ball, and understand that a cup on a table edge will fall — without reading a single sentence. Language models have none of that. No sense of time passing. No understanding of physics. No ability to plan beyond the next token. LeCun calls this the 'dark matter of intelligence' — the vast knowledge humans carry that was never written down. Common sense. Embodied intuition. Cause and effect. These cannot be learned from a text corpus — no matter how large, no matter how long you train. More data will not fix a fundamental architectural gap.",
+  "keywords_scene2": [
+    "robot learning environment",
+    "child playing physics",
+    "language model text screen"
+  ],
+  "scene2_overlays": [
+    {"lines": "*THE PROBLEM|WITH LLMs", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Dark matter of intelligence", "sub": "Knowledge never written down", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "No physics. No time. No planning.", "sub": "Text alone cannot teach this", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "Scaling won't fix it", "sub": "More data — same hard ceiling", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene3_stakes": "The stakes could not be higher. If LeCun is right, the hundreds of billions being poured into scaling language models are chasing a dead end. True machine intelligence — systems that reason, plan, and act over days and weeks — requires a completely different architecture. LeCun calls it a World Model. Instead of predicting words, the system builds internal representations of how the world physically evolves. It learns from sensory data — video, audio, touch — organized in a hierarchy. Low-level physical interactions at the base. Abstract goals and multi-step reasoning at the top. And critically, it develops common sense through self-supervised learning — not from human-labeled data, but from simply watching the world. LeCun points to a cliff analogy: current AI systems have no concept of danger. They have no world model that tells them falling off a cliff has consequences. They predict the next frame. They do not understand what it means.",
+  "keywords_scene3": [
+    "world model concept visualization",
+    "hierarchical data structure",
+    "sensory neural network brain"
+  ],
+  "scene3_overlays": [
+    {"lines": "*WORLD MODELS|THE ALTERNATIVE", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "Predict the world, not words", "sub": "Video, audio, physics as input", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Hierarchy of abstraction", "sub": "Physical → goal-level reasoning", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "Self-supervised common sense", "sub": "No human labels. Just watching.", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene4_solution": "LeCun's concrete proposal is JEPA — the Joint Embedding Predictive Architecture. Instead of generating raw pixels or words, JEPA learns abstract representations of the world and predicts how those representations change over time. Meta has published two versions: I-JEPA for images and V-JEPA for video. V-JEPA 2 hit 77.3% accuracy on the Something-Something benchmark for physical action understanding. V-JEPA 2-AC achieved zero-shot robot deployment from just 62 hours of unlabeled video — no human demonstrations required. That is a machine learning to do tasks it has never been explicitly taught, purely from watching video of the world. This year, LeCun founded AMI Labs — Advanced Machine Intelligence — which raised over one billion dollars in seed funding at a three-and-a-half billion dollar valuation, the largest seed round in European history. The money is following the bet.",
+  "keywords_scene4": [
+    "neural network architecture diagram",
+    "robot arm laboratory",
+    "technology research laboratory"
+  ],
+  "scene4_overlays": [
+    {"lines": "*JEPA|THE SOLUTION", "in": 0.5, "out": 3.5, "x": "(W-w)/2", "y": "80"},
+    {"style": "bullet", "head": "V-JEPA 2: 77.3% accuracy", "sub": "Physical action understanding", "in": 4.0, "out": 9.5},
+    {"style": "bullet", "head": "Zero-shot robot deployment", "sub": "62 hours of unlabeled video", "in": 10.0, "out": 15.5},
+    {"style": "bullet", "head": "AMI Labs: $1B seed round", "sub": "Largest seed in European history", "in": 16.0, "out": 21.5}
+  ],
+
+  "scene5_ask": "The debate is real and the industry is watching closely. Andrej Karpathy, former OpenAI research lead, has acknowledged that LLMs do not have continual learning — a partial concession to LeCun's critique. Geoffrey Hinton, LeCun's longtime collaborator and Turing Award co-winner, disagrees — he believes scaling will reach general intelligence. OpenAI, Google, and Anthropic are betting trillions on exactly that. Yann LeCun is betting on a different path entirely. He may be wrong. But a billion dollars in seed funding and a growing body of robot results say he is not alone. If LeCun is right, the next great leap in artificial intelligence will not come from predicting the next word. This has been your AI Weekly special report. Same time next Monday.",
+  "keywords_scene5": [
+    "technology debate future",
+    "artificial intelligence research lab",
+    "innovation horizon technology"
+  ],
+
+  "tagline": "This has been your AI Weekly special report. Same time next Monday.",
+  "rolling_credits": [
+    {"header": "AI Weekly"},
+    {"lines": ["Produced by Doug Morse", "dmpgh.com"]}
+  ]
+}

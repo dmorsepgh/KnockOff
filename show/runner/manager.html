@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Render Monkey — Manager Panel</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0a0a14; color: #e0e0e0; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; min-height: 100vh; }
+
+        .topbar {
+            background: #111122;
+            border-bottom: 2px solid #cc2222;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .topbar .logo { font-size: 20px; font-weight: 800; }
+        .topbar .logo .hi { color: #cc2222; }
+        .topbar .links { display: flex; gap: 16px; }
+        .topbar .links a { color: #888; font-size: 13px; text-decoration: none; }
+        .topbar .links a:hover { color: #0088ff; }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 24px; }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+        .stat-card {
+            background: #111122;
+            border: 1px solid #1e1e30;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+        .stat-card .num { font-size: 32px; font-weight: 800; }
+        .stat-card .label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+        .stat-card.green .num { color: #22aa44; }
+        .stat-card.orange .num { color: #ff9800; }
+        .stat-card.blue .num { color: #0088ff; }
+        .stat-card.red .num { color: #cc2222; }
+
+        h2 { font-size: 16px; color: #0088ff; margin: 24px 0 14px; text-transform: uppercase; letter-spacing: 1px; }
+
+        .job-row {
+            background: #111122;
+            border: 1px solid #1e1e30;
+            border-radius: 6px;
+            padding: 14px 18px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .job-row .type-badge {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            min-width: 60px;
+            text-align: center;
+        }
+        .type-badge.heygen { background: #ff6600; color: white; }
+        .type-badge.pictory { background: #aa44ff; color: white; }
+        .type-badge.full { background: #0088ff; color: white; }
+
+        .job-row .info { flex: 1; }
+        .job-row .info .title { font-size: 14px; font-weight: 600; }
+        .job-row .info .meta { font-size: 12px; color: #666; margin-top: 2px; }
+        .job-row .info .worker { color: #0088ff; }
+
+        .status-pill {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        .status-pill.available { background: #0a2a0a; color: #22aa44; }
+        .status-pill.claimed { background: #2a1a00; color: #ff9800; }
+        .status-pill.pending_review { background: #332a00; color: #ffaa00; }
+        .status-pill.approved { background: #0a1a33; color: #4488ff; }
+
+        .job-row .actions { display: flex; gap: 6px; }
+
+        .btn {
+            padding: 6px 14px;
+            border: none;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .btn-approve { background: #22aa44; color: white; }
+        .btn-approve:hover { background: #28bb4c; }
+        .btn-reject { background: #cc2222; color: white; }
+        .btn-reject:hover { background: #ee3333; }
+        .btn-preview { background: #1a1a2e; color: #ccc; border: 1px solid #2a2a3e; }
+        .btn-preview:hover { background: #222244; }
+
+        .empty { text-align: center; padding: 30px; color: #444; font-size: 14px; }
+
+        /* Preview modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active { display: flex; }
+        .modal video { max-width: 85vw; max-height: 80vh; border-radius: 8px; }
+        .modal .close { position: absolute; top: 20px; right: 24px; color: white; font-size: 32px; cursor: pointer; }
+
+        .toast {
+            position: fixed; bottom: 24px; right: 24px;
+            background: #22aa44; color: white;
+            padding: 10px 20px; border-radius: 6px;
+            font-size: 13px; font-weight: 600;
+            transform: translateY(20px); opacity: 0;
+            transition: all 0.3s; z-index: 300;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <div class="logo">
+            <span class="hi">Render Monkey</span> — Manager
+        </div>
+        <div class="links">
+            <a href="/">Show Runner</a>
+            <a href="/jobs">Job Board</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="stats">
+            <div class="stat-card green">
+                <div class="num" id="stat-available">0</div>
+                <div class="label">Available</div>
+            </div>
+            <div class="stat-card orange">
+                <div class="num" id="stat-claimed">0</div>
+                <div class="label">In Progress</div>
+            </div>
+            <div class="stat-card red">
+                <div class="num" id="stat-review">0</div>
+                <div class="label">Needs Review</div>
+            </div>
+            <div class="stat-card blue">
+                <div class="num" id="stat-approved">0</div>
+                <div class="label">Approved</div>
+            </div>
+        </div>
+
+        <h2>Needs Your Review</h2>
+        <div id="review-jobs"></div>
+
+        <h2>In Progress</h2>
+        <div id="active-jobs"></div>
+
+        <h2>Available</h2>
+        <div id="available-jobs"></div>
+
+        <h2>Ready to Stitch</h2>
+        <div id="stitch-section"></div>
+
+        <h2>Completed</h2>
+        <div id="completed-jobs"></div>
+    </div>
+
+    <!-- Preview modal -->
+    <div class="modal" id="preview-modal">
+        <span class="close" onclick="closePreview()">×</span>
+        <video id="preview-video" controls></video>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        let jobs = [];
+        const pw = new URLSearchParams(window.location.search).get('pw') || '';
+
+        async function loadJobs() {
+            const res = await fetch('/api/jobs');
+            jobs = await res.json();
+            render();
+        }
+
+        function render() {
+            const review = jobs.filter(j => j.status === 'pending_review');
+            const active = jobs.filter(j => j.status === 'claimed');
+            const available = jobs.filter(j => j.status === 'available');
+            const completed = jobs.filter(j => j.status === 'approved');
+
+            document.getElementById('stat-available').textContent = available.length;
+            document.getElementById('stat-claimed').textContent = active.length;
+            document.getElementById('stat-review').textContent = review.length;
+            document.getElementById('stat-approved').textContent = completed.length;
+
+            document.getElementById('review-jobs').innerHTML = review.length
+                ? review.map(j => jobRow(j, true)).join('')
+                : '<div class="empty">Nothing to review</div>';
+
+            document.getElementById('active-jobs').innerHTML = active.length
+                ? active.map(j => jobRow(j, false)).join('')
+                : '<div class="empty">No jobs in progress</div>';
+
+            document.getElementById('available-jobs').innerHTML = available.length
+                ? available.map(j => jobRow(j, false)).join('')
+                : '<div class="empty">No available jobs</div>';
+
+            document.getElementById('completed-jobs').innerHTML = completed.length
+                ? completed.map(j => jobRow(j, false)).join('')
+                : '<div class="empty">No completed jobs yet</div>';
+
+            // Check for episodes ready to stitch (both jobs approved)
+            const episodes = {};
+            jobs.forEach(j => {
+                if (!episodes[j.episode]) episodes[j.episode] = [];
+                episodes[j.episode].push(j);
+            });
+            let stitchHtml = '';
+            for (const [ep, epJobs] of Object.entries(episodes)) {
+                const allApproved = epJobs.every(j => j.status === 'approved');
+                if (allApproved && epJobs.length >= 2) {
+                    stitchHtml += `
+                    <div class="job-row" style="border-left:4px solid #22aa44;">
+                        <div class="info">
+                            <div class="title">Episode ${ep} — All renders approved</div>
+                            <div class="meta">${epJobs.length} jobs complete</div>
+                        </div>
+                        <button class="btn btn-approve" style="padding:10px 24px;font-size:14px;" onclick="stitchEpisode(${ep})">Stitch Episode ${ep}</button>
+                    </div>`;
+                }
+            }
+            document.getElementById('stitch-section').innerHTML = stitchHtml || '<div class="empty">No episodes ready to stitch</div>';
+        }
+
+        let workersCache = {};
+
+        async function loadWorkers() {
+            try {
+                const res = await fetch('/api/workers');
+                const list = await res.json();
+                list.forEach(w => workersCache[w.name] = w);
+            } catch(e) {}
+        }
+
+        function jobRow(job, showActions) {
+            const claimed = job.claimed_at ? new Date(job.claimed_at).toLocaleString() : '';
+            const workerName = job.claimed_by || '';
+            const uploaded = (job.uploaded_files || []).length;
+            const fileInfo = uploaded > 0 ? `${uploaded} file(s) uploaded` : '';
+
+            // Look up worker payment info
+            const worker = workersCache[workerName] || {};
+            const payInfo = worker.payment_method
+                ? `${worker.payment_method}: ${worker.payment_handle}`
+                : '';
+            const stars = worker.star_rating
+                ? '★'.repeat(worker.star_rating) + '☆'.repeat(5 - worker.star_rating)
+                : '';
+
+            let actions = '';
+            if (showActions && job.status === 'pending_review') {
+                actions = `
+                    <button class="btn btn-preview" onclick="previewJob('${job.id}')">Preview</button>
+                    <button class="btn btn-approve" onclick="approveJob('${job.id}')">Approve & Pay $${job.pay.toFixed(2)}</button>
+                    <button class="btn btn-reject" onclick="rejectJob('${job.id}')">Reject</button>
+                `;
+            }
+
+            return `
+            <div class="job-row">
+                <span class="type-badge ${job.type}">${job.type}</span>
+                <div class="info">
+                    <div class="title">${job.title}</div>
+                    <div class="meta">
+                        ${workerName ? `<span class="worker">${workerName}</span>` : ''}
+                        ${stars ? ` <span style="color:#ff9800;">${stars}</span>` : ''}
+                        ${claimed ? ` · Claimed ${claimed}` : ''}
+                        ${fileInfo ? ` · ${fileInfo}` : ''}
+                    </div>
+                    ${payInfo && showActions ? `<div class="meta" style="color:#22aa44;font-weight:600;margin-top:4px;">Pay via ${payInfo}</div>` : ''}
+                </div>
+                <span class="status-pill ${job.status}">${formatStatus(job.status)}</span>
+                <div class="actions">${actions}</div>
+            </div>`;
+        }
+
+        function formatStatus(s) {
+            return {
+                'available': 'AVAILABLE',
+                'claimed': 'IN PROGRESS',
+                'pending_review': 'NEEDS REVIEW',
+                'approved': 'APPROVED',
+            }[s] || s.toUpperCase();
+        }
+
+        async function previewJob(jobId) {
+            const job = jobs.find(j => j.id === jobId);
+            if (!job || !job.uploaded_files || !job.uploaded_files.length) {
+                alert('No file to preview');
+                return;
+            }
+            const filename = job.uploaded_files[0].filename;
+            const video = document.getElementById('preview-video');
+            video.src = `/api/episodes/${job.episode}/video`;
+            // Try to serve the uploaded file directly
+            video.src = `/api/jobs/${jobId}/preview`;
+            document.getElementById('preview-modal').classList.add('active');
+            video.play();
+        }
+
+        function closePreview() {
+            document.getElementById('preview-modal').classList.remove('active');
+            document.getElementById('preview-video').pause();
+        }
+
+        async function approveJob(jobId) {
+            if (!confirm('Approve this job and release payment?')) return;
+            const res = await fetch(`/api/jobs/${jobId}/approve?pw=${pw}`, { method: 'POST' });
+            const data = await res.json();
+            if (data.success) {
+                showToast('Job approved! Payment released.');
+                loadJobs();
+            } else {
+                alert('Error: ' + (data.error || 'Unknown'));
+            }
+        }
+
+        async function rejectJob(jobId) {
+            const reason = prompt('Reason for rejection (optional):');
+            if (reason === null) return; // Cancelled
+            const res = await fetch(`/api/jobs/${jobId}/reject?pw=${pw}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ reason })
+            });
+            const data = await res.json();
+            if (data.success) {
+                showToast('Job rejected — back on the board.');
+                loadJobs();
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        async function stitchEpisode(epNum) {
+            if (!confirm(`Stitch Episode ${epNum}? This will re-encode and assemble the final video.`)) return;
+            showToast('Stitching... this may take a minute.');
+            try {
+                const res = await fetch(`/api/episodes/${epNum}/stitch?pw=${pw}`, { method: 'POST' });
+                const data = await res.json();
+                if (data.success) {
+                    showToast(`Episode ${epNum} stitched! ${data.duration} runtime.`);
+                    loadJobs();
+                } else {
+                    alert('Stitch failed: ' + (data.error || 'Unknown'));
+                }
+            } catch (e) {
+                alert('Error: ' + e.message);
+            }
+        }
+
+        async function init() {
+            await loadWorkers();
+            await loadJobs();
+        }
+        setInterval(loadJobs, 15000);
+        init();
+    </script>
+</body>
+</html>

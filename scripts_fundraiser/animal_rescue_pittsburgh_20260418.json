@@ -1,0 +1,51 @@
+{
+  "scene1_hook": "Abandoned in the dark of night, a helpless cry echoes through the streets of Pittsburgh.",
+  "keywords_scene1": [
+    "Pittsburgh cityscape",
+    "nighttime streets",
+    "abandoned dog"
+  ],
+  "scene2_problem": "In Allegheny County, over 10,000 animals are abandoned each year. Many never find their way back home.",
+  "keywords_scene2": [
+    "Allegheny County map",
+    "animal shelter statistics",
+    "rescue dogs"
+  ],
+  "scene3_stakes": "Their stories go untold, but the pain and suffering remain \u2013 a harsh reality we can't ignore.",
+  "keywords_scene3": [
+    "sad dog eyes",
+    "forgotten cat",
+    "heartbreaking moment"
+  ],
+  "scene4_solution": "Animal Rescue Pittsburgh is dedicated to rescuing abandoned dogs and cats. Your donation provides life-saving care and second chances.",
+  "keywords_scene4": [
+    "rescue workers",
+    "shelter operations",
+    "donation impact"
+  ],
+  "scene5_ask": "Help us give hope to those who've lost their way. Donate $25 today at animalrescuepgh.org/donate",
+  "keywords_scene5": [
+    "donation button",
+    "give back",
+    "make a difference"
+  ],
+  "tagline": "Giving Hope, One Rescue at a Time",
+  "rolling_credits": [
+    {
+      "header": "Animal Rescue Pittsburgh"
+    },
+    {
+      "lines": [
+        "Produced by:",
+        "Doug Morse",
+        "AI Vocal Artist"
+      ]
+    },
+    {
+      "lines": [
+        "Music and Sound Design:",
+        "dmpgh.com"
+      ]
+    }
+  ]
+}

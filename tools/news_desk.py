@@ -2,21 +2,22 @@
 """
 News Desk Generator - Split-screen interview/news format video generator.
 
-Takes a script with HOST/GUEST markers, avatar photos, and voice assignments.
+Takes a script with named role markers, avatar photos, and voice assignments.
 Produces a split-screen video where only the active speaker's lips move.
+Supports 2 or 3 speakers with automatic layout detection.
 
-Script format:
-    HOST (avatar: photo.jpg, voice: joe):
-    Welcome back everyone.
+Script format (any role names work):
+    MODERATOR (avatar: photo.jpg, voice: joe):
+    Welcome to the debate.
 
-    GUEST (avatar: guest.jpg, voice: lessac):
-    Thanks for having me.
+    LEFT (avatar: guest1.jpg, voice: lessac):
+    Thank you for having me.
 
-    HOST:
-    So what do you think?
+    RIGHT (avatar: guest2.jpg, voice: amy):
+    Glad to be here.
 
-    GUEST:
-    I think it's great.
+    MODERATOR:
+    Let's begin.
 
 Usage:
     python tools/news_desk.py --script interview.md
@@ -40,6 +41,7 @@ from tts import generate_audio
 PROJECT_ROOT = Path(__file__).parent.parent
 AVATAR_DIR = PROJECT_ROOT / "avatars"
 WAV2LIP_DIR = Path.home() / "Easy-Wav2Lip"
+SADTALKER_DIR = Path.home() / "SadTalker"
 OUTPUT_DIR = PROJECT_ROOT / ".tmp" / "avatar" / "output"
 LOG_DIR = PROJECT_ROOT / "logs"
 LOG_DIR.mkdir(exist_ok=True)
@@ -54,14 +56,15 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Default speaker config
-DEFAULT_VOICES = {"HOST": "joe", "GUEST": "lessac"}
+# Default speaker config (used when roles match these names and no config given)
+DEFAULT_VOICES = {"HOST": "joe", "GUEST": "lessac", "MODERATOR": "joe", "LEFT": "lessac", "RIGHT": "amy"}
 DEFAULT_AVATARS = {"HOST": "dp-avatar-tight", "GUEST": "stock-test"}
 
 
 def parse_script(script_text: str) -> tuple[dict, list]:
     """
     Parse a news desk script into speaker config and dialogue lines.
+    Supports any role names (HOST, GUEST, MODERATOR, LEFT, RIGHT, etc.)
 
     Returns:
         speakers: dict of {role: {avatar, voice}} from header declarations
@@ -69,15 +72,27 @@ def parse_script(script_text: str) -> tuple[dict, list]:
     """
     speakers = {}
     lines = []
+    known_roles = set()
 
-    # Pattern for speaker line with config: HOST (avatar: x, voice: y):
+    # Pattern for speaker line with config: ROLENAME (avatar: x, voice: y):
     header_pattern = re.compile(
-        r'^(HOST|GUEST)\s*\(([^)]+)\)\s*:\s*$', re.IGNORECASE
+        r'^([A-Z][A-Z0-9_]*)\s*\(([^)]+)\)\s*:\s*$', re.IGNORECASE
     )
-    # Pattern for speaker line without config: HOST:
+    # Pattern for speaker line without config: ROLENAME:
     simple_pattern = re.compile(
-        r'^(HOST|GUEST)\s*:\s*$', re.IGNORECASE
+        r'^([A-Z][A-Z0-9_]*)\s*:\s*$', re.IGNORECASE
     )
+
+    # First pass: discover all roles (headers define them, simple lines use them)
+    for raw_line in script_text.strip().split('\n'):
+        line = raw_line.strip()
+        header_match = header_pattern.match(line)
+        if header_match:
+            known_roles.add(header_match.group(1).upper())
+            continue
+        simple_match = simple_pattern.match(line)
+        if simple_match:
+            known_roles.add(simple_match.group(1).upper())
 
     current_role = None
     current_text = []
@@ -87,7 +102,7 @@ def parse_script(script_text: str) -> tuple[dict, list]:
 
         # Check for header with config
         header_match = header_pattern.match(line)
-        if header_match:
+        if header_match and header_match.group(1).upper() in known_roles:
             # Save previous block
             if current_role and current_text:
                 lines.append({"role": current_role, "text": ' '.join(current_text)})
@@ -111,11 +126,21 @@ def parse_script(script_text: str) -> tuple[dict, list]:
 
         # Check for simple speaker line
         simple_match = simple_pattern.match(line)
-        if simple_match:
+        if simple_match and simple_match.group(1).upper() in known_roles:
             if current_role and current_text:
                 lines.append({"role": current_role, "text": ' '.join(current_text)})
                 current_text = []
             current_role = simple_match.group(1).upper()
+            continue
+
+        # Check for inline dialogue: "HOST: some text here" on one line
+        inline_match = re.match(r'^([A-Z][A-Z0-9_]*)\s*:\s+(.+)$', line, re.IGNORECASE)
+        if inline_match and inline_match.group(1).upper() in known_roles:
+            if current_role and current_text:
+                lines.append({"role": current_role, "text": ' '.join(current_text)})
+                current_text = []
+            current_role = inline_match.group(1).upper()
+            current_text = [inline_match.group(2).strip()]
             continue
 
         # Content line
@@ -126,8 +151,9 @@ def parse_script(script_text: str) -> tuple[dict, list]:
     if current_role and current_text:
         lines.append({"role": current_role, "text": ' '.join(current_text)})
 
-    # Fill in defaults for any speaker without config
-    for role in ["HOST", "GUEST"]:
+    # Fill in defaults for any role that appeared in lines but wasn't in a header
+    for line in lines:
+        role = line["role"]
         if role not in speakers:
             speakers[role] = {
                 "avatar": DEFAULT_AVATARS.get(role, ""),
@@ -170,7 +196,7 @@ def make_avatar_video(avatar_path: Path, duration: float, output: Path):
         cmd = [
             "ffmpeg", "-y", "-loop", "1", "-i", str(avatar_path),
             "-t", str(duration),
-            "-vf", "scale=960:1080:force_original_aspect_ratio=decrease,pad=960:1080:(ow-iw)/2:(oh-ih)/2",
+            "-vf", "scale=960:1080:force_original_aspect_ratio=increase,crop=960:1080",
             "-c:v", "libx264", "-preset", "fast", "-pix_fmt", "yuv420p", "-r", "30",
             "-an", str(output)
         ]
@@ -178,7 +204,7 @@ def make_avatar_video(avatar_path: Path, duration: float, output: Path):
         cmd = [
             "ffmpeg", "-y", "-stream_loop", "-1", "-i", str(avatar_path),
             "-t", str(duration),
-            "-vf", "scale=960:1080:force_original_aspect_ratio=decrease,pad=960:1080:(ow-iw)/2:(oh-ih)/2",
+            "-vf", "scale=960:1080:force_original_aspect_ratio=increase,crop=960:1080",
             "-c:v", "libx264", "-preset", "fast", "-an", str(output)
         ]
 
@@ -199,7 +225,7 @@ def run_lipsync(avatar_video: Path, audio: Path, output: Path, quality: str = "F
         "--face", str(avatar_video.resolve()),
         "--audio", str(audio.resolve()),
         "--outfile", str(output.resolve()),
-        "--out_height", "720",
+        "--out_height", "360",
         "--quality", quality,
         "--wav2lip_batch_size", "64",
     ]
@@ -212,7 +238,38 @@ def run_lipsync(avatar_video: Path, audio: Path, output: Path, quality: str = "F
     return output
 
 
-def generate_news_desk(script_path: Path, quality: str = "Fast", output_path: Path = None):
+def run_sadtalker(avatar_image: Path, audio: Path, output: Path):
+    """Run SadTalker on a still image + audio to produce video with head movement."""
+    sadtalker_python = SADTALKER_DIR / ".venv" / "bin" / "python"
+    result_dir = output.parent / "sadtalker_out"
+    result_dir.mkdir(exist_ok=True)
+
+    cmd = [
+        str(sadtalker_python), str(SADTALKER_DIR / "inference.py"),
+        "--driven_audio", str(audio.resolve()),
+        "--source_image", str(avatar_image.resolve()),
+        "--result_dir", str(result_dir),
+        "--still",
+        "--preprocess", "crop",
+    ]
+
+    result = subprocess.run(cmd, cwd=str(SADTALKER_DIR), capture_output=True, text=True)
+    if result.returncode != 0:
+        logger.error(f"SadTalker failed: {result.stderr}")
+        raise RuntimeError(f"SadTalker failed (exit {result.returncode})")
+
+    # SadTalker outputs to a dated subfolder — find the newest mp4
+    import glob
+    results = sorted(glob.glob(str(result_dir / "**/*.mp4"), recursive=True), key=lambda x: Path(x).stat().st_mtime)
+    if not results:
+        raise RuntimeError("SadTalker produced no output video")
+
+    generated = Path(results[-1])
+    shutil.copy2(str(generated), str(output))
+    return output
+
+
+def generate_news_desk(script_path: Path, quality: str = "Fast", output_path: Path = None, engine: str = "wav2lip"):
     """Generate a full news desk video from a script file."""
     total_start = time.time()
 
@@ -273,7 +330,10 @@ def generate_news_desk(script_path: Path, quality: str = "Fast", output_path: Pa
 
             # Lip sync
             synced_vid = tmpdir / f"synced_{role}_{i}.mp4"
-            run_lipsync(avatar_vid, audio_files[i], synced_vid, quality)
+            if engine == "sadtalker":
+                run_sadtalker(speakers[role]["avatar_path"], audio_files[i], synced_vid)
+            else:
+                run_lipsync(avatar_vid, audio_files[i], synced_vid, quality)
 
             synced_clips[role].append({
                 "start": cumulative_time,
@@ -287,153 +347,255 @@ def generate_news_desk(script_path: Path, quality: str = "Fast", output_path: Pa
         w2l_time = time.time() - w2l_start
         logger.info(f"Wav2Lip complete: {w2l_time:.1f}s")
 
-        # Step 3: Build full timeline for each speaker
-        # Each speaker needs: synced video when talking, static when not
+        # Step 3: Build per-line composited segments (audio+video married per line)
+        # This prevents sync drift by never separating audio from video
         asm_start = time.time()
 
-        role_timelines = {}
-        for role in speakers:
-            segments = []
-            current_pos = 0.0
+        role_order = list(speakers.keys())
+        num_panels = len(role_order)
 
-            for i, line in enumerate(lines):
-                dur = durations[i]
+        # Layout: 2 speakers = equal halves, 3 speakers = large center + smaller sides
+        if num_panels == 3:
+            center_w = 860   # Host gets biggest panel
+            side_w = 530     # Guests get equal sides (530+860+530 = 1920)
+            panel_widths = [side_w, center_w, side_w]
+            # Reorder: put HOST in center
+            host_role = role_order[0]  # First declared role is host
+            guest_roles = role_order[1:]
+            role_order = [guest_roles[0], host_role, guest_roles[1]] if len(guest_roles) >= 2 else role_order
+            panel_h = 810  # Leave room for lower third banner area
+        else:
+            panel_w = 1920 // num_panels
+            panel_widths = [panel_w] * num_panels
+            panel_h = 1080
 
-                if line["role"] == role:
-                    # This speaker is talking — use synced clip
-                    clip = [c for c in synced_clips[role] if c["line_idx"] == i][0]
-
-                    # Get synced video resolution for matching static segments
-                    synced_res = subprocess.run(
-                        ["ffprobe", "-v", "error", "-select_streams", "v",
-                         "-show_entries", "stream=width,height",
-                         "-of", "csv=p=0", str(clip["synced"])],
-                        capture_output=True, text=True
-                    ).stdout.strip()
-                    w, h = synced_res.split(',')
-
-                    segments.append({"type": "synced", "path": clip["synced"], "duration": dur, "w": int(w), "h": int(h)})
-                else:
-                    # Other speaker is talking — show static
-                    static = tmpdir / f"static_{role}_{i}.mp4"
-
-                    # Match resolution of synced clips for this role
-                    if synced_clips[role]:
-                        ref = synced_clips[role][0]["synced"]
-                        ref_res = subprocess.run(
-                            ["ffprobe", "-v", "error", "-select_streams", "v",
-                             "-show_entries", "stream=width,height",
-                             "-of", "csv=p=0", str(ref)],
-                            capture_output=True, text=True
-                        ).stdout.strip()
-                        sw, sh = ref_res.split(',')
-                    else:
-                        sw, sh = "640", "720"
-
-                    make_static_cmd = [
-                        "ffmpeg", "-y", "-stream_loop", "-1",
-                        "-i", str(speakers[role]["avatar_path"]),
-                        "-t", str(dur),
-                        "-vf", f"scale={sw}:{sh}:force_original_aspect_ratio=decrease,pad={sw}:{sh}:(ow-iw)/2:(oh-ih)/2",
-                        "-c:v", "libx264", "-preset", "fast",
-                        "-pix_fmt", "yuv420p", "-r", "30", "-an", str(static)
-                    ]
-                    # For images, add -loop 1
-                    if speakers[role]["avatar_path"].suffix.lower() in ['.jpg', '.jpeg', '.png', '.webp']:
-                        make_static_cmd.insert(3, "1")
-                        make_static_cmd.insert(3, "-loop")
-                        # Remove -stream_loop -1
-                        make_static_cmd = [x for x in make_static_cmd if x not in ["-stream_loop", "-1"]]
-
-                    subprocess.run(make_static_cmd, capture_output=True, check=True)
-                    segments.append({"type": "static", "path": static, "duration": dur, "w": int(sw), "h": int(sh)})
-
-                current_pos += dur
-
-            role_timelines[role] = segments
-
-        # Concatenate each role's timeline
-        role_videos = {}
-        for role, segments in role_timelines.items():
-            concat_list = tmpdir / f"concat_{role}.txt"
-            with open(concat_list, "w") as f:
-                for seg in segments:
-                    f.write(f"file '{seg['path']}'\n")
-
-            role_video = tmpdir / f"full_{role}.mp4"
-            subprocess.run([
-                "ffmpeg", "-y", "-f", "concat", "-safe", "0",
-                "-i", str(concat_list),
-                "-c:v", "libx264", "-preset", "fast", "-an",
-                str(role_video)
-            ], capture_output=True, check=True)
-            role_videos[role] = role_video
-
-        # Build full audio track (all lines concatenated)
-        audio_concat = tmpdir / "audio_concat.txt"
-        with open(audio_concat, "w") as f:
-            for af in audio_files:
-                f.write(f"file '{af}'\n")
-
-        full_audio = tmpdir / "full_audio.wav"
-        subprocess.run([
-            "ffmpeg", "-y", "-f", "concat", "-safe", "0",
-            "-i", str(audio_concat),
-            "-c:a", "pcm_s16le", str(full_audio)
-        ], capture_output=True, check=True)
-
-        # Composite side by side at 1080p
-        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-        if output_path is None:
-            timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-            output_path = OUTPUT_DIR / f"newsdesk_{timestamp}.mp4"
-
-        host_video = role_videos.get("HOST")
-        guest_video = role_videos.get("GUEST")
-
-        # Build filter with lower thirds overlay
         def find_lower_third(avatar_name):
             """Find lower third overlay by trying each part of the avatar name."""
             parts = avatar_name.lower().replace('_', '-').split('-')
+            # Try full name first
+            full = PROJECT_ROOT / "overlays" / f"lower_third_{avatar_name.lower().replace('_', '-')}.png"
+            if full.exists():
+                return full
             for part in parts:
                 path = PROJECT_ROOT / "overlays" / f"lower_third_{part}.png"
                 if path.exists():
                     return path
             return PROJECT_ROOT / "overlays" / f"lower_third_{parts[0]}.png"
 
-        host_lower = find_lower_third(speakers['HOST']['avatar'])
-        guest_lower = find_lower_third(speakers['GUEST']['avatar'])
-
-        filter_parts = "[0:v]scale=960:540[left];[1:v]scale=960:540[right];[left][right]hstack=inputs=2[desk]"
-
-        overlay_inputs = []
-        input_idx = 3  # 0=host, 1=guest, 2=audio
-
-        if host_lower.exists() and guest_lower.exists():
-            overlay_inputs = ["-i", str(host_lower), "-i", str(guest_lower)]
-            filter_parts += (
-                f";[{input_idx}]scale=350:40[lt_h];"
-                f"[{input_idx+1}]scale=350:40[lt_g];"
-                f"[desk][lt_h]overlay=20:480:enable='between(t,0,5)'[tmp];"
-                f"[tmp][lt_g]overlay=990:480:enable='between(t,0,5)'[vid]"
+        def smart_scale_filter(target_w, target_h):
+            """Scale to fill panel: landscape sources get center-cropped to portrait first."""
+            target_ratio = target_w / target_h
+            return (
+                f"if(gt(iw/ih\\,{target_ratio:.2f})\\,"
+                # Landscape source: crop to target aspect ratio centered, then scale
+                f"crop=ih*{target_ratio:.2f}:ih:(iw-ih*{target_ratio:.2f})/2:0\\,"
+                # Portrait source: just use as-is
+                f"),"
+                # This doesn't work in a single expression, so use the simpler approach:
             )
-        else:
-            filter_parts += ";[desk]copy[vid]"
+
+        def get_scale_vf(src_path, target_w, target_h):
+            """Scale to fill panel completely and center-crop to exact size."""
+            return f"scale={target_w}:{target_h}:force_original_aspect_ratio=increase,crop={target_w}:{target_h}"
+
+        # Pre-generate one static frame per speaker (freeze frame, no loop seam)
+        static_frames = {}
+        for idx, role in enumerate(role_order):
+            pw = panel_widths[idx] if num_panels == 3 else panel_widths[0]
+            frame_path = tmpdir / f"static_frame_{role}.png"
+            vf = get_scale_vf(speakers[role]["avatar_path"], pw, panel_h)
+            subprocess.run([
+                "ffmpeg", "-y", "-i", str(speakers[role]["avatar_path"]),
+                "-vf", vf,
+                "-frames:v", "1", str(frame_path)
+            ], capture_output=True, check=True)
+            static_frames[role] = frame_path
+
+        desk_segments = []  # Complete desk+audio segments per line
+
+        for i, line in enumerate(lines):
+            dur = durations[i]
+            active_role = line["role"]
+
+            # Build panel video for each speaker
+            panel_videos = {}
+            for idx, role in enumerate(role_order):
+                pw = panel_widths[idx] if num_panels == 3 else panel_widths[0]
+                if role == active_role:
+                    clip = [c for c in synced_clips[role] if c["line_idx"] == i][0]
+                    panel_vid = tmpdir / f"panel_{i}_{role}.mp4"
+                    vf = get_scale_vf(clip["synced"], pw, panel_h)
+                    subprocess.run([
+                        "ffmpeg", "-y", "-i", str(clip["synced"]),
+                        "-t", str(dur),
+                        "-vf", vf,
+                        "-c:v", "libx264", "-preset", "fast", "-pix_fmt", "yuv420p",
+                        "-r", "30", "-an", str(panel_vid)
+                    ], capture_output=True, check=True)
+                    panel_videos[role] = panel_vid
+                else:
+                    # Use freeze frame (no loop seam = no avatar pop-in)
+                    panel_vid = tmpdir / f"panel_{i}_{role}.mp4"
+                    subprocess.run([
+                        "ffmpeg", "-y", "-loop", "1",
+                        "-i", str(static_frames[role]),
+                        "-t", str(dur),
+                        "-vf", f"scale={pw}:{panel_h}:force_original_aspect_ratio=increase,crop={pw}:{panel_h}",
+                        "-c:v", "libx264", "-preset", "fast", "-pix_fmt", "yuv420p",
+                        "-r", "30", "-an", str(panel_vid)
+                    ], capture_output=True, check=True)
+                    panel_videos[role] = panel_vid
+
+            # Composite panels side by side with audio for this line
+            panel_inputs = []
+            hstack_filter = ""
+            for idx, role in enumerate(role_order):
+                panel_inputs.extend(["-i", str(panel_videos[role])])
+                hstack_filter += f"[{idx}:v]copy[p{idx}];"
+
+            stack_labels = "".join(f"[p{idx}]" for idx in range(num_panels))
+
+            overlay_inputs = []
+
+            if num_panels == 3:
+                # 3-panel broadcast layout: panels on dark blue background with borders
+                # Stack panels manually with padding for white borders
+                border = 2
+                bg_color = "0x0a1a4a"  # dark blue studio background
+
+                # Build composite: dark background, panels flush together with thin dividers
+                hstack_filter = ""
+                for idx in range(num_panels):
+                    hstack_filter += f"[{idx}:v]copy[p{idx}];"
+
+                # Create background
+                hstack_filter += f"color=c={bg_color}:s=1920x1080:d={dur}[bg];"
+
+                # Place panels flush on background with thin white divider lines
+                x_offset = 0
+                current = "bg"
+                for idx in range(num_panels):
+                    pw = panel_widths[idx]
+                    next_label = f"placed{idx}"
+                    hstack_filter += f"[{current}][p{idx}]overlay={x_offset}:0[{next_label}];"
+                    current = next_label
+                    # Draw thin white divider after each panel (except last)
+                    if idx < num_panels - 1:
+                        div_label = f"div{idx}"
+                        hstack_filter += f"[{current}]drawbox=x={x_offset + pw}:y=0:w={border}:h={panel_h}:color=white:t=fill[{div_label}];"
+                        current = div_label
+                    x_offset += pw
+
+                # Add chyron name labels under each panel
+                x_offset = 0
+                for idx, role in enumerate(role_order):
+                    pw = panel_widths[idx]
+                    name = speakers[role].get("avatar", role).replace("-", " ").title()
+                    name = name.replace("'", "\u2019").replace(":", "\\:")
+                    chyron_x = x_offset + pw // 2
+                    chyron_y = panel_h + 20  # below panels
+                    next_label = f"chyron{idx}"
+                    hstack_filter += (
+                        f"[{current}]drawtext=text='{name}':"
+                        f"fontsize=28:fontcolor=white:font=Helvetica Neue Bold:"
+                        f"x={chyron_x}-(text_w/2):y={chyron_y}:"
+                        f"borderw=2:bordercolor=black[{next_label}];"
+                    )
+                    current = next_label
+                    x_offset += pw
+
+                # Add lower third banner bar (red topic bar + white headline)
+                banner_y = 980
+                # Write text to files to avoid ffmpeg quoting issues
+                topic_file = tmpdir / f"topic_{i}.txt"
+                topic_file.write_text("KNOCKOFF NEWS")
+                headline = line['text'][:80]
+                headline_file = tmpdir / f"headline_{i}.txt"
+                headline_file.write_text(headline)
+                hstack_filter += (
+                    f"[{current}]drawbox=x=0:y={banner_y}:w=1920:h=40:color=0xcc0000:t=fill[bar1];"
+                    f"[bar1]drawtext=textfile={topic_file}:"
+                    f"fontsize=22:fontcolor=white:font=Helvetica Neue Bold:"
+                    f"x=20:y={banner_y}+10:"
+                    f"borderw=1:bordercolor=0x990000[bar2];"
+                    f"[bar2]drawbox=x=0:y={banner_y+40}:w=1920:h=50:color=white:t=fill[bar3];"
+                    f"[bar3]drawtext=textfile={headline_file}:"
+                    f"fontsize=30:fontcolor=0x111111:font=Helvetica Neue Bold:"
+                    f"x=20:y={banner_y+48}[vid]"
+                )
+
+            elif num_panels == 2:
+                # 2-panel: overlay on background, overlap 4px to hide seam
+                pw = panel_widths[0]
+                hstack_filter += f"color=c=white:s=1920x1080:d={dur}[bg2];"
+                hstack_filter += f"[bg2][p0]overlay=0:0[tmp2];"
+                hstack_filter += f"[tmp2][p1]overlay={pw - 10}:0[desk];"
+
+                # Add lower thirds on first line only
+                lower_thirds = [find_lower_third(speakers[role]['avatar']) for role in role_order]
+                all_lts_exist = all(lt.exists() for lt in lower_thirds)
+
+                overlay_inputs = []
+                if all_lts_exist and i == 0:
+                    for lt in lower_thirds:
+                        overlay_inputs.extend(["-i", str(lt)])
+
+                    pw = panel_widths[0]
+                    lt_w = min(350, pw - 20)
+                    current_label = "desk"
+                    for j, role in enumerate(role_order):
+                        lt_idx = num_panels + 1 + j  # after audio
+                        lt_label = f"lt_{j}"
+                        x_pos = (j * pw) + 20
+                        y_pos = panel_h - 60
+                        is_last = (j == num_panels - 1)
+                        next_label = "vid" if is_last else f"tmp{j}"
+                        hstack_filter += (
+                            f"[{lt_idx}]scale={lt_w}:40[{lt_label}];"
+                            f"[{current_label}][{lt_label}]overlay={x_pos}:{y_pos}[{next_label}]"
+                        )
+                        if not is_last:
+                            hstack_filter += ";"
+                        current_label = next_label
+                else:
+                    hstack_filter += "[desk]copy[vid]"
+
+            desk_seg = tmpdir / f"desk_{i}.mp4"
+            cmd = [
+                "ffmpeg", "-y",
+            ] + panel_inputs + [
+                "-i", str(audio_files[i]),
+            ] + overlay_inputs + [
+                "-filter_complex", hstack_filter,
+                "-map", "[vid]", "-map", f"{num_panels}:a",
+                "-c:v", "libx264", "-preset", "fast", "-pix_fmt", "yuv420p",
+                "-c:a", "aac", "-ar", "44100",
+                "-t", str(dur),
+                "-shortest",
+                str(desk_seg)
+            ]
+            subprocess.run(cmd, capture_output=True, check=True)
+            desk_segments.append(desk_seg)
+
+        # Concatenate all desk segments
+        concat_list = tmpdir / "desk_concat.txt"
+        with open(concat_list, "w") as f:
+            for seg in desk_segments:
+                f.write(f"file '{seg}'\n")
+
+        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+        if output_path is None:
+            timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            output_path = OUTPUT_DIR / f"newsdesk_{timestamp}.mp4"
 
         desk_video = tmpdir / "desk.mp4"
-        cmd = [
-            "ffmpeg", "-y",
-            "-i", str(host_video),
-            "-i", str(guest_video),
-            "-i", str(full_audio),
-        ] + overlay_inputs + [
-            "-filter_complex", filter_parts,
-            "-map", "[vid]", "-map", "2:a",
-            "-c:v", "libx264", "-preset", "fast", "-c:a", "aac",
-            "-shortest",
+        subprocess.run([
+            "ffmpeg", "-y", "-f", "concat", "-safe", "0",
+            "-i", str(concat_list),
+            "-c:v", "libx264", "-preset", "fast",
+            "-c:a", "aac",
             str(desk_video)
-        ]
-        subprocess.run(cmd, capture_output=True, check=True)
+        ], capture_output=True, check=True)
 
         # Add intro and outro if they exist
         intro_path = PROJECT_ROOT / "overlays" / "intro_card.mp4"
@@ -517,7 +679,7 @@ def generate_news_desk(script_path: Path, quality: str = "Fast", output_path: Pa
     print(f"Duration:      {total_duration:.1f}s of content")
     print(f"{'='*50}")
     print(f"TTS:           {tts_time:.1f}s")
-    print(f"Wav2Lip:       {w2l_time:.1f}s")
+    print(f"{'SadTalker' if engine == 'sadtalker' else 'Wav2Lip'}:       {w2l_time:.1f}s")
     print(f"Assembly:      {asm_time:.1f}s")
     print(f"TOTAL:         {total_time:.1f}s")
     print(f"Ratio:         {total_time:.0f}s to produce {total_duration:.1f}s ({total_duration/total_time:.1f}x)")
@@ -531,24 +693,25 @@ def main():
         description="Generate split-screen news desk videos from scripts",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
-Script format:
-  HOST (avatar: photo.jpg, voice: joe):
-  Welcome back everyone.
+Script format (any role names, 2 or 3 speakers):
+  MODERATOR (avatar: photo.jpg, voice: joe):
+  Welcome to the debate.
 
-  GUEST (avatar: guest.jpg, voice: lessac):
-  Thanks for having me.
+  LEFT (avatar: guest1.jpg, voice: lessac):
+  Thank you.
 
-  HOST:
-  So what do you think?
+  RIGHT (avatar: guest2.jpg, voice: amy):
+  Glad to be here.
 
 Examples:
   %(prog)s --script interview.md
-  %(prog)s --script interview.md --quality Improved
+  %(prog)s --script debate.md --quality Improved
   %(prog)s --script interview.md -o output/my_interview.mp4
 """
     )
     parser.add_argument("--script", "-s", type=Path, required=True, help="Path to script file")
     parser.add_argument("--quality", "-q", choices=["Fast", "Improved", "Enhanced"], default="Fast")
+    parser.add_argument("--engine", "-e", choices=["wav2lip", "sadtalker"], default="wav2lip", help="Lip sync engine")
     parser.add_argument("--output", "-o", type=Path, default=None, help="Output video path")
 
     args = parser.parse_args()
@@ -556,7 +719,7 @@ Examples:
     if not args.script.exists():
         parser.error(f"Script not found: {args.script}")
 
-    result = generate_news_desk(args.script, args.quality, args.output)
+    result = generate_news_desk(args.script, args.quality, args.output, args.engine)
     subprocess.run(["open", str(result)])
 
 

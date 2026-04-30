@@ -1,0 +1,48 @@
+{
+  "scene1_hook": "Every 10 seconds, a cat is abandoned in America.",
+  "keywords_scene1": [
+    "abandoned cats",
+    "stray kittens",
+    "sad cat"
+  ],
+  "scene2_problem": "Our streets are filled with feral cats struggling to survive. Without food or shelter, they're forced into survival mode, scavenging for scraps and facing cruel endings like disease and starvation.",
+  "keywords_scene2": [
+    "feral cats",
+    "abandoned kittens",
+    "street animals"
+  ],
+  "scene3_stakes": "Their lives depend on our action now. If we don't act, these innocent creatures will suffer unbearable neglect, loneliness, and death.",
+  "keywords_scene3": [
+    "cute cat",
+    "sad eyes",
+    "feline neglect"
+  ],
+  "scene4_solution": "Cat Hope of America provides food, shelter, and medical care to thousands of stray cats each year. Your donation today enables our lifesaving work, bringing hope back to the most vulnerable cats in need.",
+  "keywords_scene4": [
+    "cat rescue",
+    "shelter volunteers",
+    "donate cat"
+  ],
+  "scene5_ask": "Will you donate $25 or more today and give a voice to the voiceless? Visit Cat.org to make your gift now.",
+  "keywords_scene5": [
+    "donate online",
+    "monthly cat donation",
+    "cat charity"
+  ],
+  "tagline": "Hope for America's Cats",
+  "rolling_credits": [
+    {
+      "header": "Cat Hope of America",
+      "lines": [
+        "A non-profit organization dedicated to helping cats in need."
+      ]
+    },
+    {
+      "header": "Produced by Doug Morse",
+      "lines": [
+        "dmpgh.com",
+        "AI Vocal Artist"
+      ]
+    }
+  ]
+}

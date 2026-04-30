@@ -1,0 +1,408 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>AI Views and News — Business Plan</title><style>body{font-family:Helvetica Neue,Arial,sans-serif;max-width:850px;margin:40px auto;padding:0 20px;color:#1a1a2e;line-height:1.6}h1{border-bottom:3px solid #0088ff;padding-bottom:8px}h2{color:#0088ff;margin-top:32px}h3{color:#333}table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}th{background:#0a0a14;color:white;padding:8px 12px;text-align:left}td{padding:7px 12px;border-bottom:1px solid #ddd}tr:nth-child(even){background:#f8f9fa}hr{border:none;border-top:1px solid #ddd;margin:24px 0}code{background:#f0f0f0;padding:2px 6px;border-radius:3px}</style></head><body><h1>AI Views and News — Show Runner Business Plan</h1>
+<h2>v0.1.0 | March 31, 2026</h2>
+<hr />
+<h2>The Product</h2>
+<p>A turnkey AI news show production service for Skool community owners. We produce a branded, professional video news show tailored to any niche — delivered twice a month, ready to post.</p>
+<p><strong>Deliverables per episode:</strong>
+- 8-15 min video show (intro bumper, host avatar, 3 news segments, credits)
+- Written newsletter (Crypt Notes)
+- Host notes with Q&amp;A topics for live sessions
+- All source links and story briefs</p>
+<hr />
+<h2>Revenue Model</h2>
+<h3>Primary: Barter for Access</h3>
+<ul>
+<li>Trade 2 shows/month for free community membership</li>
+<li>Zero cash exchanged — value for value</li>
+<li>Goal: access to every Skool community in our network</li>
+<li>Each community we join = new audience, new network, new leads</li>
+</ul>
+<h3>Secondary: Paid Production ($50/episode)</h3>
+<ul>
+<li>For communities that prefer to pay</li>
+<li>$50 per episode, 2 episodes/month = $100/mo per client</li>
+<li>Client picks 3 topics, we produce everything else</li>
+</ul>
+<hr />
+<h2>Cost Structure</h2>
+<h3>Fixed Monthly Costs</h3>
+<table>
+<thead>
+<tr>
+<th>Expense</th>
+<th>Cost</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HeyGen Creator</td>
+<td>$29/mo</td>
+<td>Avatar video generation</td>
+</tr>
+<tr>
+<td>Pictory</td>
+<td>$0</td>
+<td>Free tier (manual browser use)</td>
+</tr>
+<tr>
+<td>Claude Code</td>
+<td>~$20/mo</td>
+<td>AI scripting and orchestration</td>
+</tr>
+<tr>
+<td>Cloudflare Tunnel</td>
+<td>$0</td>
+<td>Free, routes showrunner.dmpgh.com</td>
+</tr>
+<tr>
+<td>Pushover</td>
+<td>$0</td>
+<td>One-time $5 purchase (done)</td>
+</tr>
+<tr>
+<td>Ollama</td>
+<td>$0</td>
+<td>Local LLM on M4 Pro</td>
+</tr>
+<tr>
+<td>Domain (dmpgh.com)</td>
+<td>~$1/mo</td>
+<td>Already owned</td>
+</tr>
+<tr>
+<td><strong>Total fixed</strong></td>
+<td><strong>~$50/mo</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>Per-Episode Variable Costs</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HeyGen render (2 clips)</td>
+<td>$0 (included in $29 plan)</td>
+</tr>
+<tr>
+<td>Pictory render (3 clips)</td>
+<td>$0 (free tier)</td>
+</tr>
+<tr>
+<td>ffmpeg stitching</td>
+<td>$0 (local)</td>
+</tr>
+<tr>
+<td>Ollama scripts</td>
+<td>$0 (local)</td>
+</tr>
+<tr>
+<td><strong>Total per episode</strong></td>
+<td><strong>$0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>Future Costs (if scaling to API automation)</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Cost</th>
+<th>When needed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HeyGen API</td>
+<td>~$50/mo</td>
+<td>At 5+ clients or 10+ episodes/mo</td>
+</tr>
+<tr>
+<td>Pictory API</td>
+<td>$49/mo</td>
+<td>At 5+ clients or 10+ episodes/mo</td>
+</tr>
+<tr>
+<td><strong>Total if automated</strong></td>
+<td><strong>~$149/mo</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Profit Scenarios</h2>
+<h3>Barter Only (no cash revenue)</h3>
+<table>
+<thead>
+<tr>
+<th>Clients</th>
+<th>Shows/mo</th>
+<th>Cost</th>
+<th>Cash Revenue</th>
+<th>Value Received</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5</td>
+<td>10</td>
+<td>$50</td>
+<td>$0</td>
+<td>5 community memberships ($50-300/mo each)</td>
+</tr>
+<tr>
+<td>10</td>
+<td>20</td>
+<td>$50</td>
+<td>$0</td>
+<td>10 community memberships ($100-600/mo each)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>True value:</strong> If average Skool membership is $97/mo, 10 barter deals = $970/mo in access you'd otherwise pay for.</p>
+<h3>Paid Production</h3>
+<table>
+<thead>
+<tr>
+<th>Clients</th>
+<th>Shows/mo</th>
+<th>Cost</th>
+<th>Revenue</th>
+<th>Profit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>$50</td>
+<td>$100</td>
+<td>$50</td>
+</tr>
+<tr>
+<td>3</td>
+<td>6</td>
+<td>$50</td>
+<td>$300</td>
+<td>$250</td>
+</tr>
+<tr>
+<td>5</td>
+<td>10</td>
+<td>$50</td>
+<td>$500</td>
+<td>$450</td>
+</tr>
+<tr>
+<td>10</td>
+<td>20</td>
+<td>$50*</td>
+<td>$1,000</td>
+<td>$950</td>
+</tr>
+</tbody>
+</table>
+<p>*At 10 clients, consider API automation ($149/mo) to save time. Profit would be ~$851/mo but each episode takes 10 min instead of 60.</p>
+<h3>Hybrid (Barter + Paid)</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Count</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Barter clients</td>
+<td>5</td>
+<td>$485/mo in memberships</td>
+</tr>
+<tr>
+<td>Paid clients</td>
+<td>5</td>
+<td>$500/mo cash</td>
+</tr>
+<tr>
+<td>Total monthly value</td>
+<td></td>
+<td><strong>$985/mo</strong></td>
+</tr>
+<tr>
+<td>Total cost</td>
+<td></td>
+<td>$50/mo</td>
+</tr>
+<tr>
+<td>Time investment</td>
+<td></td>
+<td>~10 hrs/mo (20 episodes × 30 min avg)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Time Investment</h2>
+<h3>Current (Manual + Show Runner v0.1.0)</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Open show runner, scrape news</td>
+<td>2 min</td>
+</tr>
+<tr>
+<td>Pick 3 stories</td>
+<td>3 min</td>
+</tr>
+<tr>
+<td>Generate scripts</td>
+<td>2 min (Ollama)</td>
+</tr>
+<tr>
+<td>Review/edit scripts</td>
+<td>5 min</td>
+</tr>
+<tr>
+<td>Copy to HeyGen + Pictory</td>
+<td>5 min</td>
+</tr>
+<tr>
+<td>Wait for renders</td>
+<td>20-30 min (do other work)</td>
+</tr>
+<tr>
+<td>Drop renders, auto-stitch</td>
+<td>2 min</td>
+</tr>
+<tr>
+<td><strong>Total active time</strong></td>
+<td><strong>~20 min</strong></td>
+</tr>
+<tr>
+<td><strong>Total wall clock</strong></td>
+<td><strong>~45-60 min</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>Future (API Automated)</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Open show runner, pick stories</td>
+<td>3 min</td>
+</tr>
+<tr>
+<td>Click "Produce Episode"</td>
+<td>1 click</td>
+</tr>
+<tr>
+<td>Wait</td>
+<td>5-8 min</td>
+</tr>
+<tr>
+<td>Review final video</td>
+<td>2 min</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>~10 min</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Growth Strategy</h2>
+<h3>Phase 1: Proof of Concept (Now)</h3>
+<ul>
+<li>Produce for Drake &amp; Carter's community</li>
+<li>Refine the workflow and show format</li>
+<li>Build 3-5 sample episodes across different niches</li>
+</ul>
+<h3>Phase 2: Barter Network (Month 2-3)</h3>
+<ul>
+<li>Approach 5-10 Skool community owners with the pitch video</li>
+<li>Offer barter deal: free show for free membership</li>
+<li>Build a portfolio of shows across niches (crypto, fitness, real estate, etc.)</li>
+</ul>
+<h3>Phase 3: Paid Clients (Month 3-6)</h3>
+<ul>
+<li>Use barter portfolio as proof/demos</li>
+<li>Offer $50/episode to communities outside the barter network</li>
+<li>Target: 5 paid clients = $500/mo</li>
+</ul>
+<h3>Phase 4: Scale (Month 6+)</h3>
+<ul>
+<li>Invest in API automation (HeyGen + Pictory)</li>
+<li>Each episode drops to 10 min production time</li>
+<li>Target: 10-20 clients (mix of barter + paid)</li>
+<li>Consider hiring a virtual assistant for copy/paste work before committing to API costs</li>
+</ul>
+<hr />
+<h2>Competitive Advantage</h2>
+<ol>
+<li><strong>Near-zero marginal cost</strong> — tools are flat-rate, not per-video</li>
+<li><strong>Speed</strong> — 60 min per episode, not days</li>
+<li><strong>Show Runner platform</strong> — web-based, shareable, collaborator-friendly</li>
+<li><strong>AI-native</strong> — scripts, summaries, Q&amp;A topics all auto-generated</li>
+<li><strong>Niche-agnostic</strong> — swap RSS feeds, same pipeline works for any topic</li>
+<li><strong>Barter model</strong> — competitors charge cash, we trade value</li>
+</ol>
+<hr />
+<h2>Risks</h2>
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HeyGen/Pictory price increases</td>
+<td>KnockOff (local) as long-term backup</td>
+</tr>
+<tr>
+<td>Free tier Pictory gets limited</td>
+<td>Switch to paid ($25/mo) or API</td>
+</tr>
+<tr>
+<td>Quality concerns from clients</td>
+<td>Episode review step before delivery</td>
+</tr>
+<tr>
+<td>Too many clients, not enough time</td>
+<td>API automation or hire VA</td>
+</tr>
+<tr>
+<td>Platform TOS changes</td>
+<td>Diversify tools, keep local alternatives</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Bottom Line</h2>
+<ul>
+<li><strong>Cost to run:</strong> $50/mo</li>
+<li><strong>Break-even:</strong> 1 paid client</li>
+<li><strong>Sweet spot:</strong> 5 barter + 5 paid = ~$985/mo value on $50 cost</li>
+<li><strong>Time:</strong> 20 min active per episode</li>
+<li><strong>Moat:</strong> The Show Runner platform + established barter network</li>
+</ul>
+<hr />
+<p><em>Generated March 31, 2026 — AI Views and News Show Runner v0.1.0</em></p></body></html>

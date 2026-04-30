@@ -1,0 +1,24 @@
+{
+  "scene1_hook": "Hey everyone, welcome to AI Views and News! Today we've got some big headlines for you. We'll dive into reports that Sam Altman has been targeted in a second attack. Plus, find out how Iran managed to out-shitpost the White House. And sticking with tech news, Vercel's CEO Guillermo Rauch is hinting at an IPO as AI agents boost their revenue. Let's get into it.",
+  "scene2_problem": "In a startling turn of events, Sam Altman, the CEO of OpenAI and a prominent figure in the tech world, was reportedly targeted in a second attack. This time, it happened at his Russian Hill residence in San Francisco on Sunday morning. Two suspects were arrested following a shooting incident at his home. According to The San Francisco Standard, police charged them with negligent discharge. This isn't Altman's first brush with danger. Just last month, he was the target of an attack that left him shaken but unharmed. This latest incident raises serious concerns about his safety and the security measures in place for high-profile individuals.",
+  "scene3_stakes": "In the early days of escalating tensions with Iran, the White House took to social media with a peculiar strategy. They posted Call of Duty memes and AI-generated videos of dancing bowling pins, aiming for a light-hearted approach to defuse the situation. Meanwhile, Iranian state media was flooding the zone with raw, unfiltered footage from the ground. Explosions over Tehran, smoke billowing into the sky. It was a stark contrast to the White House's meme-heavy strategy. The Iranian regime's approach mattered because it provided a clear, unfiltered narrative of events as they unfolded. This direct communication resonated with audiences worldwide, offering a raw and immediate perspective that countered the more light-hearted tone from Washington.",
+  "scene4_solution": "Vercel, a decade-old developer tool and website hosting platform, is riding high on the AI wave. While many startups struggle to adapt post-ChatGPT, Vercel's revenue is surging thanks to the boom in AI-generated apps and agents. CEO Guillermo Rauch recently hinted at IPO readiness, signaling confidence in Vercel's future. The company's tools have become indispensable for developers building AI-driven applications, positioning Vercel as a key player in this rapidly evolving landscape. The company's growth trajectory suggests that an IPO could be on the horizon. Investors are watching closely as Vercel navigates this exciting phase, poised to capitalize on the AI revolution.",
+  "scene5_ask": "That's all for tonight. We covered Sam Altman facing another attack, Iran's creative social media strategy, and Vercel's CEO hinting at an IPO. Thanks for joining us on AI Views and News. Don't forget to check out more stories at dmpgh.com. See you next week.",
+  "keywords_scene1": ["news studio broadcast", "technology headlines"],
+  "keywords_scene2": ["san francisco home security", "police investigation night"],
+  "keywords_scene3": ["social media phone", "explosion smoke city"],
+  "keywords_scene4": ["developer coding laptop", "stock market growth chart"],
+  "keywords_scene5": ["news anchor closing", "website computer screen"],
+  "rolling_credits": [
+    {"header": "AI VIEWS AND NEWS", "lines": ["presents", ""]},
+    {"header": "", "lines": ["EPISODE 1", "today in AI and tech"]},
+    {"header": "HOSTED BY", "lines": ["Douglas Morse"]},
+    {"header": "PRODUCED WITH", "lines": ["Mother ShowRunner"]},
+    {"header": "WRITTEN BY", "lines": ["Mistral Small (Ollama)"]},
+    {"header": "VOICE", "lines": ["OpenAI TTS — Nova"]},
+    {"header": "STOCK FOOTAGE", "lines": ["Pexels"]},
+    {"header": "ASSEMBLY", "lines": ["ffmpeg · Python · Pillow"]},
+    {"header": "MORE AT", "lines": ["dmpgh.com", "mothershowrunner.com"]},
+    {"header": "", "lines": ["", "© 2026 AI VIEWS AND NEWS", "all rights reserved"]}
+  ]
+}

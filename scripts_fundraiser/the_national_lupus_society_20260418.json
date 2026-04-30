@@ -1,0 +1,45 @@
+{
+  "scene1_hook": "In a moment, you'll never forget. A diagnosis that changes everything.",
+  "keywords_scene1": [
+    "woman",
+    "doctor",
+    "hospital"
+  ],
+  "scene2_problem": "Lupus affects over 1.5 million Americans, causing debilitating fatigue, joint pain, and organ damage. But it's not just physical - every patient loses a piece of themselves with each diagnosis.",
+  "keywords_scene2": [
+    "lupus patient",
+    "fatigue",
+    "joint pain"
+  ],
+  "scene3_stakes": "Imagine being forced to give up your career, your relationships, or even your independence. That's the reality for too many lupus patients and their families.",
+  "keywords_scene3": [
+    "career",
+    "relationships",
+    "independence"
+  ],
+  "scene4_solution": "The National Lupus Society is here to help. Your donation funds research, patient support groups, and education programs - giving hope and a brighter future to those affected by lupus.",
+  "keywords_scene4": [
+    "research",
+    "patient support",
+    "education"
+  ],
+  "scene5_ask": "Will you give $25 today to help the National Lupus Society bring life-changing care to those who need it most? Donate now at lupas.org",
+  "keywords_scene5": [
+    "donate",
+    "give back",
+    "help others"
+  ],
+  "tagline": "Hope for a Brighter Tomorrow",
+  "rolling_credits": [
+    {
+      "header": "A Production of"
+    },
+    {
+      "lines": [
+        "The National Lupus Society",
+        "Produced by Doug Morse",
+        "AI Vocal Artist, dmpgh.com"
+      ]
+    }
+  ]
+}
